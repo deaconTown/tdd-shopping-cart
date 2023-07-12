@@ -7,9 +7,8 @@ export class ProductService {
     private readonly products: Product[] = [];
 
     getProductById(productId: number): Product {
-        let product: Product;
-        product = this.products.find(x => x.id === productId)
-        return product;
+        
+        return this.products.find(x => x.id === productId);
     }
 
     addProduct(product: Product) : Product {

@@ -11,7 +11,7 @@ describe('ProductService', () => {
     });
 
     it('should create a new product', () => {
-        const product1: Product = {id: 1, name:'red shoes',isActive: true, unitPrice: 10.00, amountAvailable: 2,  isInStock: true};
+        const product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
 
         let result = productService.addProduct(product1);
 
@@ -23,7 +23,15 @@ describe('ProductService', () => {
     });
 
     it('should get a product by id', () => {
-        expect.assertions(1)
+        const product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+        const product2: Product = { id: 2, name: 'blue shoes', isActive: true, unitPrice: 15.00, amountAvailable: 4, isInStock: true };
+
+        productService.addProduct(product1);
+        productService.addProduct(product2);
+
+        let result = productService.getProductById(product2.id);
+
+        expect(result.name).toEqual(product2.name);
     });
 
     it('should make a product inActive', () => {
