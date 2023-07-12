@@ -1,10 +1,10 @@
-import { Products } from "./Entities/Products";
+import { Product } from "./Entities/Product";
 
 describe('Products', () => {
-    let product: Products;
+    let product: Product;
 
     beforeEach(() => {
-        product = new Products();
+        product = new Product();
     });
 
     it('should create a new product', () => {
