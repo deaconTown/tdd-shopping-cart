@@ -1,11 +1,14 @@
 import { CartItem } from "./Entities/CartItem";
+import { Product } from "./Entities/Product";
 import { ShoppingCart } from "./Entities/ShoppingCart";
+import { ProductService } from "./Services/product.service";
 
 describe('ShoppingCart', () => {
   let cart: ShoppingCart;
+  let productService: ProductService = new ProductService();
 
   beforeEach(() => {
-    cart = new ShoppingCart();
+    cart = new ShoppingCart(productService);
   });
 
 
@@ -180,7 +183,17 @@ describe('ShoppingCart', () => {
 
   // (cost per item) subtotal should be calculated by the qty * unit price
   it('should return correct cost for a single item in cart', () => {
-    expect.assertions(1)
+    let product1 : Product = {id: 1, name:'red shoes',isActive: true, unitPrice: 10.00, amountAvailable: 2,  isInStock: true};
+    
+    let cart1: CartItem = { id: 1, productId: product1.id, qty: 1, shoppingCartId: 1 }
+
+    cart.addItem(cart1);
+
+    let expected = product1.unitPrice * cart1.qty;
+
+    let cost = cart.getCartItemsCostById(1);
+    
+    expect(cost).toEqual(expected)
   });
 
   it('should return correct total cost for all the items in cart', () => {

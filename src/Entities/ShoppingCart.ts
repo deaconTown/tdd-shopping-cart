@@ -1,8 +1,14 @@
+import { ProductService } from "src/Services/product.service";
 import { CartItem } from "./CartItem";
+import { Product } from "./Product";
 
 export class ShoppingCart {
-
   cartItems: CartItem[] = [];
+
+  /**
+   *
+   */
+  constructor(private productService: ProductService) {}
 
   checkExists(cart1: CartItem): boolean {
     var cartItemExits: boolean = false;
@@ -92,6 +98,15 @@ export class ShoppingCart {
     this.cartItems = [];
 
     return this.cartItems;
+  }
+
+  getCartItemsCostById(id: number) {
+
+    let cartItem = this.getCartItemsById(id);
+    let productItem = this.productService.getProductById(cartItem.productId);
+    
+    let itemCost = cartItem.qty * productItem.unitPrice;
+    return itemCost;
   }
 
 
