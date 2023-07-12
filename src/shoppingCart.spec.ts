@@ -1,15 +1,15 @@
 import { CartItem } from "./Entities/CartItem";
 import { Product } from "./Entities/Product";
-import { ShoppingCart } from "./Entities/ShoppingCart";
+import { ShoppingCartService } from "./Services/shoppingCart.service";
 import { ProductService } from "./Services/product.service";
 
 describe('ShoppingCart', () => {
-  let shoppingCart: ShoppingCart;
+  let shoppingCart: ShoppingCartService;
   let productService: ProductService;
 
   beforeEach(() => {
     productService = new ProductService();
-    shoppingCart = new ShoppingCart(productService);
+    shoppingCart = new ShoppingCartService(productService);
   });
 
 
@@ -226,9 +226,9 @@ describe('ShoppingCart', () => {
     shoppingCart.addItem(cart1);
     shoppingCart.addItem(cart2);
 
-    let expected = product1.unitPrice * cart1.qty;
+    let expected = (product1.unitPrice * cart1.qty) + (product2.unitPrice * cart2.qty);
 
-    let totalCost = shoppingCart.getCartTotalCost();
+    let totalCost = shoppingCart.getCartTotalCost(1);
     
     expect(totalCost).toEqual(expected);
   });
