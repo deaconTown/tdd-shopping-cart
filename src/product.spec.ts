@@ -1,14 +1,21 @@
 import { Product } from "./Entities/Product";
+import { ProductService } from "./Services/product.service";
 
-describe('Products', () => {
+describe('ProductService', () => {
     let product: Product;
+    let productService: ProductService;
 
     beforeEach(() => {
         product = new Product();
+        productService = new ProductService();
     });
 
     it('should create a new product', () => {
-        expect.assertions(1)
+        const product1: Product = {id: 1, name:'red shoes',isActive: true, unitPrice: 10.00, amountAvailable: 2,  isInStock: true};
+
+        let result = productService.addProduct(product1);
+
+        expect(result.name).toEqual(product1.name);
     });
 
     it('should get all products', () => {
