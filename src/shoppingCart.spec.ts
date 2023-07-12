@@ -3,6 +3,7 @@ import { Product } from "./Entities/Product";
 import { ShoppingCartService } from "./Services/shoppingCart.service";
 import { ProductService } from "./Services/product.service";
 import { Catelog } from "./Entities/Catelog";
+import { CatelogItem } from "./Entities/CatelogItem";
 
 describe('ShoppingCart', () => {
   let shoppingCart: ShoppingCartService;
@@ -320,7 +321,7 @@ describe('ShoppingCart', () => {
   });
 
   it('should be able to add active catelog to cart', () => {
-    let productList: Product[] = [];
+    let catelogItemList: CatelogItem[] = [];
     let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
     let product2: Product = { id: 2, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
 
@@ -328,25 +329,44 @@ describe('ShoppingCart', () => {
     productService.addProduct(product1);
     productService.addProduct(product2);
 
-    productList.push(product1);
-    productList.push(product2);
+    let catelogItem1 : CatelogItem = {id: 1, productId: product1.id, qty: 3}
+
+    catelogItemList.push(catelogItem1);
 
 
-    let calelog1: Catelog = { id: 1, name: 'electronic special', isActive: false, category: 'electronics', products: productList };
+    let calelog1: Catelog = { id: 1, name: 'electronic special', isActive: true, category: 'electronics', items: catelogItemList };
 
+
+    let result = shoppingCart.addCatelogToCart(calelog1);
+
+    expect(result).toEqual(true);
+
+  });
+
+  it('should not be able to add an inActive catelog to cart', () => {
+    let catelogItemList: CatelogItem[] = [];
+    let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+    let product2: Product = { id: 2, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+
+    //TODO: LEARN HOW TO MOCK THIS
+    productService.addProduct(product1);
+    productService.addProduct(product2);
+
+    let catelogItem1 : CatelogItem = {id: 1, productId: product1.id, qty: 3}
+
+    catelogItemList.push(catelogItem1);
+
+
+    let calelog1: Catelog = { id: 1, name: 'electronic special', isActive: true, category: 'electronics', items: catelogItemList };
 
     let cart1: CartItem = { id: 1, productId: product1.id, qty: 1, shoppingCartId: 1 }
 
-    shoppingCart.addCatelogToCart(calelog1);
+    shoppingCart.addItem(cart1);
 
     let expected = shoppingCart.getCartItems().length;
 
     expect(expected).toEqual(0);
 
-  });
-
-  it('should not be able to add an inActive catelog to cart', () => {
-    expect.assertions(1)
   });
 
 

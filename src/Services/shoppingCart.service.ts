@@ -134,8 +134,21 @@ export class ShoppingCartService {
     return totalCost;
   }
 
-  addCatelogToCart(calelog: Catelog) {
-    throw new Error("Method not implemented.");
+  addCatelogToCart(calelog: Catelog): boolean {
+    let success = false;
+    calelog.items.forEach(item => {
+      //create a cart item with the product
+      //TODO: GENEREATE UNIQUE ID 
+      //TODO: fIGURE OUT THE SHOPPING CART ID HARDCODED ISSUE
+      let cartItem : CartItem = { id: 1, productId: item.productId, qty: item.qty, shoppingCartId: 1 }
+
+      //add cart item to cart
+      this.addItem(cartItem);
+
+      success = true;
+      
+    });
+    return success
   }
 
 
