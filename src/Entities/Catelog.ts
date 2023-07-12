@@ -1,3 +1,4 @@
+import { CatelogItem } from "./CatelogItem";
 import { Product } from "./Product";
 
 export class Catelog {
@@ -5,5 +6,5 @@ export class Catelog {
     name: string;
     category: string;
     isActive: boolean;
-    products: Product[];
+    items: CatelogItem[];
 }
