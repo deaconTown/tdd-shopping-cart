@@ -1,15 +1,10 @@
-export interface ICartItem {
-  id: number;
-  name: string;
-  qty?: number
-}
-
+import { CartItem } from "./CartItem";
 
 export class ShoppingCart {
 
-  cartItems: ICartItem[] = [{ id: 1, name: 'item 1', qty: 2 }];
+  cartItems: CartItem[] = [];
 
-  checkExists(cart1: ICartItem): boolean {
+  checkExists(cart1: CartItem): boolean {
     var cartItemExits: boolean = false;
     var foundCartItem = this.cartItems.find(x => x.id === cart1.id);
 
@@ -31,12 +26,12 @@ export class ShoppingCart {
     return this.cartItems;
   }
 
-  getCartItemsById(id: number): ICartItem {
+  getCartItemsById(id: number): CartItem {
     var foundCartItem = this.cartItems.find(x => x.id === id)
     return foundCartItem;
   }
 
-  addItem(cart: { id: number, name: string, qty?: number }) {
+  addItem(cart: CartItem) {
 
     //check if item exist
     let foundCartItem = this.checkExists(cart);
@@ -60,27 +55,28 @@ export class ShoppingCart {
     return cart;
   }
 
-  updateCartItem = (cart: ICartItem) => {
+  updateCartItem = (cart: CartItem) => {
 
     var foundIndex = this.cartItems.findIndex(x => x.id == cart.id);
     this.cartItems[foundIndex] = cart;
   }
 
-  increaseCartItemQty(id: number, qty: number): ICartItem {
+  increaseCartItemQty(id: number, qty: number): CartItem {
     var cartItemFound = this.getCartItemsById(id);
 
     if (cartItemFound) {
       var updatedCartItem = {
         id: cartItemFound.id,
-        name: cartItemFound.name,
-        qty: cartItemFound.qty + qty
+        productId: cartItemFound.productId,
+        qty: cartItemFound.qty + qty,
+        shoppingCartId: cartItemFound.shoppingCartId
       }
       return updatedCartItem;
     }
-    return { id: 0, name: 'item 0', qty: 0 };
+    return { id: 0, productId: 0, qty: 0, shoppingCartId: 0 };
   }
 
-  decreaseCartItemQty(id: number): ICartItem {
+  decreaseCartItemQty(id: number): CartItem {
     let cartItem = this.getCartItemsById(id);
     cartItem.qty -= 1;
     if (cartItem.qty === 0) {
