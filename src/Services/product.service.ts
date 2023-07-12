@@ -11,4 +11,10 @@ export class ProductService {
         product = this.products.find(x => x.id === productId)
         return product;
     }
+
+    addProduct(product: Product) : Product {
+        this.products.push(product);
+
+        return product;
+    }
 }
