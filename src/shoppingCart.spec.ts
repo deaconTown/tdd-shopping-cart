@@ -2,6 +2,7 @@ import { CartItem } from "./Entities/CartItem";
 import { Product } from "./Entities/Product";
 import { ShoppingCartService } from "./Services/shoppingCart.service";
 import { ProductService } from "./Services/product.service";
+import { Catelog } from "./Entities/Catelog";
 
 describe('ShoppingCart', () => {
   let shoppingCart: ShoppingCartService;
@@ -109,7 +110,7 @@ describe('ShoppingCart', () => {
   });
 
   it('should get cart item by id', () => {
-    
+
     let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
     let product2: Product = { id: 3, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
 
@@ -315,7 +316,33 @@ describe('ShoppingCart', () => {
 
     let expected = shoppingCart.getCartItems().length;
 
-     expect(expected).toEqual(0);
+    expect(expected).toEqual(0);
+  });
+
+  it('should be able to add active catelog to cart', () => {
+    let productList: Product[] = [];
+    let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+    let product2: Product = { id: 2, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+
+    //TODO: LEARN HOW TO MOCK THIS
+    productService.addProduct(product1);
+    productService.addProduct(product2);
+
+    productList.push(product1);
+    productList.push(product2);
+
+
+    let calelog1: Catelog = { id: 1, name: 'electronic special', isActive: false, category: 'electronics', products: productList };
+
+
+    let cart1: CartItem = { id: 1, productId: product1.id, qty: 1, shoppingCartId: 1 }
+
+    shoppingCart.addCatelogToCart(calelog1);
+
+    let expected = shoppingCart.getCartItems().length;
+
+    expect(expected).toEqual(0);
+
   });
 
   it('should not be able to add an inActive catelog to cart', () => {

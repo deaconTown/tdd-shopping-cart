@@ -1,6 +1,7 @@
 import { ProductService } from "src/Services/product.service";
 import { CartItem } from "../Entities/CartItem";
 import { Product } from "../Entities/Product";
+import { Catelog } from "src/Entities/Catelog";
 
 export class ShoppingCartService {
   private cartItems: CartItem[] = [];
@@ -132,6 +133,11 @@ export class ShoppingCartService {
 
     return totalCost;
   }
+
+  addCatelogToCart(calelog: Catelog) {
+    throw new Error("Method not implemented.");
+  }
+
 
 
 }
