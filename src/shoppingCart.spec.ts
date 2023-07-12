@@ -15,9 +15,18 @@ describe('ShoppingCart', () => {
 
 
   it('should get all items from cart', () => {
-    let cart1: CartItem = { id: 1, productId: 1, qty: 1, shoppingCartId: 1 }
-    let cart2: CartItem = { id: 2, productId: 2, qty: 1, shoppingCartId: 1 }
-    let cart3: CartItem = { id: 3, productId: 3, qty: 1, shoppingCartId: 1 }
+    let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+    let product2: Product = { id: 2, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+    let product3: Product = { id: 3, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+
+    //TODO: LEARN HOW TO MOCK THIS
+    productService.addProduct(product1);
+    productService.addProduct(product2);
+    productService.addProduct(product3);
+
+    let cart1: CartItem = { id: 1, productId: product1.id, qty: 1, shoppingCartId: 1 }
+    let cart2: CartItem = { id: 2, productId: product2.id, qty: 1, shoppingCartId: 1 }
+    let cart3: CartItem = { id: 3, productId: product3.id, qty: 1, shoppingCartId: 1 }
 
     shoppingCart.addItem(cart1);
     shoppingCart.addItem(cart2);
@@ -30,7 +39,11 @@ describe('ShoppingCart', () => {
 
   // must be able to add a cart
   it('should add new items to the cart', () => {
-    let cart1: CartItem = { id: 2, productId: 2, qty: 1, shoppingCartId: 1 }
+    let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+
+    productService.addProduct(product1);
+
+    let cart1: CartItem = { id: 2, productId: product1.id, qty: 1, shoppingCartId: 1 }
     shoppingCart.addItem(cart1);
 
     let cartItem = shoppingCart.getCartItemsById(2);
@@ -38,7 +51,11 @@ describe('ShoppingCart', () => {
   });
 
   it('should not create a new item when item already exists in the cart', () => {
-    let cart1: CartItem = { id: 1, productId: 2, qty: 1, shoppingCartId: 1 }
+    let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+
+    productService.addProduct(product1);
+
+    let cart1: CartItem = { id: 2, productId: product1.id, qty: 1, shoppingCartId: 1 }
     shoppingCart.addItem(cart1);
 
     let cartItems = shoppingCart.getCartItems();
@@ -50,7 +67,13 @@ describe('ShoppingCart', () => {
   it('should update existing item in the cart', () => {
 
     //add new item to cart
-    let cart1: CartItem = { id: 2, productId: 2, qty: 1, shoppingCartId: 1 }
+    let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+    let product2: Product = { id: 2, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+
+    productService.addProduct(product1);
+    productService.addProduct(product2);
+
+    let cart1: CartItem = { id: 2, productId: product1.id, qty: 1, shoppingCartId: 1 }
     shoppingCart.addItem(cart1);
 
     //attempt to add item with the same id with new property values
@@ -63,14 +86,22 @@ describe('ShoppingCart', () => {
   });
 
   it('should return false when when cart item does not exists', () => {
-    let cart1: CartItem = { id: 2, productId: 2, qty: 1, shoppingCartId: 1 }
+    let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+
+    productService.addProduct(product1);
+
+    let cart1: CartItem = { id: 2, productId: product1.id, qty: 1, shoppingCartId: 1 }
 
     let cartItemExist = shoppingCart.checkExists(cart1);
     expect(cartItemExist).toEqual(false);
   });
 
   it('should return true when cart item does exists', () => {
-    let cart1: CartItem = { id: 2, productId: 2, qty: 1, shoppingCartId: 1 }
+    let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+
+    productService.addProduct(product1);
+
+    let cart1: CartItem = { id: 2, productId: product1.id, qty: 1, shoppingCartId: 1 }
     shoppingCart.addItem(cart1);
 
     let cartItemExist = shoppingCart.checkExists(cart1);
@@ -78,8 +109,16 @@ describe('ShoppingCart', () => {
   });
 
   it('should get cart item by id', () => {
-    let cart1: CartItem = { id: 2, productId: 2, qty: 1, shoppingCartId: 1 }
-    let cart2: CartItem = { id: 3, productId: 3, qty: 1, shoppingCartId: 1 }
+    
+    let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+    let product2: Product = { id: 3, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+
+    //TODO: LEARN HOW TO MOCK THIS
+    productService.addProduct(product1);
+    productService.addProduct(product2);
+
+    let cart1: CartItem = { id: 2, productId: product1.id, qty: 1, shoppingCartId: 1 }
+    let cart2: CartItem = { id: 3, productId: product2.id, qty: 1, shoppingCartId: 1 }
     shoppingCart.addItem(cart1);
     shoppingCart.addItem(cart2);
 
@@ -87,9 +126,12 @@ describe('ShoppingCart', () => {
     expect(cartItem.productId).toEqual(3);
   });
 
-  //TODO: NOT SURE ABOUT THIS ONE
   it('cart item qty should only increase by 1 when qty value is not specified when adding item to cart', () => {
-    let cart1: CartItem = { id: 2, productId: 2, qty: 1, shoppingCartId: 1 }
+    let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+
+    productService.addProduct(product1);
+
+    let cart1: CartItem = { id: 2, productId: product1.id, qty: 1, shoppingCartId: 1 }
     shoppingCart.addItem(cart1);
 
     let cartItem = shoppingCart.getCartItemsById(2);
@@ -98,7 +140,14 @@ describe('ShoppingCart', () => {
   });
 
   it('should remove items from the cart by id', () => {
-    let cart1: CartItem = { id: 2, productId: 2, qty: 1, shoppingCartId: 1 }
+    let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+    let product2: Product = { id: 2, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+
+    //TODO: LEARN HOW TO MOCK THIS
+    productService.addProduct(product1);
+    productService.addProduct(product2);
+
+    let cart1: CartItem = { id: 2, productId: product1.id, qty: 1, shoppingCartId: 1 }
     let cart2: CartItem = { id: 3, productId: 3, qty: 1, shoppingCartId: 1 }
     shoppingCart.addItem(cart1);
     shoppingCart.addItem(cart2);
@@ -123,7 +172,12 @@ describe('ShoppingCart', () => {
   it('should increase cart item qty by 1', () => {
 
     //arrange 
-    let cart1: CartItem = { id: 2, productId: 2, qty: 1, shoppingCartId: 1 }
+
+    let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+
+    productService.addProduct(product1);
+
+    let cart1: CartItem = { id: 2, productId: product1.id, qty: 1, shoppingCartId: 1 }
     shoppingCart.addItem(cart1);
 
     //act
@@ -138,8 +192,12 @@ describe('ShoppingCart', () => {
 
   // when same item is added to the cart, the qty should increase in the cart
   it('should increase cart item qty by specified amount when already exists in cart', () => {
-    let cart1: CartItem = { id: 22, productId: 2, qty: 3, shoppingCartId: 1 }
-    // let cart2: ICartItem = { id: 3, name: 'item 3', qty: 1 }
+    let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+
+    productService.addProduct(product1);
+
+    let cart1: CartItem = { id: 22, productId: product1.id, qty: 3, shoppingCartId: 1 }
+
     shoppingCart.addItem(cart1);
     // cart.addItem(cart2);
 
@@ -154,9 +212,12 @@ describe('ShoppingCart', () => {
 
   // must be able to decrease the qty of the products in the cart
   it('should decrease cart item qty by 1', () => {
+    let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
 
-    //arrange 
-    let cart1: CartItem = { id: 2, productId: 2, qty: 2, shoppingCartId: 1 }
+    productService.addProduct(product1);
+
+    let cart1: CartItem = { id: 2, productId: product1.id, qty: 2, shoppingCartId: 1 }
+
     shoppingCart.addItem(cart1);
 
     //act
@@ -170,7 +231,12 @@ describe('ShoppingCart', () => {
   // items in the cart below 1 should be removed form the cart automatically
   it('should remove item from cart when qty is zero', () => {
     //arrange 
-    let cart1: CartItem = { id: 2, productId: 2, qty: 1, shoppingCartId: 1 }
+    let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+
+    productService.addProduct(product1);
+
+    let cart1: CartItem = { id: 2, productId: product1.id, qty: 1, shoppingCartId: 1 }
+
     shoppingCart.addItem(cart1);
 
     shoppingCart.decreaseCartItemQty(cart1.id);

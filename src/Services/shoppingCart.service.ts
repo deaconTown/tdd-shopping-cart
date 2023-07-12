@@ -40,27 +40,36 @@ export class ShoppingCartService {
   }
 
   addItem(cart: CartItem) {
+    let cartItemToAdd = cart;
+    //check if product is available to add
+    const productToAdd = this.productService.getProductById(cart.productId);
 
-    //check if item exist
-    let foundCartItem = this.checkExists(cart);
-    if (foundCartItem) {
+    if (productToAdd && productToAdd.isActive) {
+      //check if item exist
+      let foundCartItem = this.checkExists(cart);
+      if (foundCartItem) {
 
-      if (cart.qty === undefined) {
-        //update qty for existing cart item by 1
-        cart.qty = this.increaseCartItemQty(cart.id, 1).qty;
-        // console.log('it is undefined cart qty', cart)
-      };
-      //update cart item
-      this.updateCartItem(cart);
+        if (cart.qty === undefined) {
+          //update qty for existing cart item by 1
+          cart.qty = this.increaseCartItemQty(cart.id, 1).qty;
+          // console.log('it is undefined cart qty', cart)
+        };
+        //update cart item
+        this.updateCartItem(cart);
+      }
+      else {
+        //set new cart item to 1
+        if (cart.qty === undefined) {
+          cart.qty = 1;
+        };
+        this.cartItems.push(cart);
+      }
     }
     else {
-      //set new cart item to 1
-      if (cart.qty === undefined) {
-        cart.qty = 1;
-      };
-      this.cartItems.push(cart);
+      cartItemToAdd = undefined;
     }
-    return cart;
+
+    return cartItemToAdd;
   }
 
   updateCartItem = (cart: CartItem) => {
@@ -106,21 +115,21 @@ export class ShoppingCartService {
 
     let cartItem = this.getCartItemsById(id);
     let productItem = this.productService.getProductById(cartItem.productId);
-    
+
     let itemCost = cartItem.qty * productItem.unitPrice;
     return itemCost;
   }
 
   getCartTotalCost(shoppingCartId: number) {
     let totalCost = 0.00;
-    let cartItemList = this.cartItems.filter(x => x.shoppingCartId === shoppingCartId );
-    
-    cartItemList.forEach(item => {      
+    let cartItemList = this.cartItems.filter(x => x.shoppingCartId === shoppingCartId);
+
+    cartItemList.forEach(item => {
       let productItem = this.productService.getProductById(item.productId);
 
       totalCost += (item.qty * productItem.unitPrice)
     });
-    
+
     return totalCost;
   }
 
