@@ -208,7 +208,29 @@ describe('ShoppingCart', () => {
   });
 
   it('should return correct total cost for all the items in cart', () => {
-    expect.assertions(1)
+    let product1 : Product = {id: 1, name:'red shoes',isActive: true, unitPrice: 10.00, amountAvailable: 2,  isInStock: true};
+    let product2 : Product = {id: 2, name:'SWP EFun Earphones',isActive: true, unitPrice: 34.99, amountAvailable: 5,  isInStock: true};
+    
+    // const result = jest.spyOn(productService, 'addProduct').mockImplementation(() => product1).mockReturnThis();
+
+    // console.log('result', result)
+    
+    //TODO: LEARN HOW TO MOCK THIS
+    productService.addProduct(product1);
+    productService.addProduct(product2);
+
+
+    let cart1: CartItem = { id: 1, productId: product1.id, qty: 2, shoppingCartId: 1 }
+    let cart2: CartItem = { id: 2, productId: product2.id, qty: 1, shoppingCartId: 1 }
+
+    shoppingCart.addItem(cart1);
+    shoppingCart.addItem(cart2);
+
+    let expected = product1.unitPrice * cart1.qty;
+
+    let totalCost = shoppingCart.getCartTotalCost();
+    
+    expect(totalCost).toEqual(expected);
   });
 
   // each customer should have a unique cart, one to one
