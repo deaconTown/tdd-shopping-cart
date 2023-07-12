@@ -136,14 +136,18 @@ export class ShoppingCartService {
 
   addCatelogToCart(calelog: Catelog): boolean {
     let success = false;
+    let cartItemId = 1;
+    
     calelog.items.forEach(item => {
       //create a cart item with the product
       //TODO: GENEREATE UNIQUE ID 
       //TODO: fIGURE OUT THE SHOPPING CART ID HARDCODED ISSUE
-      let cartItem : CartItem = { id: 1, productId: item.productId, qty: item.qty, shoppingCartId: 1 }
+      let cartItem : CartItem = { id: cartItemId, productId: item.productId, qty: item.qty, shoppingCartId: 1 }
 
       //add cart item to cart
       this.addItem(cartItem);
+
+      cartItemId += 1;
 
       success = true;
       

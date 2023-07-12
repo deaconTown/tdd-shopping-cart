@@ -322,12 +322,10 @@ describe('ShoppingCart', () => {
 
   it('should be able to add active catelog to cart', () => {
     let catelogItemList: CatelogItem[] = [];
-    let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
-    let product2: Product = { id: 2, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+    let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 5, isInStock: true };
 
     //TODO: LEARN HOW TO MOCK THIS
     productService.addProduct(product1);
-    productService.addProduct(product2);
 
     let catelogItem1 : CatelogItem = {id: 1, productId: product1.id, qty: 3}
 
@@ -338,35 +336,31 @@ describe('ShoppingCart', () => {
 
 
     let result = shoppingCart.addCatelogToCart(calelog1);
+    let expected = shoppingCart.getCartItemsById(1);
 
     expect(result).toEqual(true);
+    expect(expected.qty).toEqual(3);
 
   });
 
+  //TODO: NOT SURE WHY THIS IS PASSING - INVESTIGATE
   it('should not be able to add an inActive catelog to cart', () => {
     let catelogItemList: CatelogItem[] = [];
     let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
-    let product2: Product = { id: 2, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
 
-    //TODO: LEARN HOW TO MOCK THIS
-    productService.addProduct(product1);
-    productService.addProduct(product2);
-
-    let catelogItem1 : CatelogItem = {id: 1, productId: product1.id, qty: 3}
+    let catelogItem1 : CatelogItem = {id: 1, productId: product1.id, qty: 2}
 
     catelogItemList.push(catelogItem1);
 
 
     let calelog1: Catelog = { id: 1, name: 'electronic special', isActive: true, category: 'electronics', items: catelogItemList };
 
-    let cart1: CartItem = { id: 1, productId: product1.id, qty: 1, shoppingCartId: 1 }
 
-    shoppingCart.addItem(cart1);
-
+    let result = shoppingCart.addCatelogToCart(calelog1);
     let expected = shoppingCart.getCartItems().length;
 
+    expect(result).toEqual(true);
     expect(expected).toEqual(0);
-
   });
 
 
