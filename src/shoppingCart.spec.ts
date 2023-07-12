@@ -183,12 +183,12 @@ describe('ShoppingCart', () => {
 
   // (cost per item) subtotal should be calculated by the qty * unit price
   it('should return correct cost for a single item in cart', () => {
-    let product1 : Product = {id: 1, name:'red shoes',isActive: true, unitPrice: 10.00, amountAvailable: 2,  isInStock: true};
-    
+    let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+
     // const result = jest.spyOn(productService, 'addProduct').mockImplementation(() => product1).mockReturnThis();
 
     // console.log('result', result)
-    
+
     //TODO: LEARN HOW TO MOCK THIS
     productService.addProduct(product1);
 
@@ -203,18 +203,18 @@ describe('ShoppingCart', () => {
     let expected = product1.unitPrice * cart1.qty;
 
     let cost = shoppingCart.getCartItemsCostById(1);
-    
+
     expect(cost).toEqual(expected)
   });
 
   it('should return correct total cost for all the items in cart', () => {
-    let product1 : Product = {id: 1, name:'red shoes',isActive: true, unitPrice: 10.00, amountAvailable: 2,  isInStock: true};
-    let product2 : Product = {id: 2, name:'SWP EFun Earphones',isActive: true, unitPrice: 34.99, amountAvailable: 5,  isInStock: true};
-    
+    let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+    let product2: Product = { id: 2, name: 'SWP EFun Earphones', isActive: true, unitPrice: 34.99, amountAvailable: 5, isInStock: true };
+
     // const result = jest.spyOn(productService, 'addProduct').mockImplementation(() => product1).mockReturnThis();
 
     // console.log('result', result)
-    
+
     //TODO: LEARN HOW TO MOCK THIS
     productService.addProduct(product1);
     productService.addProduct(product2);
@@ -229,7 +229,7 @@ describe('ShoppingCart', () => {
     let expected = (product1.unitPrice * cart1.qty) + (product2.unitPrice * cart2.qty);
 
     let totalCost = shoppingCart.getCartTotalCost(1);
-    
+
     expect(totalCost).toEqual(expected);
   });
 
@@ -237,18 +237,29 @@ describe('ShoppingCart', () => {
 
 
 
-  it('should update product availableAmount when added to cart', () => {
-    expect.assertions(1)
-  });
-
   it('should not be able to add an inActive product to cart', () => {
-    expect.assertions(1)
+    let product1: Product = { id: 1, name: 'red shoes', isActive: false, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+
+    //TODO: LEARN HOW TO MOCK THIS
+    productService.addProduct(product1);
+
+    let cart1: CartItem = { id: 1, productId: product1.id, qty: 1, shoppingCartId: 1 }
+
+    shoppingCart.addItem(cart1);
+
+    let expected = shoppingCart.getCartItems().length;
+
+     expect(expected).toEqual(0);
   });
 
   it('should not be able to add an inActive catelog to cart', () => {
     expect.assertions(1)
   });
 
+
+  // it('should update product availableAmount when added to sold', () => {
+  //   expect.assertions(1)
+  // });
 
 
 
