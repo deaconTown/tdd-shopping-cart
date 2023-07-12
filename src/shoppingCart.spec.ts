@@ -5,9 +5,10 @@ import { ProductService } from "./Services/product.service";
 
 describe('ShoppingCart', () => {
   let shoppingCart: ShoppingCart;
-  let productService: ProductService = new ProductService();
+  let productService: ProductService;
 
   beforeEach(() => {
+    productService = new ProductService();
     shoppingCart = new ShoppingCart(productService);
   });
 
@@ -93,7 +94,6 @@ describe('ShoppingCart', () => {
 
     let cartItem = shoppingCart.getCartItemsById(2);
 
-    console.log('cartItem ~~', cartItem)
     expect(cartItem.qty).toEqual(1);
   });
 
@@ -185,6 +185,17 @@ describe('ShoppingCart', () => {
   it('should return correct cost for a single item in cart', () => {
     let product1 : Product = {id: 1, name:'red shoes',isActive: true, unitPrice: 10.00, amountAvailable: 2,  isInStock: true};
     
+    // const result = jest.spyOn(productService, 'addProduct').mockImplementation(() => product1).mockReturnThis();
+
+    // console.log('result', result)
+    
+    //TODO: LEARN HOW TO MOCK THIS
+    productService.addProduct(product1);
+
+    let p = productService.getProductById(product1.id);
+
+    console.log('p', p)
+
     let cart1: CartItem = { id: 1, productId: product1.id, qty: 1, shoppingCartId: 1 }
 
     shoppingCart.addItem(cart1);
