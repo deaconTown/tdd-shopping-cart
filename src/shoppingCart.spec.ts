@@ -4,11 +4,11 @@ import { ShoppingCart } from "./Entities/ShoppingCart";
 import { ProductService } from "./Services/product.service";
 
 describe('ShoppingCart', () => {
-  let cart: ShoppingCart;
+  let shoppingCart: ShoppingCart;
   let productService: ProductService = new ProductService();
 
   beforeEach(() => {
-    cart = new ShoppingCart(productService);
+    shoppingCart = new ShoppingCart(productService);
   });
 
 
@@ -18,11 +18,11 @@ describe('ShoppingCart', () => {
     let cart2: CartItem = { id: 2, productId: 2, qty: 1, shoppingCartId: 1 }
     let cart3: CartItem = { id: 3, productId: 3, qty: 1, shoppingCartId: 1 }
 
-    cart.addItem(cart1);
-    cart.addItem(cart2);
-    cart.addItem(cart3);
+    shoppingCart.addItem(cart1);
+    shoppingCart.addItem(cart2);
+    shoppingCart.addItem(cart3);
 
-    let cartItem = cart.getCartItems();
+    let cartItem = shoppingCart.getCartItems();
     expect(cartItem.length).toEqual(3);
   });
 
@@ -30,17 +30,17 @@ describe('ShoppingCart', () => {
   // must be able to add a cart
   it('should add new items to the cart', () => {
     let cart1: CartItem = { id: 2, productId: 2, qty: 1, shoppingCartId: 1 }
-    cart.addItem(cart1);
+    shoppingCart.addItem(cart1);
 
-    let cartItem = cart.getCartItemsById(2);
+    let cartItem = shoppingCart.getCartItemsById(2);
     expect(cartItem.id).toEqual(2);
   });
 
   it('should not create a new item when item already exists in the cart', () => {
     let cart1: CartItem = { id: 1, productId: 2, qty: 1, shoppingCartId: 1 }
-    cart.addItem(cart1);
+    shoppingCart.addItem(cart1);
 
-    let cartItems = cart.getCartItems();
+    let cartItems = shoppingCart.getCartItems();
 
     //assert that length of cart stays the same
     expect(cartItems.length).toEqual(1);
@@ -50,48 +50,48 @@ describe('ShoppingCart', () => {
 
     //add new item to cart
     let cart1: CartItem = { id: 2, productId: 2, qty: 1, shoppingCartId: 1 }
-    cart.addItem(cart1);
+    shoppingCart.addItem(cart1);
 
     //attempt to add item with the same id with new property values
     cart1 = { id: 2, productId: 2, qty: 1, shoppingCartId: 1 }
-    cart.addItem(cart1); //
+    shoppingCart.addItem(cart1); //
 
     //add the item twice, each with same id, but different qty/name then assert that the cart item has the same id and latest change
-    let cartResult = cart.getCartItemsById(2);
+    let cartResult = shoppingCart.getCartItemsById(2);
     expect(cartResult.productId).toEqual(2);
   });
 
   it('should return false when when cart item does not exists', () => {
     let cart1: CartItem = { id: 2, productId: 2, qty: 1, shoppingCartId: 1 }
 
-    let cartItemExist = cart.checkExists(cart1);
+    let cartItemExist = shoppingCart.checkExists(cart1);
     expect(cartItemExist).toEqual(false);
   });
 
   it('should return true when cart item does exists', () => {
     let cart1: CartItem = { id: 2, productId: 2, qty: 1, shoppingCartId: 1 }
-    cart.addItem(cart1);
+    shoppingCart.addItem(cart1);
 
-    let cartItemExist = cart.checkExists(cart1);
+    let cartItemExist = shoppingCart.checkExists(cart1);
     expect(cartItemExist).toEqual(true);
   });
 
   it('should get cart item by id', () => {
     let cart1: CartItem = { id: 2, productId: 2, qty: 1, shoppingCartId: 1 }
     let cart2: CartItem = { id: 3, productId: 3, qty: 1, shoppingCartId: 1 }
-    cart.addItem(cart1);
-    cart.addItem(cart2);
+    shoppingCart.addItem(cart1);
+    shoppingCart.addItem(cart2);
 
-    let cartItem = cart.getCartItemsById(3);
+    let cartItem = shoppingCart.getCartItemsById(3);
     expect(cartItem.productId).toEqual(3);
   });
 
   //TODO: NOT SURE ABOUT THIS ONE
   it('cart item qty should only increase by 1 when qty value is not specified when adding item to cart', () => {
     let cart1: CartItem = { id: 2, productId: 2, qty: 1, shoppingCartId: 1 }
-    cart.addItem(cart1);
+    shoppingCart.addItem(cart1);
 
-    let cartItem = cart.getCartItemsById(2);
+    let cartItem = shoppingCart.getCartItemsById(2);
 
     console.log('cartItem ~~', cartItem)
     expect(cartItem.qty).toEqual(1);
@@ -100,11 +100,11 @@ describe('ShoppingCart', () => {
   it('should remove items from the cart by id', () => {
     let cart1: CartItem = { id: 2, productId: 2, qty: 1, shoppingCartId: 1 }
     let cart2: CartItem = { id: 3, productId: 3, qty: 1, shoppingCartId: 1 }
-    cart.addItem(cart1);
-    cart.addItem(cart2);
-    cart.removeItem(1);
+    shoppingCart.addItem(cart1);
+    shoppingCart.addItem(cart2);
+    shoppingCart.removeItem(1);
 
-    let cartItem = cart.getCartItems();
+    let cartItem = shoppingCart.getCartItems();
     expect(cartItem[0].id).toEqual(2);
 
     // assert.deepEqual(cartItem[0].id, 2);
@@ -112,9 +112,9 @@ describe('ShoppingCart', () => {
 
   it('should remove all items in the cart', () => {
 
-    cart.clearCart();
+    shoppingCart.clearCart();
 
-    let cartItems = cart.getCartItems();
+    let cartItems = shoppingCart.getCartItems();
 
     expect(cartItems.length).toEqual(0);
   });
@@ -124,11 +124,11 @@ describe('ShoppingCart', () => {
 
     //arrange 
     let cart1: CartItem = { id: 2, productId: 2, qty: 1, shoppingCartId: 1 }
-    cart.addItem(cart1);
+    shoppingCart.addItem(cart1);
 
     //act
 
-    let cartItem = cart.increaseCartItemQty(2, 1);
+    let cartItem = shoppingCart.increaseCartItemQty(2, 1);
 
     //assert
     expect(cartItem.qty).toEqual(2);
@@ -140,10 +140,10 @@ describe('ShoppingCart', () => {
   it('should increase cart item qty by specified amount when already exists in cart', () => {
     let cart1: CartItem = { id: 22, productId: 2, qty: 3, shoppingCartId: 1 }
     // let cart2: ICartItem = { id: 3, name: 'item 3', qty: 1 }
-    cart.addItem(cart1);
+    shoppingCart.addItem(cart1);
     // cart.addItem(cart2);
 
-    let cartItem = cart.increaseCartItemQty(cart1.id, 4);
+    let cartItem = shoppingCart.increaseCartItemQty(cart1.id, 4);
 
     console.log('cartItem', cartItem)
 
@@ -157,11 +157,11 @@ describe('ShoppingCart', () => {
 
     //arrange 
     let cart1: CartItem = { id: 2, productId: 2, qty: 2, shoppingCartId: 1 }
-    cart.addItem(cart1);
+    shoppingCart.addItem(cart1);
 
     //act
 
-    let cartItem = cart.decreaseCartItemQty(2);
+    let cartItem = shoppingCart.decreaseCartItemQty(2);
 
     //assert
     expect(cartItem.qty).toEqual(1);
@@ -171,11 +171,11 @@ describe('ShoppingCart', () => {
   it('should remove item from cart when qty is zero', () => {
     //arrange 
     let cart1: CartItem = { id: 2, productId: 2, qty: 1, shoppingCartId: 1 }
-    cart.addItem(cart1);
+    shoppingCart.addItem(cart1);
 
-    cart.decreaseCartItemQty(cart1.id);
+    shoppingCart.decreaseCartItemQty(cart1.id);
 
-    let result = cart.checkExists(cart1);
+    let result = shoppingCart.checkExists(cart1);
 
     expect(result).toEqual(false);
   });
@@ -187,11 +187,11 @@ describe('ShoppingCart', () => {
     
     let cart1: CartItem = { id: 1, productId: product1.id, qty: 1, shoppingCartId: 1 }
 
-    cart.addItem(cart1);
+    shoppingCart.addItem(cart1);
 
     let expected = product1.unitPrice * cart1.qty;
 
-    let cost = cart.getCartItemsCostById(1);
+    let cost = shoppingCart.getCartItemsCostById(1);
     
     expect(cost).toEqual(expected)
   });
