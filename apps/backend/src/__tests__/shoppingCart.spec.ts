@@ -29,13 +29,13 @@ describe('ShoppingCart', () => {
     let product3: Product = { id: 3, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
 
     //TODO: LEARN HOW TO MOCK THIS
-    productService.addProduct(product1);
-    productService.addProduct(product2);
-    productService.addProduct(product3);
+    // productService.addProduct(product1);
+    // productService.addProduct(product2);
+    // productService.addProduct(product3);
 
-    // jest.spyOn(productService, 'getProductById').mockImplementation(() => product1);
-    // jest.spyOn(productService, 'getProductById').mockImplementation(() => product2);
-    // jest.spyOn(productService, 'getProductById').mockImplementation(() => product3);
+    jest.spyOn(productService, 'getProductById').mockImplementation(() => product1);
+    jest.spyOn(productService, 'getProductById').mockImplementation(() => product2);
+    jest.spyOn(productService, 'getProductById').mockImplementation(() => product3);
 
     let cart1: CartItem = { id: 1, productId: product1.id, qty: 1, shoppingCartId: 1 }
     let cart2: CartItem = { id: 2, productId: product2.id, qty: 1, shoppingCartId: 1 }
