@@ -11,8 +11,13 @@ describe('ShoppingCart', () => {
   let shoppingCart: IShoppingCartService;
   let productService: ProductService;
 
-  beforeEach(() => {
-    productService = new ProductService();
+  beforeEach(async () => {
+    
+    const module : TestingModule =  await Test.createTestingModule({
+      providers: [ProductService]
+    }).compile();
+    
+    productService = module.get<ProductService>(ProductService);
     shoppingCart = new ShoppingCartService(productService);
   });
 
