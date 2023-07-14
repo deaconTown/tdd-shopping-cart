@@ -1,4 +1,4 @@
-import { Catelog } from "./Entities/Catelog";
+import { Catelog } from "../Entities/Catelog";
 
 describe('Catelog', () => {
     let catalog: Catelog;
