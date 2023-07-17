@@ -274,15 +274,20 @@ describe('ShoppingCart', () => {
     let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
     let product2: Product = { id: 2, name: 'SWP EFun Earphones', isActive: true, unitPrice: 34.99, amountAvailable: 5, isInStock: true };
 
-    jest.spyOn(productService, 'getProductById').mockImplementation(() => product1);    
+    /** using mockImplementation instead of mockImplementationOnce caused the return value to be the last value called at all times.
+     * have to mock the implementation for each time getProductById was called throughout the entire flow.
+     **/
+    jest.spyOn(productService, 'getProductById')
+    .mockImplementationOnce(() => product1) //get product for adding to cart, cart item cannot be added if product not found
+    .mockImplementationOnce(() => product2) //
+    .mockImplementationOnce(() => product1) //get product when adding up the total 
+    .mockImplementationOnce(() => product2); //
+    
     let cart1: CartItem = { id: 1, productId: product1.id, qty: 2, shoppingCartId: 1 }
     shoppingCart.addItem(cart1);
 
-
-    jest.spyOn(productService, 'getProductById').mockImplementation(() => product2);
     let cart2: CartItem = { id: 2, productId: product2.id, qty: 1, shoppingCartId: 1 }
     shoppingCart.addItem(cart2);
-
 
     let expected = (product1.unitPrice * cart1.qty) + (product2.unitPrice * cart2.qty);
 
