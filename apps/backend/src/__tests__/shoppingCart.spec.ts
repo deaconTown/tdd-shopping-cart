@@ -11,8 +11,13 @@ describe('ShoppingCart', () => {
   let shoppingCart: IShoppingCartService;
   let productService: ProductService;
 
-  beforeEach(() => {
-    productService = new ProductService();
+  beforeEach(async () => {
+
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [ProductService]
+    }).compile();
+
+    productService = module.get<ProductService>(ProductService);
     shoppingCart = new ShoppingCartService(productService);
   });
 
@@ -23,14 +28,9 @@ describe('ShoppingCart', () => {
     let product2: Product = { id: 2, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
     let product3: Product = { id: 3, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
 
-    //TODO: LEARN HOW TO MOCK THIS
-    productService.addProduct(product1);
-    productService.addProduct(product2);
-    productService.addProduct(product3);
-
-    // jest.spyOn(productService, 'getProductById').mockImplementation(() => product1);
-    // jest.spyOn(productService, 'getProductById').mockImplementation(() => product2);
-    // jest.spyOn(productService, 'getProductById').mockImplementation(() => product3);
+    jest.spyOn(productService, 'getProductById').mockImplementation(() => product1);
+    jest.spyOn(productService, 'getProductById').mockImplementation(() => product2);
+    jest.spyOn(productService, 'getProductById').mockImplementation(() => product3);
 
     let cart1: CartItem = { id: 1, productId: product1.id, qty: 1, shoppingCartId: 1 }
     let cart2: CartItem = { id: 2, productId: product2.id, qty: 1, shoppingCartId: 1 }
@@ -49,7 +49,7 @@ describe('ShoppingCart', () => {
   it('should add new items to the cart', () => {
     let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
 
-    productService.addProduct(product1);
+    jest.spyOn(productService, 'getProductById').mockImplementation(() => product1);
 
     let cart1: CartItem = { id: 2, productId: product1.id, qty: 1, shoppingCartId: 1 }
     shoppingCart.addItem(cart1);
@@ -61,7 +61,7 @@ describe('ShoppingCart', () => {
   it('should not create a new item when item already exists in the cart', () => {
     let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
 
-    productService.addProduct(product1);
+    jest.spyOn(productService, 'getProductById').mockImplementation(() => product1);
 
     let cart1: CartItem = { id: 2, productId: product1.id, qty: 1, shoppingCartId: 1 }
     shoppingCart.addItem(cart1);
@@ -78,8 +78,8 @@ describe('ShoppingCart', () => {
     let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
     let product2: Product = { id: 2, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
 
-    productService.addProduct(product1);
-    productService.addProduct(product2);
+    jest.spyOn(productService, 'getProductById').mockImplementation(() => product1);
+    jest.spyOn(productService, 'getProductById').mockImplementation(() => product2);
 
     let cart1: CartItem = { id: 2, productId: product1.id, qty: 1, shoppingCartId: 1 }
     shoppingCart.addItem(cart1);
@@ -96,7 +96,7 @@ describe('ShoppingCart', () => {
   it('should return false when when cart item does not exists', () => {
     let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
 
-    productService.addProduct(product1);
+    jest.spyOn(productService, 'getProductById').mockImplementation(() => product1);
 
     let cart1: CartItem = { id: 2, productId: product1.id, qty: 1, shoppingCartId: 1 }
 
@@ -107,7 +107,7 @@ describe('ShoppingCart', () => {
   it('should return true when cart item does exists', () => {
     let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
 
-    productService.addProduct(product1);
+    jest.spyOn(productService, 'getProductById').mockImplementation(() => product1);
 
     let cart1: CartItem = { id: 2, productId: product1.id, qty: 1, shoppingCartId: 1 }
     shoppingCart.addItem(cart1);
@@ -121,9 +121,8 @@ describe('ShoppingCart', () => {
     let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
     let product2: Product = { id: 3, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
 
-    //TODO: LEARN HOW TO MOCK THIS
-    productService.addProduct(product1);
-    productService.addProduct(product2);
+    jest.spyOn(productService, 'getProductById').mockImplementation(() => product1);
+    jest.spyOn(productService, 'getProductById').mockImplementation(() => product2);
 
     let cart1: CartItem = { id: 2, productId: product1.id, qty: 1, shoppingCartId: 1 }
     let cart2: CartItem = { id: 3, productId: product2.id, qty: 1, shoppingCartId: 1 }
@@ -137,7 +136,7 @@ describe('ShoppingCart', () => {
   it('cart item qty should only increase by 1 when qty value is not specified when adding item to cart', () => {
     let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
 
-    productService.addProduct(product1);
+    jest.spyOn(productService, 'getProductById').mockImplementation(() => product1);
 
     let cart1: CartItem = { id: 2, productId: product1.id, qty: 1, shoppingCartId: 1 }
     shoppingCart.addItem(cart1);
@@ -151,9 +150,8 @@ describe('ShoppingCart', () => {
     let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
     let product2: Product = { id: 2, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
 
-    //TODO: LEARN HOW TO MOCK THIS
-    productService.addProduct(product1);
-    productService.addProduct(product2);
+    jest.spyOn(productService, 'getProductById').mockImplementation(() => product1);
+    jest.spyOn(productService, 'getProductById').mockImplementation(() => product2);
 
     let cart1: CartItem = { id: 2, productId: product1.id, qty: 1, shoppingCartId: 1 }
     let cart2: CartItem = { id: 3, productId: 3, qty: 1, shoppingCartId: 1 }
@@ -183,7 +181,7 @@ describe('ShoppingCart', () => {
 
     let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
 
-    productService.addProduct(product1);
+    jest.spyOn(productService, 'getProductById').mockImplementation(() => product1);
 
     let cart1: CartItem = { id: 2, productId: product1.id, qty: 1, shoppingCartId: 1 }
     shoppingCart.addItem(cart1);
@@ -202,7 +200,7 @@ describe('ShoppingCart', () => {
   it('should increase cart item qty by specified amount when already exists in cart', () => {
     let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
 
-    productService.addProduct(product1);
+    jest.spyOn(productService, 'getProductById').mockImplementation(() => product1);
 
     let cart1: CartItem = { id: 22, productId: product1.id, qty: 3, shoppingCartId: 1 }
 
@@ -222,7 +220,7 @@ describe('ShoppingCart', () => {
   it('should decrease cart item qty by 1', () => {
     let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
 
-    productService.addProduct(product1);
+    jest.spyOn(productService, 'getProductById').mockImplementation(() => product1);
 
     let cart1: CartItem = { id: 2, productId: product1.id, qty: 2, shoppingCartId: 1 }
 
@@ -241,7 +239,7 @@ describe('ShoppingCart', () => {
     //arrange 
     let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
 
-    productService.addProduct(product1);
+    jest.spyOn(productService, 'getProductById').mockImplementation(() => product1);
 
     let cart1: CartItem = { id: 2, productId: product1.id, qty: 1, shoppingCartId: 1 }
 
@@ -259,16 +257,7 @@ describe('ShoppingCart', () => {
   it('should return correct cost for a single item in cart', () => {
     let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
 
-    // const result = jest.spyOn(productService, 'addProduct').mockImplementation(() => product1).mockReturnThis();
-
-    // console.log('result', result)
-
-    //TODO: LEARN HOW TO MOCK THIS
-    productService.addProduct(product1);
-
-    let p = productService.getProductById(product1.id);
-
-    console.log('p', p)
+    jest.spyOn(productService, 'getProductById').mockImplementation(() => product1);
 
     let cart1: CartItem = { id: 1, productId: product1.id, qty: 1, shoppingCartId: 1 }
 
@@ -285,19 +274,19 @@ describe('ShoppingCart', () => {
     let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
     let product2: Product = { id: 2, name: 'SWP EFun Earphones', isActive: true, unitPrice: 34.99, amountAvailable: 5, isInStock: true };
 
-    // const result = jest.spyOn(productService, 'addProduct').mockImplementation(() => product1).mockReturnThis();
-
-    // console.log('result', result)
-
-    //TODO: LEARN HOW TO MOCK THIS
-    productService.addProduct(product1);
-    productService.addProduct(product2);
-
-
+    /** using mockImplementation instead of mockImplementationOnce caused the return value to be the last value called at all times.
+     * have to mock the implementation for each time getProductById was called throughout the entire flow.
+     **/
+    jest.spyOn(productService, 'getProductById')
+    .mockImplementationOnce(() => product1) //get product for adding to cart, cart item cannot be added if product not found
+    .mockImplementationOnce(() => product2) //
+    .mockImplementationOnce(() => product1) //get product when adding up the total 
+    .mockImplementationOnce(() => product2); //
+    
     let cart1: CartItem = { id: 1, productId: product1.id, qty: 2, shoppingCartId: 1 }
-    let cart2: CartItem = { id: 2, productId: product2.id, qty: 1, shoppingCartId: 1 }
-
     shoppingCart.addItem(cart1);
+
+    let cart2: CartItem = { id: 2, productId: product2.id, qty: 1, shoppingCartId: 1 }
     shoppingCart.addItem(cart2);
 
     let expected = (product1.unitPrice * cart1.qty) + (product2.unitPrice * cart2.qty);
@@ -314,8 +303,7 @@ describe('ShoppingCart', () => {
   it('should not be able to add an inActive product to cart', () => {
     let product1: Product = { id: 1, name: 'red shoes', isActive: false, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
 
-    //TODO: LEARN HOW TO MOCK THIS
-    productService.addProduct(product1);
+    jest.spyOn(productService, 'getProductById').mockImplementation(() => product1);
 
     let cart1: CartItem = { id: 1, productId: product1.id, qty: 1, shoppingCartId: 1 }
 
@@ -330,10 +318,9 @@ describe('ShoppingCart', () => {
     let catelogItemList: CatelogItem[] = [];
     let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 5, isInStock: true };
 
-    //TODO: LEARN HOW TO MOCK THIS
-    productService.addProduct(product1);
+    jest.spyOn(productService, 'getProductById').mockImplementation(() => product1);
 
-    let catelogItem1 : CatelogItem = {id: 1, productId: product1.id, qty: 3}
+    let catelogItem1: CatelogItem = { id: 1, productId: product1.id, qty: 3 }
 
     catelogItemList.push(catelogItem1);
 
@@ -354,7 +341,7 @@ describe('ShoppingCart', () => {
     let catelogItemList: CatelogItem[] = [];
     let product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
 
-    let catelogItem1 : CatelogItem = {id: 1, productId: product1.id, qty: 2}
+    let catelogItem1: CatelogItem = { id: 1, productId: product1.id, qty: 2 }
 
     catelogItemList.push(catelogItem1);
 

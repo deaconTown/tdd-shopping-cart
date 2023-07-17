@@ -19,7 +19,15 @@ describe('ProductService', () => {
     });
 
     it('should get all products', () => {
-        expect.assertions(1)
+
+        let product1: Product = { id: 1, name: 'red shoe', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+        let product2: Product = { id: 2, name: 'blue cup', isActive: true, unitPrice: 220.00, amountAvailable: 5, isInStock: true };
+
+        productService.addProduct(product1);
+        productService.addProduct(product2);
+
+        let prodList = productService.GetAllProducts();
+        expect(prodList.length).toEqual(2);
     });
 
     it('should get a product by id', () => {

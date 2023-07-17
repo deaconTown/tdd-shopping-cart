@@ -1,14 +1,21 @@
-import { Products } from "./Entities/Products";
+import { Product } from "./Entities/Product";
+import { ProductService } from "./Services/product.service";
 
-describe('Products', () => {
-    let product: Products;
+describe('ProductService', () => {
+    let product: Product;
+    let productService: ProductService;
 
     beforeEach(() => {
-        product = new Products();
+        product = new Product();
+        productService = new ProductService();
     });
 
     it('should create a new product', () => {
-        expect.assertions(1)
+        const product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+
+        let result = productService.addProduct(product1);
+
+        expect(result.name).toEqual(product1.name);
     });
 
     it('should get all products', () => {
@@ -16,7 +23,15 @@ describe('Products', () => {
     });
 
     it('should get a product by id', () => {
-        expect.assertions(1)
+        const product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+        const product2: Product = { id: 2, name: 'blue shoes', isActive: true, unitPrice: 15.00, amountAvailable: 4, isInStock: true };
+
+        productService.addProduct(product1);
+        productService.addProduct(product2);
+
+        let result = productService.getProductById(product2.id);
+
+        expect(result.name).toEqual(product2.name);
     });
 
     it('should make a product inActive', () => {

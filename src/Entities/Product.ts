@@ -1,4 +1,5 @@
-export class Products {
+export class Product {
+
     id: number;
     name: string;
     isActive: boolean;
