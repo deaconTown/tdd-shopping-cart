@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Product } from "src/Entities/Product";
+import { IProductService } from 'src/Interfaces/IProductService.interface';
 
 @Injectable()
-export class ProductService {
+export class ProductService implements IProductService{
+  
 
     private readonly products: Product[] = [];
 
@@ -15,5 +17,9 @@ export class ProductService {
         this.products.push(product);
 
         return product;
+    }  
+    
+    GetAllProducts(): Product[] {
+        return this.products;
     }
 }

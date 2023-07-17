@@ -6,18 +6,19 @@ import { Catelog } from "../Entities/Catelog";
 import { CatelogItem } from "../Entities/CatelogItem";
 import { IShoppingCartService } from "../Interfaces/IShoppingCart.interface";
 import { Test, TestingModule } from "@nestjs/testing";
+import { IProductService } from "src/Interfaces/IProductService.interface";
 
 describe('ShoppingCart', () => {
   let shoppingCart: IShoppingCartService;
-  let productService: ProductService;
+  let productService: IProductService;
 
   beforeEach(async () => {
 
     const module: TestingModule = await Test.createTestingModule({
-      providers: [ProductService]
+      providers: [ProductService ]
     }).compile();
 
-    productService = module.get<ProductService>(ProductService);
+    productService = module.get<IProductService>(ProductService);
     shoppingCart = new ShoppingCartService(productService);
   });
 

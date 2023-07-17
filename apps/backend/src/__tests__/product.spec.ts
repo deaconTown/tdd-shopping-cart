@@ -1,9 +1,10 @@
+import { IProductService } from "src/Interfaces/IProductService.interface";
 import { Product } from "../Entities/Product";
 import { ProductService } from "../Services/product.service";
 
 describe('ProductService', () => {
     let product: Product;
-    let productService: ProductService;
+    let productService: IProductService;
 
     beforeEach(() => {
         product = new Product();
