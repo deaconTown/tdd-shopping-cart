@@ -40,4 +40,8 @@ export class ProductService implements IProductService {
         //return the updated product
         return updatedProduct;
     }
+
+    DeactivateProduct(product1: Product): Product {
+        throw new Error('Method not implemented.');
+    }
 }
