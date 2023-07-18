@@ -57,6 +57,10 @@ export class ProductService implements IProductService {
     }
 
     CheckExists(product: Product): boolean {
-        throw new Error('Method not implemented.');
+         //find the product
+         let foundProduct: boolean = this.products.some(x => x.id === product.id);
+        
+         //return the updated product
+         return foundProduct;
     }
 }

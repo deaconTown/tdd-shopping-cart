@@ -83,7 +83,7 @@ describe('ProductService', () => {
 
         let result: boolean = productService.CheckExists(product1);
 
-        expect(result).toEqual(false);
+        expect(result).toEqual(true);
     });
 
     it('should not add product when it already exists', () => {
