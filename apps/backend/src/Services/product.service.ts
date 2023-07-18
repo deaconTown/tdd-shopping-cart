@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Product } from 'src/Entities/Product';
+import ProductException from 'src/Exception/ProductException';
 import { IProductService } from 'src/Interfaces/IProductService.interface';
 
 @Injectable()
@@ -13,7 +14,17 @@ export class ProductService implements IProductService {
     }
 
     addProduct(product: Product): Product {
-        this.products.push(product);
+        //check if product already exists 
+        let productExists: boolean = this.CheckExists(product);
+        if (productExists) {
+            throw new Error('Product already exists');
+
+            // const ex = new ProductException('Product already exists');
+            // throw ex.ProductAlreadyExists();
+        }
+        else {
+            this.products.push(product);
+        }
 
         return product;
     }
@@ -57,10 +68,10 @@ export class ProductService implements IProductService {
     }
 
     CheckExists(product: Product): boolean {
-         //find the product
-         let foundProduct: boolean = this.products.some(x => x.id === product.id);
-        
-         //return the updated product
-         return foundProduct;
+        //find the product
+        let foundProduct: boolean = this.products.some(x => x.id === product.id);
+
+        //return the updated product
+        return foundProduct;
     }
 }

@@ -100,16 +100,27 @@ describe('ProductService', () => {
         expect(result).toEqual(false);
     });
 
-    it('should not add product when it already exists', () => {
+    // it('should not add product when it already exists', () => {
+    //     const product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+    //     const product2: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+
+    //     productService.addProduct(product1);
+    //     productService.addProduct(product2);
+
+    //     let prodList = productService.GetAllProducts();
+    //     expect(prodList.length).toEqual(1);
+
+    // });
+
+    it('should throw an error when product already exists', () => {
         const product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
         const product2: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
 
         productService.addProduct(product1);
-        productService.addProduct(product2);
 
-        let prodList = productService.GetAllProducts();
-        expect(prodList.length).toEqual(1);
+        const ex = () => productService.addProduct(product2);
 
+        expect(ex).toThrow('Product already exists')
     });
 
     it('should return true if product is in stock', () => {
