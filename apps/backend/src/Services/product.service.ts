@@ -32,7 +32,7 @@ export class ProductService implements IProductService {
         let updatedProduct: Product;
 
         if (foundProduct) {
-            //create new product with active flag
+            //set updatd product with active flag true
             updatedProduct = product;
             updatedProduct.isActive = true;
         }
@@ -41,7 +41,18 @@ export class ProductService implements IProductService {
         return updatedProduct;
     }
 
-    DeactivateProduct(product1: Product): Product {
-        throw new Error('Method not implemented.');
+    DeactivateProduct(product: Product): Product {
+        //find the product
+        let foundProduct: Product = this.products.find(x => x.id === product.id);
+        let updatedProduct: Product;
+
+        if (foundProduct) {
+            //set updatd product with active flag false
+            updatedProduct = product;
+            updatedProduct.isActive = false;
+        }
+
+        //return the updated product
+        return updatedProduct;
     }
 }
