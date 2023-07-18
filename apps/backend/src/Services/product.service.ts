@@ -13,7 +13,14 @@ export class ProductService implements IProductService {
     }
 
     addProduct(product: Product): Product {
-        this.products.push(product);
+        //check if product already exists 
+        let productExists: boolean = this.CheckExists(product);
+        if (productExists) {
+            //do something
+        }
+        else {
+            this.products.push(product);
+        }
 
         return product;
     }
@@ -57,10 +64,10 @@ export class ProductService implements IProductService {
     }
 
     CheckExists(product: Product): boolean {
-         //find the product
-         let foundProduct: boolean = this.products.some(x => x.id === product.id);
-        
-         //return the updated product
-         return foundProduct;
+        //find the product
+        let foundProduct: boolean = this.products.some(x => x.id === product.id);
+
+        //return the updated product
+        return foundProduct;
     }
 }
