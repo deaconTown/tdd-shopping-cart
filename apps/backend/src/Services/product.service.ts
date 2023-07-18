@@ -25,4 +25,8 @@ export class ProductService implements IProductService{
     GetAllActiveProducts(): Product[] {
         return this.products.filter(x => x.isActive === true);
     }
+
+    ActivateProduct(product: Product): Product {
+        throw new Error('Method not implemented.');
+    }
 }

@@ -56,7 +56,13 @@ describe('ProductService', () => {
     });
 
     it('should make a product active', () => {
-        expect.assertions(1)
+        const product1: Product = { id: 1, name: 'red shoes', isActive: false, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+
+        productService.addProduct(product1);
+
+        let result: Product = productService.ActivateProduct(product1);
+
+        expect(result.isActive).toEqual(true);
     });
 
     it('should return only active products', () => {
