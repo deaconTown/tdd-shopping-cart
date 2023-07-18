@@ -77,13 +77,27 @@ describe('ProductService', () => {
     });
 
     it('should check return true when product exists', () => {
+        //arrange
         const product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
 
+        //act
         productService.addProduct(product1);
 
         let result: boolean = productService.CheckExists(product1);
 
+        //assert
         expect(result).toEqual(true);
+    });
+
+    it('should check return false when product exists', () => {
+        //arrange
+        const product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+
+        //act
+        let result: boolean = productService.CheckExists(product1);
+
+        //assert
+        expect(result).toEqual(false);
     });
 
     it('should not add product when it already exists', () => {
