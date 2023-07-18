@@ -5,7 +5,6 @@ import { IProductService } from 'src/Interfaces/IProductService.interface';
 @Injectable()
 export class ProductService implements IProductService{
   
-
     private readonly products: Product[] = [];
 
     getProductById(productId: number): Product {
@@ -21,5 +20,9 @@ export class ProductService implements IProductService{
     
     GetAllProducts(): Product[] {
         return this.products;
+    }
+
+    GetAllActiveProducts(): Product[] {
+        throw new Error('Method not implemented.');
     }
 }
