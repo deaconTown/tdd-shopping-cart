@@ -21,7 +21,7 @@ export class ProductService implements IProductService {
 
             // const ex = new ProductException('Product already exists');
             // throw ex.ProductAlreadyExists();
-        }
+        } 
         else {
             this.products.push(product);
         }
