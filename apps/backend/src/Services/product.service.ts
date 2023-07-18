@@ -55,4 +55,8 @@ export class ProductService implements IProductService {
         //return the updated product
         return updatedProduct;
     }
+
+    CheckExists(product: Product): boolean {
+        throw new Error('Method not implemented.');
+    }
 }

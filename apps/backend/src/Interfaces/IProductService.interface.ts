@@ -7,4 +7,5 @@ export interface IProductService {
     GetAllActiveProducts(): Product[];
     ActivateProduct(product: Product): Product;
     DeactivateProduct(product1: Product): Product;
+    CheckExists(product1: Product): boolean;
 }
