@@ -163,7 +163,33 @@ describe('ProductService', () => {
 
     });
 
-    it('should should be out of stock when amountAvailable is 0', () => {
+    it('should be out of stock when amountAvailable is 0', () => {
         expect.assertions(1)
+    });
+
+    it('should set product to out of stock', () => {
+        const product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+
+        //act
+        productService.addProduct(product1);
+
+        productService.SetProductToOutOFStock(product1.id);
+        let result = productService.getProductById(product1.id);
+
+        //assert
+        expect(result.isInStock).toEqual(false);
+    });
+
+    it('should set product to be in stock', () => {
+        const product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: false };
+
+        //act
+        productService.addProduct(product1);
+
+        productService.SetProductToOutOFStock(product1.id);
+        let result = productService.getProductById(product1.id);
+
+        //assert
+        expect(result.isInStock).toEqual(true);
     });
 });

@@ -8,4 +8,5 @@ export interface IProductService {
     ActivateProduct(product: Product): Product;
     DeactivateProduct(product1: Product): Product;
     CheckExists(product1: Product): boolean;
+    SetProductToOutOFStock(productId: number): void;
 }
