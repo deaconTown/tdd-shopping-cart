@@ -74,10 +74,34 @@ export class ProductService implements IProductService {
 
         //check if the product was found and is in stock;
         if(foundProduct && foundProduct.isInStock){
-            exists = true;
+            if(foundProduct.isActive)
+            {
+                exists = true;
+            }
+            else {
+                //set product to out of stock
+                this.SetProductToOutOFStock(foundProduct.id);
+            }
         }
 
         //return the updated product
         return exists;
     }
+
+    SetProductToOutOFStock(id: number): void {
+        //find the product
+        let foundProduct: Product = this.products.find(x => x.id === id);
+        let updatedProduct: Product;
+
+        if (foundProduct) {
+            //set updated product with isInStock flag to false
+            updatedProduct = foundProduct;
+            updatedProduct.isInStock = false;
+        }
+    }
+
+    SetProductToBeInStock(id: number): unknown {
+        throw new Error('Method not implemented.');
+    }
+
 }

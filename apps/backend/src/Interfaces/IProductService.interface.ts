@@ -9,4 +9,5 @@ export interface IProductService {
     DeactivateProduct(product1: Product): Product;
     CheckExists(product1: Product): boolean;
     SetProductToOutOFStock(productId: number): void;
+    SetProductToBeInStock(id: number): void;
 }

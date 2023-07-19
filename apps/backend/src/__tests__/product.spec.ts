@@ -186,7 +186,7 @@ describe('ProductService', () => {
         //act
         productService.addProduct(product1);
 
-        productService.SetProductToOutOFStock(product1.id);
+        productService.SetProductToBeInStock(product1.id);
         let result = productService.getProductById(product1.id);
 
         //assert
