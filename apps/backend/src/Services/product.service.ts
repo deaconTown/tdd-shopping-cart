@@ -69,9 +69,15 @@ export class ProductService implements IProductService {
 
     CheckExists(product: Product): boolean {
         //find the product
-        let foundProduct: boolean = this.products.some(x => x.id === product.id);
+        let exists: boolean = false;
+        let foundProduct: Product = this.products.find(x => x.id === product.id);
+
+        //check if the product was found and is in stock;
+        if(foundProduct && foundProduct.isInStock){
+            exists = true;
+        }
 
         //return the updated product
-        return foundProduct;
+        return exists;
     }
 }
