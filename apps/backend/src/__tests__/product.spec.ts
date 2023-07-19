@@ -146,12 +146,21 @@ describe('ProductService', () => {
 
         //assert
         expect(result).toEqual(false);
-
-
     });
 
-    it('should should be out of stock when it is inActive', () => {
-        expect.assertions(1)
+    it('should be out of stock when the product is inActive', () => {
+        const product1: Product = { id: 1, name: 'red shoes', isActive: false, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+
+        //act
+        productService.addProduct(product1);
+
+        productService.CheckExists(product1);
+        let result = productService.getProductById(product1.id);
+
+        //assert
+
+        expect(result.isInStock).toEqual(false);
+
     });
 
     it('should should be out of stock when amountAvailable is 0', () => {
