@@ -1,7 +1,7 @@
 import { CatelogItem } from "src/Entities/CatelogItem";
 import { Catelog } from "../Entities/Catelog";
-import { ICatelogService } from "src/Interfaces/ICatelogService.interface";
-import { CatelogService } from "src/Services/catelog.service";
+import { ICatelogService } from "../Interfaces/ICatelogService.interface";
+import { CatelogService } from "../Services/catelog.service";
 
 describe('Catelog', () => {
     let catalog: Catelog;
