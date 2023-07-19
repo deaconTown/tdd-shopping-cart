@@ -1,8 +1,7 @@
-import { ProductService } from "src/Services/product.service";
 import { CartItem } from "../Entities/CartItem";
-import { Product } from "../Entities/Product";
 import { Catelog } from "src/Entities/Catelog";
 import { IShoppingCartService } from "src/Interfaces/IShoppingCart.interface";
+import { IProductService } from "src/Interfaces/IProductService.interface";
 
 export class ShoppingCartService implements IShoppingCartService {
   private cartItems: CartItem[] = [];
@@ -10,7 +9,7 @@ export class ShoppingCartService implements IShoppingCartService {
   /**
    *
    */
-  constructor(private productService: ProductService) {
+  constructor(private productService: IProductService) {
     id: 1
   }
 
