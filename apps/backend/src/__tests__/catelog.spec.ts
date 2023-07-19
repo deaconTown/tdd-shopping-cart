@@ -23,7 +23,15 @@ describe('Catelog', () => {
     });
 
     it('should get all catelogs', () => {
-        expect.assertions(1)
+        const catelogItemList: CatelogItem[] = [{id: 1, productId: 1, qty: 2}]
+        const catelog1: Catelog = { id: 1, name: 'electronics', isActive: true, category: "", items:catelogItemList };
+
+        const catelog2: Catelog = { id: 2, name: 'electronics2', isActive: true, category: "", items:catelogItemList };
+
+        let result = catalogService.GetCatelogs();
+
+        expect(result.length).toEqual(2);
+
     });
 
 
