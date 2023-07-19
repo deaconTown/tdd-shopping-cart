@@ -1,14 +1,25 @@
+import { CatelogItem } from "src/Entities/CatelogItem";
 import { Catelog } from "../Entities/Catelog";
+import { ICatelogService } from "src/Interfaces/ICatelogService.interface";
+import { CatelogService } from "src/Services/catelog.service";
 
 describe('Catelog', () => {
     let catalog: Catelog;
+    let catalogService: ICatelogService;
 
     beforeEach(() => {
         catalog = new Catelog();
+        catalogService = new CatelogService();
     });
 
     it('should create a new catelog', () => {
-        expect.assertions(1)
+        const catelogItemList: CatelogItem[] = [{id: 1, productId: 1, qty: 2}]
+        const catelog1: Catelog = { id: 1, name: 'electronics', isActive: true, category: "", items:catelogItemList };
+
+        let result = catalogService.addCatelog(catelog1);
+
+        expect(result.name).toEqual(catelog1.name);
+
     });
 
     it('should get all catelogs', () => {
