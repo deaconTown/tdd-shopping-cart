@@ -28,6 +28,9 @@ describe('Catelog', () => {
 
         const catelog2: Catelog = { id: 2, name: 'electronics2', isActive: true, category: "", items:catelogItemList };
 
+        catalogService.addCatelog(catelog1);
+        catalogService.addCatelog(catelog2);
+        
         let result = catalogService.GetCatelogs();
 
         expect(result.length).toEqual(2);

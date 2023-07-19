@@ -11,6 +11,6 @@ export class CatelogService implements ICatelogService {
     }
 
     GetCatelogs(): Catelog[] {
-        throw new Error("Method not implemented.");
+        return this.catelogs;
     }
 }
