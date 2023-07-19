@@ -74,13 +74,13 @@ export class ProductService implements IProductService {
 
         //check if the product was found and is in stock;
         if(foundProduct && foundProduct.isInStock){
-            if(foundProduct.isActive)
-            {
-                exists = true;
-            }
-            else {
+            if (!foundProduct.isActive || foundProduct.amountAvailable <= 0) {
                 //set product to out of stock
                 this.SetProductToOutOFStock(foundProduct.id);
+            }
+            else if(foundProduct.isActive)
+            {
+                exists = true;
             }
         }
 
