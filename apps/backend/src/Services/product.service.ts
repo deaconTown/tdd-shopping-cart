@@ -15,7 +15,8 @@ export class ProductService implements IProductService {
 
     addProduct(product: Product): Product {
         //check if product already exists 
-        let productExists: boolean = this.CheckExists(product);
+        //TODO: MIGHT NEED ANOTHER WAY TO CHECK FOR DUPLICATE. MAYBE ANOTHER PROPORTY ON THE PRODUCT LIKE A QR CODE
+        let productExists: boolean = this.CheckExists(product); 
         if (productExists) {
             throw new Error('Product already exists');
 
@@ -70,7 +71,7 @@ export class ProductService implements IProductService {
     CheckExists(product: Product): boolean {
         //find the product
         let exists: boolean = false;
-        let foundProduct: Product = this.products.find(x => x.id === product.id);
+        let foundProduct: Product = this.products.find(x => x.id === product.id); //TODO: MIGHT NEED ANOTHER WAY TO CHECK FOR DUPLICATE
 
         //check if the product was found and is in stock;
         if(foundProduct && foundProduct.isInStock){

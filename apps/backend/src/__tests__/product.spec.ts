@@ -112,7 +112,7 @@ describe('ProductService', () => {
 
     // });
 
-    it('should throw an error when product already exists', () => {
+    it('should throw an error when trying to add a duplicate product', () => {
         const product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
         const product2: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
 
