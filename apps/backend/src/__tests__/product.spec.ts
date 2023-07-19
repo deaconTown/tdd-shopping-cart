@@ -124,7 +124,16 @@ describe('ProductService', () => {
     });
 
     it('should return true if product is in stock', () => {
-        expect.assertions(1)
+        const product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 2, isInStock: true };
+
+        //act
+        productService.addProduct(product1);
+
+        let result: boolean = productService.CheckExists(product1);
+
+        //assert
+        expect(result).toEqual(true);
+
     });
 
     it('should return false if product is not in stock', () => {
