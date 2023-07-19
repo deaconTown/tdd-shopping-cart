@@ -100,8 +100,16 @@ export class ProductService implements IProductService {
         }
     }
 
-    SetProductToBeInStock(id: number): unknown {
-        throw new Error('Method not implemented.');
+    SetProductToBeInStock(id: number): void {
+        //find the product
+        let foundProduct: Product = this.products.find(x => x.id === id);
+        let updatedProduct: Product;
+
+        if (foundProduct) {
+            //set updated product with isInStock flag to true
+            updatedProduct = foundProduct;
+            updatedProduct.isInStock = true;
+        }
     }
 
 }
