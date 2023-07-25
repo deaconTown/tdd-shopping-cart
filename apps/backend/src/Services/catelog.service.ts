@@ -94,7 +94,7 @@ export class CatelogService implements ICatelogService {
                 if (isProductInCatelog) {
                     //do not add product again, //TODO: MAYBE THROW AND ERROR OR SUMN
                 }
-                else if(productToAdd.isActive === true && productToAdd.isInStock === true  && productToAdd.amountAvailable >= qty) {
+                else if (productToAdd.isActive === true && productToAdd.isInStock === true && productToAdd.amountAvailable >= qty) {
                     let newItemId: number = catalogItemList[catalogItemList.length - 1].id + 1;
                     let newCatalogItem: CatelogItem = { id: newItemId, productId: productToAdd.id, qty }
                     catalogItemList.push(newCatalogItem);
@@ -105,5 +105,32 @@ export class CatelogService implements ICatelogService {
         }
 
         return calelog;
+    }
+
+    UpdateCatelogProductQty(id: number, productId: number, newQty: number): Catelog {
+        let calelog: Catelog = this.catelogs.find(x => x.id === id);
+
+        if (calelog) {
+            let productToUpdate = this.productService.getProductById(productId);
+
+            if (productToUpdate) {
+                //check if product in catelog
+                let productInCatelog = calelog.items.find(x => x.productId === productToUpdate.id);
+
+                if (productInCatelog) {
+                    //update the product qty
+                    productInCatelog.qty = newQty;
+
+                    //find the index of the product in the catelog
+                    let foundIndex = calelog.items.findIndex(x => x.productId === productInCatelog.productId);
+
+                    //update that product with the same product but with the new qty
+                    calelog.items[foundIndex] = productInCatelog;
+                }
+            }
+        }
+
+        return calelog;
+
     }
 }
