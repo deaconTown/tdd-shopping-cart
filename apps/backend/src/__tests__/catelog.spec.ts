@@ -14,11 +14,11 @@ describe('Catelog', () => {
 
     beforeEach(async () => {
         catalog = new Catelog();
-        
+
         const module: TestingModule = await Test.createTestingModule({
             providers: [ProductService]
         }).compile();
-        
+
         productService = module.get<IProductService>(ProductService);
         catalogService = new CatelogService(productService);
     });
@@ -73,21 +73,21 @@ describe('Catelog', () => {
         // productService.addProduct(product2);
 
         jest.spyOn(productService, 'addProduct')
-        .mockImplementationOnce(() => product1)
-        .mockImplementationOnce(() => product2)
+            .mockImplementationOnce(() => product1)
+            .mockImplementationOnce(() => product2)
 
-        const catelogItemList: CatelogItem[] = [{ id: 1, productId: product1.id, qty: 2 },{ id: 1, productId: product2.id, qty: 1 }]
+        const catelogItemList: CatelogItem[] = [{ id: 1, productId: product1.id, qty: 2 }, { id: 1, productId: product2.id, qty: 1 }]
         const catelog1: Catelog = { id: 1, name: 'electronics', isActive: true, category: "", items: catelogItemList };
 
         catalogService.addCatelog(catelog1);
 
         jest.spyOn(productService, 'getProductById')
-        .mockImplementationOnce(() => product1)
-        .mockImplementationOnce(() => product2)
-        
+            .mockImplementationOnce(() => product1)
+            .mockImplementationOnce(() => product2)
+
         //act
         let result: Product[] = catalogService.GetProductsByCatalogId(catelog1.id);
-        
+
         //assert
         expect(result.length).toEqual(2);
     });
@@ -156,8 +156,30 @@ describe('Catelog', () => {
         expect(result.isActive).toEqual(true);
     });
 
-    it('should add a product in the catelog', () => {
-        expect.assertions(1)
+    it('should add a product to the catelog', () => {
+        //arrange
+        const product1: Product = { id: 1, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 11, isInStock: true };
+
+
+        // jest.spyOn(productService, 'addProduct')
+        //     .mockImplementationOnce(() => product1)
+
+
+        const catelogItemList: CatelogItem[] = [{ id: 1, productId: 100, qty: 2 }]
+        const catelog1: Catelog = { id: 1, name: 'electronics', isActive: false, category: "", items: catelogItemList };
+
+        catalogService.addCatelog(catelog1);
+
+        jest.spyOn(productService, 'getProductById')
+        .mockImplementationOnce(() => product1)
+
+        //act
+        let result: Catelog = catalogService.AddProductionToCatelog(catelog1.id, product1, 5);
+
+        let actualResult = result.items.find(x => x.productId == 1);
+
+        //assert
+        expect(actualResult.productId).toEqual(product1.id);
     });
 
     it('should update a specific product in the catelog', () => {
