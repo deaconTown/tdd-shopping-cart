@@ -117,7 +117,7 @@ export class CatelogService implements ICatelogService {
                 //check if product in catelog
                 let productInCatelog = calelog.items.find(x => x.productId === productToUpdate.id);
 
-                if (productInCatelog) {
+                if (productInCatelog && productToUpdate.amountAvailable >= newQty) {
                     //update the product qty
                     productInCatelog.qty = newQty;
 

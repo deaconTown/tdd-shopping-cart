@@ -278,6 +278,27 @@ describe('Catelog', () => {
 
     });
 
+    it('should not be able to update the catelog product qty when the requested quantity exceeds what available in stock', () => {
+        //arrange
+        const product1: Product = { id: 100, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 5, isInStock: true };
+
+        const catelogItemList: CatelogItem[] = [{ id: 1, productId: 100, qty: 2 }]
+        const catelog1: Catelog = { id: 1, name: 'electronics', isActive: false, category: "", items: catelogItemList };
+
+        catalogService.addCatelog(catelog1);
+
+        jest.spyOn(productService, 'getProductById')
+            .mockImplementationOnce(() => product1)
+
+        //act
+        let newQty = 9
+        let result: Catelog = catalogService.UpdateCatelogProductQty(catelog1.id, product1.id, newQty);
+
+        //assert
+        expect(result.items[0].qty).toEqual(2);
+
+    });
+
     it('should remove a specific product from the catelog', () => {
         expect.assertions(1)
     });
