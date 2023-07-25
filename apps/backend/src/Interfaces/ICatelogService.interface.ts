@@ -7,5 +7,6 @@ export interface ICatelogService {
     GetCatelogById(id: number): Catelog;
     GetProductsByCatalogId(id:number): Product[];
     CheckIfCatelogExists(id: number): boolean;
+    GetAllActiveCatelogs(): Catelog[];
     
 }

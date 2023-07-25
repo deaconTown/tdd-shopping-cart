@@ -120,7 +120,17 @@ describe('Catelog', () => {
     });
 
     it('should return only active catelogs', () => {
-        expect.assertions(1)
+        const catelogItemList: CatelogItem[] = [{ id: 1, productId: 1, qty: 2 }]
+        const catelog1: Catelog = { id: 1, name: 'electronics', isActive: false, category: "", items: catelogItemList };
+
+        const catelog2: Catelog = { id: 2, name: 'electronics2', isActive: true, category: "", items: catelogItemList };
+
+        catalogService.addCatelog(catelog1);
+        catalogService.addCatelog(catelog2);
+
+        let result: Catelog[] = catalogService.GetAllActiveCatelogs();
+
+        expect(result.length).toEqual(1);
     });
 
     it('should get catelog by id', () => {

@@ -53,4 +53,8 @@ export class CatelogService implements ICatelogService {
         
         return exists;
     }
+
+    GetAllActiveCatelogs(): Catelog[] {
+        return this.catelogs.filter(x => x.isActive === true);
+    }
 }
