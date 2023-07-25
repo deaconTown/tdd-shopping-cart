@@ -182,6 +182,22 @@ describe('Catelog', () => {
         expect(actualResult.productId).toEqual(product1.id);
     });
 
+    it('should not add product if it is already exists in the catelog', () => {
+        expect.assertions(1)
+    });
+
+    it('should not add inactive product to the catelog', () => {
+        expect.assertions(1)
+    });
+
+    it('should not add product when not in stock to the catelog', () => {
+        expect.assertions(1)
+    });
+
+    it('should not add product when qty required exceeds the product available amount to the catelog', () => {
+        expect.assertions(1)
+    });
+
     it('should update a specific product in the catelog', () => {
         expect.assertions(1)
     });
