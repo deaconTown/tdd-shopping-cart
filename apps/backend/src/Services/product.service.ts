@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { Product } from 'src/Entities/Product';
-import ProductException from 'src/Exception/ProductException';
-import { IProductService } from 'src/Interfaces/IProductService.interface';
+import { Product } from '../Entities/Product';
+import ProductException from '../Exception/ProductException';
+import { IProductService } from '../Interfaces/IProductService.interface';
 
 @Injectable()
 export class ProductService implements IProductService {
@@ -18,10 +18,10 @@ export class ProductService implements IProductService {
         //TODO: MIGHT NEED ANOTHER WAY TO CHECK FOR DUPLICATE. MAYBE ANOTHER PROPORTY ON THE PRODUCT LIKE A QR CODE
         let productExists: boolean = this.CheckExists(product); 
         if (productExists) {
-            throw new Error('Product already exists');
+            // throw new Error('Product already exists');
 
-            // const ex = new ProductException('Product already exists');
-            // throw ex.ProductAlreadyExists();
+            const ex = new ProductException('Product already exists');
+            throw ex.ProductAlreadyExists();
         } 
         else {
             this.products.push(product);
