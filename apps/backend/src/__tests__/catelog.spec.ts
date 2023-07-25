@@ -108,7 +108,15 @@ describe('Catelog', () => {
 
     it('should return false if catelog does not exists', () => {
         //checking by name not id
-        expect.assertions(1)
+        const catelogItemList: CatelogItem[] = [{ id: 1, productId: 1, qty: 2 }]
+        const catelog1: Catelog = { id: 1, name: 'electronics', isActive: true, category: "", items: catelogItemList };
+
+
+        // catalogService.addCatelog(catelog1);
+
+        let result: boolean = catalogService.CheckIfCatelogExists(catelog1.id);
+
+        expect(result).toEqual(false);
     });
 
     it('should return only active catelogs', () => {
