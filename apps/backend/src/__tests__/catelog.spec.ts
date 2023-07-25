@@ -134,11 +134,26 @@ describe('Catelog', () => {
     });
 
     it('should make catelog inActive', () => {
-        expect.assertions(1)
+        const catelogItemList: CatelogItem[] = [{ id: 1, productId: 1, qty: 2 }]
+        const catelog1: Catelog = { id: 1, name: 'electronics', isActive: true, category: "", items: catelogItemList };
+
+        catalogService.addCatelog(catelog1);
+
+        let result: Catelog = catalogService.DeactivateCatelog(catelog1.id);
+
+        expect(result.isActive).toEqual(false);
+
     });
 
     it('should make catelog active', () => {
-        expect.assertions(1)
+        const catelogItemList: CatelogItem[] = [{ id: 1, productId: 1, qty: 2 }]
+        const catelog1: Catelog = { id: 1, name: 'electronics', isActive: false, category: "", items: catelogItemList };
+
+        catalogService.addCatelog(catelog1);
+
+        let result: Catelog = catalogService.ActivateCatelog(catelog1.id);
+
+        expect(result.isActive).toEqual(true);
     });
 
     it('should add a product in the catelog', () => {

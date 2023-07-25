@@ -8,5 +8,6 @@ export interface ICatelogService {
     GetProductsByCatalogId(id:number): Product[];
     CheckIfCatelogExists(id: number): boolean;
     GetAllActiveCatelogs(): Catelog[];
-    
+    ActivateCatelog(id: number): Catelog;    
+    DeactivateCatelog(id: number): Catelog;
 }

@@ -57,4 +57,30 @@ export class CatelogService implements ICatelogService {
     GetAllActiveCatelogs(): Catelog[] {
         return this.catelogs.filter(x => x.isActive === true);
     }
+    
+    ActivateCatelog(id: number): Catelog {
+        let calelog: Catelog = this.catelogs.find(x => x.id === id);
+        let updatedCatelog: Catelog;
+
+        if(calelog)
+        {
+            updatedCatelog = calelog;
+            updatedCatelog.isActive = true
+        }
+        
+        return updatedCatelog;
+    }
+
+    DeactivateCatelog(id: number): Catelog {
+        let calelog: Catelog = this.catelogs.find(x => x.id === id);
+        let updatedCatelog: Catelog;
+
+        if(calelog)
+        {
+            updatedCatelog = calelog;
+            updatedCatelog.isActive = false
+        }
+
+        return updatedCatelog;
+    }
 }
