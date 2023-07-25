@@ -94,7 +94,7 @@ export class CatelogService implements ICatelogService {
                 if (isProductInCatelog) {
                     //do not add product again, //TODO: MAYBE THROW AND ERROR OR SUMN
                 }
-                else if(productToAdd.isActive === true && productToAdd.isInStock === true) {
+                else if(productToAdd.isActive === true && productToAdd.isInStock === true  && productToAdd.amountAvailable >= qty) {
                     let newItemId: number = catalogItemList[catalogItemList.length - 1].id + 1;
                     let newCatalogItem: CatelogItem = { id: newItemId, productId: productToAdd.id, qty }
                     catalogItemList.push(newCatalogItem);
