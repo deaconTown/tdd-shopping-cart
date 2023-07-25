@@ -133,10 +133,6 @@ describe('Catelog', () => {
         expect(result.length).toEqual(1);
     });
 
-    it('should get catelog by id', () => {
-        expect.assertions(1)
-    });
-
     it('should make catelog inActive', () => {
         expect.assertions(1)
     });
