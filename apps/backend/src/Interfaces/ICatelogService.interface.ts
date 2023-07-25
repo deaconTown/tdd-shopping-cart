@@ -12,4 +12,5 @@ export interface ICatelogService {
     DeactivateCatelog(id: number): Catelog;
     AddProductionToCatelog(id: number, product: Product, qty: number): Catelog;
     UpdateCatelogProductQty(id: number, productId: number, newQty: number): Catelog;
+    DeleteProductFromCatelog(id: number, id1: number): Catelog;
 }

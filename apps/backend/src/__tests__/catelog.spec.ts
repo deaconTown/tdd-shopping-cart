@@ -300,7 +300,25 @@ describe('Catelog', () => {
     });
 
     it('should remove a specific product from the catelog', () => {
-        expect.assertions(1)
+        //arrange
+        const product1: Product = { id: 100, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 5, isInStock: true };
+        const product2: Product = { id: 200, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 5, isInStock: true };
+
+        const catelogItemList: CatelogItem[] = [{ id: 1, productId: product1.id, qty: 2 },{ id: 2, productId: product2.id, qty: 3 }]
+        const catelog1: Catelog = { id: 1, name: 'electronics', isActive: false, category: "", items: catelogItemList };
+
+        catalogService.addCatelog(catelog1);
+
+        jest.spyOn(productService, 'getProductById')
+            .mockImplementationOnce(() => product1)
+            .mockImplementationOnce(() => product2)
+
+        //act
+        let result: Catelog = catalogService.DeleteProductFromCatelog(catelog1.id, product1.id);
+
+        //assert
+        expect(result.items.length).toEqual(1);
+
     });
 
     it('should make catelog inActive when a product becomes inActive', () => {

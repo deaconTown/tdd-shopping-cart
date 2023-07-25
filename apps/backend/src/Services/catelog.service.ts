@@ -131,6 +131,9 @@ export class CatelogService implements ICatelogService {
         }
 
         return calelog;
-
+    }
+    
+    DeleteProductFromCatelog(id: number, id1: number): Catelog {
+        throw new Error("Method not implemented.");
     }
 }
