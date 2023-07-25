@@ -41,4 +41,16 @@ export class CatelogService implements ICatelogService {
     GetCatelogById(id: number): Catelog {
         return this.catelogs.find(x => x.id === id);
     }
+    
+    CheckIfCatelogExists(id: number): boolean {
+        let exists: boolean = false;
+        let catalog: Catelog = this.catelogs.find(x => x.id === id);
+        
+        if(catalog)
+        {
+            exists = true;
+        }
+        
+        return exists;
+    }
 }
