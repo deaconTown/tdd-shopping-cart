@@ -23,14 +23,12 @@ export class CatelogService implements ICatelogService {
     GetProductsByCatalogId(id: number): Product[] {
         let products: Product[] = [];
         let foundProduct: Product;
-        let catalog : Catelog = this.GetCatelogById(id);
+        let catalog: Catelog = this.GetCatelogById(id);
 
-        if(catalog && catalog.items.length > 0)
-        {
+        if (catalog && catalog.items.length > 0) {
             catalog.items.forEach(x => {
                 foundProduct = this.productService.getProductById(x.productId);
-                if(foundProduct)
-                {
+                if (foundProduct) {
                     products.push(foundProduct);
                 }
             })
@@ -42,33 +40,31 @@ export class CatelogService implements ICatelogService {
     GetCatelogById(id: number): Catelog {
         return this.catelogs.find(x => x.id === id);
     }
-    
+
     CheckIfCatelogExists(id: number): boolean {
         let exists: boolean = false;
         let catalog: Catelog = this.catelogs.find(x => x.id === id);
-        
-        if(catalog)
-        {
+
+        if (catalog) {
             exists = true;
         }
-        
+
         return exists;
     }
 
     GetAllActiveCatelogs(): Catelog[] {
         return this.catelogs.filter(x => x.isActive === true);
     }
-    
+
     ActivateCatelog(id: number): Catelog {
         let calelog: Catelog = this.catelogs.find(x => x.id === id);
         let updatedCatelog: Catelog;
 
-        if(calelog)
-        {
+        if (calelog) {
             updatedCatelog = calelog;
             updatedCatelog.isActive = true
         }
-        
+
         return updatedCatelog;
     }
 
@@ -76,30 +72,35 @@ export class CatelogService implements ICatelogService {
         let calelog: Catelog = this.catelogs.find(x => x.id === id);
         let updatedCatelog: Catelog;
 
-        if(calelog)
-        {
+        if (calelog) {
             updatedCatelog = calelog;
             updatedCatelog.isActive = false
         }
 
         return updatedCatelog;
     }
-    
+
     AddProductionToCatelog(id: number, product: Product, qty: number): Catelog {
         let calelog: Catelog = this.catelogs.find(x => x.id === id);
 
-        if(calelog)
-        {
+        if (calelog) {
             let catalogItemList: CatelogItem[] = calelog.items;
             let productToAdd = this.productService.getProductById(product.id);
 
-            if(productToAdd)
-            {
-                let newItemId: number = catalogItemList[catalogItemList.length - 1].id + 1;
-                let newCatalogItem : CatelogItem = {id: newItemId, productId: productToAdd.id, qty}
-                catalogItemList.push(newCatalogItem);
+            if (productToAdd) {
+                //check if product already in catelog
+                let isProductInCatelog = calelog.items.find(x => x.productId === productToAdd.id);
 
-                calelog.items = catalogItemList;
+                if (isProductInCatelog) {
+                    //do not add product again, //TODO: MAYBE THROW AND ERROR OR SUMN
+                }
+                else {
+                    let newItemId: number = catalogItemList[catalogItemList.length - 1].id + 1;
+                    let newCatalogItem: CatelogItem = { id: newItemId, productId: productToAdd.id, qty }
+                    catalogItemList.push(newCatalogItem);
+
+                    calelog.items = catalogItemList;
+                }
             }
         }
 
