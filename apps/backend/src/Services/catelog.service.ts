@@ -133,7 +133,22 @@ export class CatelogService implements ICatelogService {
         return calelog;
     }
     
-    DeleteProductFromCatelog(id: number, id1: number): Catelog {
-        throw new Error("Method not implemented.");
+    DeleteProductFromCatelog(catelogId: number, productId: number): Catelog {
+
+        let modifiedCatelog: Catelog;
+        //get all the products in the catelog
+        let catelogItems: CatelogItem[] = this.GetCatelogById(catelogId).items;
+
+        if(catelogItems && catelogItems.length > 0)
+        {
+            //remove product from list
+            let newCatelogItems: CatelogItem[] = catelogItems.filter(x => x.productId !== productId);
+
+            modifiedCatelog = this.GetCatelogById(catelogId);
+
+            modifiedCatelog.items = newCatelogItems;
+        }
+        
+        return modifiedCatelog;
     }
 }

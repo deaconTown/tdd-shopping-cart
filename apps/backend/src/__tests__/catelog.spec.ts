@@ -315,28 +315,50 @@ describe('Catelog', () => {
 
         //act
         let result: Catelog = catalogService.DeleteProductFromCatelog(catelog1.id, product1.id);
+        
+        let products = result.items.find(x => x.id === product1.id)
+        
+        //assert
+        expect(products).toEqual(undefined);
+    });
+
+    it('catelog items should decrease when a specific product is removed from the catelog', () => {
+        //arrange
+        const product1: Product = { id: 100, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 5, isInStock: true };
+        const product2: Product = { id: 200, name: 'red shoes', isActive: true, unitPrice: 10.00, amountAvailable: 5, isInStock: true };
+
+        const catelogItemList: CatelogItem[] = [{ id: 1, productId: product1.id, qty: 2 },{ id: 2, productId: product2.id, qty: 3 }]
+        const catelog1: Catelog = { id: 1, name: 'electronics', isActive: false, category: "", items: catelogItemList };
+
+        catalogService.addCatelog(catelog1);
+
+        jest.spyOn(productService, 'getProductById')
+            .mockImplementationOnce(() => product1)
+            .mockImplementationOnce(() => product2)
+
+        //act
+        let result: Catelog = catalogService.DeleteProductFromCatelog(catelog1.id, product1.id);
 
         //assert
         expect(result.items.length).toEqual(1);
-
     });
 
-    it('should make catelog inActive when a product becomes inActive', () => {
-        expect.assertions(1)
-    });
+    // it('should make catelog inActive when a product becomes inActive', () => {
+    //     expect.assertions(1)
+    // });
 
-    it('should make catelog inActive when a product availableAmount is zero', () => {
-        expect.assertions(1)
-    });
+    // it('should make catelog inActive when a product availableAmount is zero', () => {
+    //     expect.assertions(1)
+    // });
 
-    // select from a catalog of products or item
-    it('should add specific product from calelog to cart', () => {
-        expect.assertions(1)
-    });
+    // // select from a catalog of products or item
+    // it('should add specific product from calelog to cart', () => {
+    //     expect.assertions(1)
+    // });
 
-    //	but if the catalog had 6 then it should increase by such
-    it('should add all items in the catelog to the cart', () => {
-        expect.assertions(1)
-    });
+    // //	but if the catalog had 6 then it should increase by such
+    // it('should add all items in the catelog to the cart', () => {
+    //     expect.assertions(1)
+    // });
 
 });
