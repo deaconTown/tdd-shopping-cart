@@ -1,6 +1,6 @@
 import ICustomerService from "src/Interfaces/ICustomerService.interface";
 import { Customer } from "../Entities/Customer"
-import CustomerService from "src/Services/customer.service";
+import CustomerService from "../Services/customer.service";
 import { ShoppingCart } from "src/Entities/ShoppingCart";
 
 describe('Customer', () => {
