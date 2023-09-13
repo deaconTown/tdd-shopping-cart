@@ -1,7 +1,7 @@
 import { CartItem } from "./CartItem";
 
 export class ShoppingCart {
-    id: number;
+    id: string;
     customerId: number;
     cartItems: CartItem[];
     isActive: boolean;

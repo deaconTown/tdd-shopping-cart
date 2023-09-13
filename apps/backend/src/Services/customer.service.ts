@@ -5,8 +5,9 @@ class CustomerService implements ICustomerService {
     private customers: Customer[] = [];
     
     GetCustomers() : Customer[] {
-        throw new Error("Method not implemented.");
+        return this.customers;
     }
+
     GetCustomerById(customerId: number): Customer {
         
         return this.customers.find(x => x.id == customerId);
@@ -17,11 +18,29 @@ class CustomerService implements ICustomerService {
 
         return customer;
     }
+
     ActivateCustomer(customerId: number) {
-        throw new Error("Method not implemented.");
+        var customer: Customer = this.GetCustomerById(customerId);
+
+        customer.isActive = true;
+
+        //find the index of the customer to update
+        let foundIndex = this.customers.findIndex(x => x.id == customerId);
+
+        //update the customer based on the index found
+        this.customers[foundIndex] = customer;
     }
+
     DeactivateCustomer(customerId: number) {
-        throw new Error("Method not implemented.");
+        var customer: Customer = this.GetCustomerById(customerId);
+
+        customer.isActive = false;
+
+        //find the index of the customer to update
+        let foundIndex = this.customers.findIndex(x => x.id == customerId);
+
+        //update the customer based on the index found
+        this.customers[foundIndex] = customer;
     }
     
 }
