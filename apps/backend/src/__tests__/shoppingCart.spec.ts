@@ -7,6 +7,7 @@ import { CatelogItem } from "../Entities/CatelogItem";
 import { IShoppingCartService } from "../Interfaces/IShoppingCart.interface";
 import { Test, TestingModule } from "@nestjs/testing";
 import { IProductService } from "src/Interfaces/IProductService.interface";
+import { ShoppingCart } from "src/Entities/ShoppingCart";
 
 describe('ShoppingCart', () => {
   let shoppingCart: IShoppingCartService;
@@ -15,11 +16,22 @@ describe('ShoppingCart', () => {
   beforeEach(async () => {
 
     const module: TestingModule = await Test.createTestingModule({
-      providers: [ProductService ]
+      providers: [ProductService]
     }).compile();
 
     productService = module.get<IProductService>(ProductService);
     shoppingCart = new ShoppingCartService(productService);
+  });
+
+  it('should create a new cart', () => {
+    //arrange
+    let newCustomerId = 1;
+
+    //act
+    let result = shoppingCart.createShoppingCart(newCustomerId);
+
+    //assert
+    expect(result.customerId).toEqual(1);
   });
 
 
@@ -279,11 +291,11 @@ describe('ShoppingCart', () => {
      * have to mock the implementation for each time getProductById was called throughout the entire flow.
      **/
     jest.spyOn(productService, 'getProductById')
-    .mockImplementationOnce(() => product1) //get product for adding to cart, cart item cannot be added if product not found
-    .mockImplementationOnce(() => product2) //
-    .mockImplementationOnce(() => product1) //get product when adding up the total 
-    .mockImplementationOnce(() => product2); //
-    
+      .mockImplementationOnce(() => product1) //get product for adding to cart, cart item cannot be added if product not found
+      .mockImplementationOnce(() => product2) //
+      .mockImplementationOnce(() => product1) //get product when adding up the total 
+      .mockImplementationOnce(() => product2); //
+
     let cart1: CartItem = { id: 1, productId: product1.id, qty: 2, shoppingCartId: 1 }
     shoppingCart.addItem(cart1);
 
@@ -358,9 +370,18 @@ describe('ShoppingCart', () => {
   });
 
 
-  // it('should update product availableAmount when added to sold', () => {
-  //   expect.assertions(1)
-  // });
+  it('should get cart by customer id', () => {
+    //arrange
+    let newCustomerId = 1;
+
+    //act
+    shoppingCart.createShoppingCart(newCustomerId);
+
+    let result: ShoppingCart = shoppingCart.getShoppingCartByCustomerId(newCustomerId);
+
+    //assert
+    expect(result).toBeDefined();
+  });
 
 
 

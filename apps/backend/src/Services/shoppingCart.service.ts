@@ -1,16 +1,32 @@
 import { CartItem } from "../Entities/CartItem";
-import { Catelog } from "src/Entities/Catelog";
-import { IShoppingCartService } from "src/Interfaces/IShoppingCart.interface";
-import { IProductService } from "src/Interfaces/IProductService.interface";
+import { Catelog } from "../Entities/Catelog";
+import { IShoppingCartService } from "../Interfaces/IShoppingCart.interface";
+import { IProductService } from "../Interfaces/IProductService.interface";
+import { ShoppingCart } from "../Entities/ShoppingCart";
+import { create_UUID } from "../Utilites/utilities";
 
 export class ShoppingCartService implements IShoppingCartService {
+  private shoppingCart: ShoppingCart[] = [];
   private cartItems: CartItem[] = [];
 
   /**
    *
    */
   constructor(private productService: IProductService) {
-    id: 1
+   
+  }
+
+
+  createShoppingCart(customerId: number): ShoppingCart {
+    var cartItems: CartItem[];
+
+    var newShoppingCart: ShoppingCart;
+    
+    newShoppingCart = {id: create_UUID(), customerId: customerId, cartItems: cartItems, isActive: true }
+
+    this.shoppingCart.push(newShoppingCart);
+    
+    return newShoppingCart;
   }
 
   checkExists(cart1: CartItem): boolean {
@@ -155,6 +171,12 @@ export class ShoppingCartService implements IShoppingCartService {
     return success
   }
 
+  getShoppingCartByCustomerId(customerId: number): ShoppingCart {
+    var foundCart: ShoppingCart;
+    foundCart = this.shoppingCart.find(x => x.customerId === customerId);
+
+    return foundCart;
+  }
 
 
 }
