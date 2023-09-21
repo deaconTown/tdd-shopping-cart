@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/deaconTown/tdd-shopping-cart-o.git",
-  "author": "Davia Deacon <dd611950@digicelgroup.com>",
+  "author": "deaconTown<daviabizniz@gmail.com>",
   "license": "MIT",
   "private": true,
   "workspaces": ["packages/*", "apps/*"]
