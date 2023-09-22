@@ -57,12 +57,13 @@ function NavBar() {
                     <Bars3Icon className='h-6 w-6' />
                 </div>
             </div>
-            <div className=
+            <div id='mobile-menu'
+                className=
                 {
                     openNav ?
                         `fixed left-0 top-0 w-[65%] sm:hidden h-screen bg-[#ecf0f3] p-10 ease-in duration-500 overflow-auto`
                         :
-                        `fixed left-[-100%] top-0 p-10 ease-in duration-500`
+                        `fixed left-[-100%] top-0 p-10 ease-in duration-500 h-screen`
                 }>
                 <div className='flex w-full items-center justify-end'>
                     <div>
@@ -82,7 +83,7 @@ function NavBar() {
                     </Link>
                 </div>
                 <div className='flex-col py-4'>
-                    <ul id='menu-list' className='justify-between'>
+                    <ul id='menu-list-mobile' className='justify-between'>
 
                         <li className='ml-10 uppercase hover:border-b text-xl cursor-pointer py-4'>
                             <Link href="" onClick={closeNav}>
