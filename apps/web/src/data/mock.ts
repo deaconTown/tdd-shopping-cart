@@ -114,7 +114,7 @@ export const postToShoppingCart = (shoppingCart: ShoppingCart) => {
         amountAvailable: faker.number.int({ max: 50 }), // 42,
         isInStock: true,
         description: faker.commerce.productDescription(),
-        qty: faker.number.int({ max: 5 }), // 42,
+        qty: faker.number.int({ min: 1, max: 5 }), // 42,
         image: faker.image.urlLoremFlickr({ category: 'business' })
     }
 

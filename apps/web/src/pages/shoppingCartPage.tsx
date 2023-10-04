@@ -2,11 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { faker } from '@faker-js/faker';
 import SharedLayout from './sharedLayout';
 import { postToTestShoppingCart } from '@/data/mock';
+import { useRouter } from 'next/router'
 
 function shoppingCartPage() {
 
   const [cartItems, setCartItems] = useState<CartItem[]>([])
   const [shoppingCartItems, setShoppingCartItems] = useState<ShoppingCartModel[]>([])
+
+  const router = useRouter();
+
+  // https://fakestoreapi.com/
 
   const getShoppingCartItems = async () => {
     console.log('entered getShoppingCartItems')
@@ -174,56 +179,51 @@ function shoppingCartPage() {
 
   return (
     <SharedLayout>
-      <main>
+      <main className='m-10'>
+
         <div >Cart Items</div>
         <>
-          <div id="nav-space" className='mb-100'></div>
-
-          <div className="max-w-sm w-full lg:max-w-full lg:flex">
-            <div className="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" 
-            // style="background-image: url('/img/card-left.jpg')" 
-            title="Woman holding a mug">
-            </div>
-            <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
-              <div className="mb-8">
-                <p className="text-sm text-gray-600 flex items-center">
-                  <svg className="fill-current text-gray-500 w-3 h-3 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
-                  </svg>
-                  Members only
-                </p>
-                <div className="text-gray-900 font-bold text-xl mb-2">Can coffee make you a better developer?</div>
-                <p className="text-gray-700 text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p>
-              </div>
-              <div className="flex items-center">
-                <img className="w-10 h-10 rounded-full mr-4" src="/img/jonathan.jpg" alt="Avatar of Jonathan Reinink"/>
-                  <div className="text-sm">
-                    <p className="text-gray-900 leading-none">Jonathan Reinink</p>
-                    <p className="text-gray-600">Aug 18</p>
-                  </div>
-              </div>
-            </div>
-          </div>
-
           {
             shoppingCartItems.length > 0 ?
               shoppingCartItems?.map((carItem, key) => {
                 console.log("map", carItem)
                 return (
-                  <div className=''>
-                    <div key={Math.random() * 10} >{carItem.productName}</div>
-                    <img
-                      className="h-32 w-32 rounded-lg object-cover object-center"
-                      src={`${carItem.productImage}`}
-                      alt={`${carItem.productName}`}
-                    />
-                    <div key={Math.random() * 10}>{carItem.unitPrice}</div>
-                    <div key={Math.random() * 10}>{carItem.qty}</div>
-                  </div>)
+
+                  <div className="overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                    <div className="bg-white ">
+                      <div className="sm:flex sm:items-start">
+                        <div className="mx-auto flex flex-shrink-0 items-center justify-center lg:h-44 lg:w-44  sm:mx-0 sm:h-10 sm:w-10">
+                          {/* <svg className="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                          </svg> */}
+                          <img
+                            className="h-44 w-44 object-cover object-center"
+                            src={`${carItem.productImage}`}
+                            alt={`${carItem.productName}`}
+                          />
+                        </div>
+                        <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                          <h3 className="text-base font-semibold leading-6 text-gray-900" id="modal-title">{carItem.productName}</h3>
+                          <div className="mt-2">
+                            <p className="text-sm text-gray-500">{carItem.qty}</p>
+                          </div>                          <div className="mt-2">
+                            <p className="text-sm text-gray-500">${carItem.unitPrice * carItem.qty}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )
               })
               :
               <div>No items in cart</div>
           }
+
+          <button onClick={() => {
+            router.push("/checkoutPage")
+          }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-9">
+            Checkout
+          </button>
         </>
       </main>
     </SharedLayout>

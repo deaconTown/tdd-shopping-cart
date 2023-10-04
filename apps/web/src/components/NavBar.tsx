@@ -22,7 +22,7 @@ function NavBar() {
         <nav id='navBar' className='fixed h-24 w-full shadow-xl bg-white'>
             <div
                 id='left-side'
-                className='flex justify-between items-center h-full w-full  px-4 2xl:px16'>
+                className='flex justify-between items-center h-full w-full  px-4 2xl:px16 '>
                 <Link href='/'>
                     <Image
                         src={Logo}
