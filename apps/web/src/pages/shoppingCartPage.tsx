@@ -181,50 +181,51 @@ function shoppingCartPage() {
     <SharedLayout>
       <main className='m-10'>
 
-        <div >Cart Items</div>
-        <>
-          {
-            shoppingCartItems.length > 0 ?
-              shoppingCartItems?.map((carItem, key) => {
-                console.log("map", carItem)
-                return (
+      <div id='cart-header' className='my-12 font-semibold text-center md:my-6 md:text-left text-2xl md:text-3xl transition-all'>Shopping Cart</div>
+        <div id='cart-items' className='md:flex md:flex-row'>
+          <section className='md:basis-3/4'>
+            {
+              shoppingCartItems.length > 0 ?
+                shoppingCartItems?.map((carItem, key) => {
+                  console.log("map", carItem)
+                  return (
 
-                  <div className="overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                    <div className="bg-white ">
-                      <div className="sm:flex sm:items-start">
-                        <div className="mx-auto flex flex-shrink-0 items-center justify-center lg:h-44 lg:w-44  sm:mx-0 sm:h-10 sm:w-10">
-                          {/* <svg className="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
-                          </svg> */}
-                          <img
-                            className="h-44 w-44 object-cover object-center"
-                            src={`${carItem.productImage}`}
-                            alt={`${carItem.productName}`}
-                          />
-                        </div>
-                        <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                          <h3 className="text-base font-semibold leading-6 text-gray-900" id="modal-title">{carItem.productName}</h3>
-                          <div className="mt-2">
-                            <p className="text-sm text-gray-500">{carItem.qty}</p>
-                          </div>                          <div className="mt-2">
-                            <p className="text-sm text-gray-500">${carItem.unitPrice * carItem.qty}</p>
+                    <div className="overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
+                      <div className="bg-white ">
+                        <div className="sm:flex sm:items-start">
+                          <div className="mx-auto flex flex-shrink-0 items-center justify-center lg:h-44 lg:w-44  sm:mx-0 sm:h-10 sm:w-10">
+                            <img
+                              className="h-44 w-44 object-cover object-center"
+                              src={`${carItem.productImage}`}
+                              alt={`${carItem.productName}`}
+                            />
+                          </div>
+                          <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+                            <h3 className="text-base font-semibold leading-6 text-gray-900" id="modal-title">{carItem.productName}</h3>
+                            <div className="mt-2">
+                              <p className="text-sm text-black-500 font-bold">${carItem.unitPrice * carItem.qty}</p>
+                            </div>
+                            <div className="mt-2">
+                              <p className="text-sm text-gray-500">{carItem.qty}</p>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                )
-              })
-              :
-              <div>No items in cart</div>
-          }
-
-          <button onClick={() => {
-            router.push("/checkoutPage")
-          }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-9">
-            Checkout
-          </button>
-        </>
+                  )
+                })
+                :
+                <div>No items in cart</div>
+            }
+          </section>
+          <section className='md:basis-1/4'>
+            <button onClick={() => {
+              router.push("/checkoutPage")
+            }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-9">
+              Checkout
+            </button>
+          </section>
+        </div>
       </main>
     </SharedLayout>
   )

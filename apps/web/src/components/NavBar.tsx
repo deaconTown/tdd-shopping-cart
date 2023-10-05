@@ -82,7 +82,7 @@ function NavBar() {
                         />
                     </Link>
                 </div>
-                <div className='flex-col py-4'>
+                <div className='flex-col py-4' onBlur={()=> setOpenNav(false)}>
                     <ul id='menu-list-mobile' className='justify-between'>
 
                         <li className='ml-10 uppercase hover:border-b text-xl cursor-pointer py-4'>
