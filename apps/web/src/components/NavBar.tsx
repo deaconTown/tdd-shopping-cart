@@ -22,7 +22,7 @@ function NavBar() {
         <nav id='navBar' className='fixed h-24 w-full shadow-xl bg-white'>
             <div
                 id='left-side'
-                className='flex justify-between items-center h-full w-full  px-4 2xl:px16'>
+                className='flex justify-between items-center h-full w-full  px-4 2xl:px16 '>
                 <Link href='/'>
                     <Image
                         src={Logo}
@@ -35,7 +35,7 @@ function NavBar() {
                 </Link>
                 <div id='right-side' className='hidden sm:flex'>
                     <ul id='menu-list' className='hidden sm:flex'>
-                        <Link href="">
+                        <Link href="/">
                             <li className='ml-10 uppercase hover:border-b text-xl'>Home</li>
                         </Link>
 
@@ -47,7 +47,7 @@ function NavBar() {
                             <li className='ml-10 uppercase hover:border-b text-xl'>About</li>
                         </Link>
 
-                        <Link href="">
+                        <Link href="/shoppingCartPage">
                             {/* <li className='ml-10 uppercase hover:border-b text-xl'>Cart</li> */}
                             <ShoppingCartIcon className='h-6 w-6 ml-10 uppercase hover:border-b text-xl' />
                         </Link>
@@ -86,7 +86,7 @@ function NavBar() {
                     <ul id='menu-list-mobile' className='justify-between'>
 
                         <li className='ml-10 uppercase hover:border-b text-xl cursor-pointer py-4'>
-                            <Link href="" onClick={closeNav}>
+                            <Link href="/" onClick={closeNav}>
                                 Home
                             </Link>
                         </li>
@@ -104,7 +104,7 @@ function NavBar() {
                         </li>
 
                         <li className='ml-10 uppercase hover:border-b text-xl cursor-pointer py-4'>
-                            <Link href="" onClick={closeNav}>
+                            <Link href="/shoppingCartPage" onClick={closeNav}>
                                 <ShoppingCartIcon className='h-6 w-6 uppercase hover:border-b text-xl' />
                             </Link>
                         </li>

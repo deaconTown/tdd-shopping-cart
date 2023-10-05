@@ -1,0 +1,110 @@
+{
+  "customer": [
+    {
+      "id": "63eaced8-09aa-4f6c-bc60-a119ac8be314",
+      "firstName": "Karen",
+      "lastName": "Willms",
+      "isActive": true
+    },
+    {
+      "id": "84c778b9-587b-4852-9fe1-0b6d2dfe7f34",
+      "firstName": "Beverly",
+      "lastName": "Donnelly",
+      "isActive": true
+    },
+    {
+      "id": "bbc999c3-451b-4345-a1ce-fc9e8cad9cd2",
+      "firstName": "Nels",
+      "lastName": "Frami-Franecki",
+      "isActive": true
+    }
+  ],
+  "product": [
+    {
+      "id": "a7803488-ac6b-4b74-b6f5-b2d51b0197f4",
+      "name": "Car",
+      "isActive": true,
+      "unitPrice": 166,
+      "amountAvailable": 40,
+      "isInStock": true,
+      "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals"
+    },
+    {
+      "id": "9166b3dc-51c6-4dcb-b6fc-0bfa7cad19d5",
+      "name": "Pants",
+      "isActive": true,
+      "unitPrice": 189,
+      "amountAvailable": 15,
+      "isInStock": true,
+      "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive"
+    },
+    {
+      "id": "38080d5e-9a39-445a-8d66-a9e6f97e14ae",
+      "name": "Gloves",
+      "isActive": true,
+      "unitPrice": 178,
+      "amountAvailable": 46,
+      "isInStock": true,
+      "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients"
+    }
+  ],
+  "cartItem": [
+    {
+      "id": "cb6a1221-b5f6-4cec-be5e-eb14bf7e6ad1",
+      "productId": "a7803488-ac6b-4b74-b6f5-b2d51b0197f4",
+      "shoppingCartId": "068ab7ac-aa7f-48c3-89cd-425446860f4a",
+      "qty": 1
+    },
+    {
+      "id": "8230bf20-9542-4f49-bff9-53777ba966e1",
+      "productId": "9166b3dc-51c6-4dcb-b6fc-0bfa7cad19d5",
+      "shoppingCartId": "07977406-28c6-4f51-be66-0f1a1f0bbff5",
+      "qty": 1
+    },
+    {
+      "id": "e3032cad-bb51-4f67-bafc-6c7a0dff104c",
+      "productId": "38080d5e-9a39-445a-8d66-a9e6f97e14ae",
+      "shoppingCartId": "ece9bea6-9653-4f80-bd41-a66e17620cbe",
+      "qty": 1
+    }
+  ],
+  "shoppingCart": [
+    {
+      "id": "068ab7ac-aa7f-48c3-89cd-425446860f4a",
+      "customerId": "63eaced8-09aa-4f6c-bc60-a119ac8be314",
+      "isActive": true
+    },
+    {
+      "id": "07977406-28c6-4f51-be66-0f1a1f0bbff5",
+      "customerId": "84c778b9-587b-4852-9fe1-0b6d2dfe7f34",
+      "isActive": true
+    },
+    {
+      "id": "ece9bea6-9653-4f80-bd41-a66e17620cbe",
+      "customerId": "bbc999c3-451b-4345-a1ce-fc9e8cad9cd2",
+      "isActive": true
+    }
+  ],
+  "testShoppingCart": [
+    {
+      "id": "7aa31be8-701c-42fe-bbab-b458fc9dba4d",
+      "name": "Chips",
+      "unitPrice": 164,
+      "amountAvailable": 19,
+      "isInStock": true,
+      "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+      "qty": 0,
+      "image": "https://loremflickr.com/640/480/business?lock=8084348794306560"
+    },
+    {
+      "id": "dedd2373-9400-405f-8fed-71aae9b31f0e",
+      "name": "Ball",
+      "unitPrice": 189,
+      "amountAvailable": 45,
+      "isInStock": true,
+      "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+      "qty": 2,
+      "image": "https://loremflickr.com/640/480/business?lock=3470339866624000"
+    }
+  ]
+}
