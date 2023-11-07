@@ -1,5 +1,5 @@
-import NavBar from "@/components/NavBar"
-
+import NavBar from '@/components/NavBar'
+import { ShoppingCartProvider } from '@/context/ShoppingCartContext'
 export default function SharedLayout({
   children, // will be a page or nested layout
 }: {
@@ -7,12 +7,16 @@ export default function SharedLayout({
 }) {
   return (
     <section>
-      {/* Include shared UI here e.g. a header or sidebar */}
-      <NavBar />
+      <ShoppingCartProvider>
+        {/* Include shared UI here e.g. a header or sidebar */}
+        <NavBar />
 
-      <div className=" h-24"></div>
+        <div className=" h-24"></div>
 
-      {children}
+        {children}
+      </ShoppingCartProvider>
+
     </section>
+
   )
 }

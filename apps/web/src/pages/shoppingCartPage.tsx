@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { el, faker } from "@faker-js/faker";
 import SharedLayout from "./sharedLayout";
-import { postToTestShoppingCart } from "@/data/mock";
+import { DeleteCartItem, postToTestShoppingCart } from "@/data/mock";
 import { useRouter } from "next/router";
+import { ShoppingCartContext, ShoppingDispatchCartContext } from "@/context/ShoppingCartContext";
 
 function shoppingCartPage() {
   // const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -13,6 +14,9 @@ function shoppingCartPage() {
   const [shoppingCart2Items, setShoppingCart2Items] = useState<
     ShoppingCartModel2[]
   >([]);
+
+  const setCartAmount = useContext(ShoppingDispatchCartContext);
+  const {cartAmount, cartItems} = useContext(ShoppingCartContext);
 
   const router = useRouter();
 
@@ -151,84 +155,84 @@ function shoppingCartPage() {
 
   //   // return product;
   // };
-  const getTestCart2 = async () => {
-    console.log("entered getTestCart");
-    // Convert the data to a JSON string
-    // Use the fetch method with the POST method and the JSON data
+  // const getTestCart2 = async () => {
+  //   console.log("entered getTestCart");
+  //   // Convert the data to a JSON string
+  //   // Use the fetch method with the POST method and the JSON data
 
-    // let cart: ShoppingCartModel2[] = [];
+  //   // let cart: ShoppingCartModel2[] = [];
 
-    let data = await fetch(`http://localhost:4000/testShoppingCart2`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json()) // Parse the response as JSON
-      .then((data) => {
-        console.log("getTestCart", data);
+  //   let data = await fetch(`http://localhost:4000/testShoppingCart2`, {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   })
+  //     .then((response) => response.json()) // Parse the response as JSON
+  //     .then((data) => {
+  //       console.log("getTestCart", data);
 
-        data.forEach(
-          (element: {
-            id: number,
-            title: string,
-            price: number,
-            description: string,
-            category: {
-              id: number,
-              name: string,
-              image: string
-            },
-            images: string[],
-          }) => {
-            // console.log("element", element);
+  //       data.forEach(
+  //         (element: {
+  //           id: number,
+  //           title: string,
+  //           price: number,
+  //           description: string,
+  //           category: {
+  //             id: number,
+  //             name: string,
+  //             image: string
+  //           },
+  //           images: string[],
+  //         }) => {
+  //           // console.log("element", element);
 
 
-            let shoppingCart: ShoppingCartModel2 = {
-              id: element.id,
-              title: element.title,
-              price: element.price,
-              description: element.description,
-              category: {
-                id: element.category.id,
-                name: element.category.name,
-                image: element.category.image
-              },
-              images: element.images,
-            };
+  //           let shoppingCart: ShoppingCartModel2 = {
+  //             id: element.id,
+  //             title: element.title,
+  //             price: element.price,
+  //             description: element.description,
+  //             category: {
+  //               id: element.category.id,
+  //               name: element.category.name,
+  //               image: element.category.image
+  //             },
+  //             images: element.images,
+  //           };
 
-            // console.log("prev", shoppingCartItems);
-            // console.log("new item", shoppingCart);
+  //           // console.log("prev", shoppingCartItems);
+  //           // console.log("new item", shoppingCart);
 
-            setShoppingCart2Items((prev) => [...prev, shoppingCart]);
-          }
-        );
-      }) // Do something with the data
-      .catch((error) => console.error(error)); // Handle any errors
+  //           setShoppingCart2Items((prev) => [...prev, shoppingCart]);
+  //         }
+  //       );
+  //     }) // Do something with the data
+  //     .catch((error) => console.error(error)); // Handle any errors
 
-    // console.log("data cart", shoppingCart2Items);
+  //   // console.log("data cart", shoppingCart2Items);
 
-    console.log("exiting getTestCart");
+  //   console.log("exiting getTestCart");
 
-    // return product;
-  };
+  //   // return product;
+  // };
 
-  useEffect(() => {
-    // // populateDb();
-    // const getCartItems = async () => {
-    //   await getTestCart();
-    // };
+  // useEffect(() => {
+  //   // // populateDb();
+  //   // const getCartItems = async () => {
+  //   //   await getTestCart();
+  //   // };
 
-    // // console.log('cart', getCartItems)
+  //   // // console.log('cart', getCartItems)
 
-    // postToTestShoppingCart();
+  //   // postToTestShoppingCart();
 
-    // getCartItems();
+  //   // getCartItems();
 
-    getTestCart2();
+  //   getTestCart2();
 
-    // return () => { };
-  }, []);
+  //   // return () => { };
+  // }, []);
 
   // const [clientSecret, setClientSecret] = useState('');
   // const [paymentIntent, setPaymentIntent] = useState('');
@@ -249,6 +253,22 @@ function shoppingCartPage() {
   //       setClientSecret(data.client_secret), setPaymentIntent(data.id);
   //     });
   // }, []);
+
+  useEffect(() => {
+    setShoppingCart2Items(cartItems);
+
+    console.log(`cart items from context: ${cartItems}`)
+    console.log(`cart items count from context: ${cartItems}`)
+  
+    return () => {
+      
+    }
+  }, [cartItems])
+  
+
+  useEffect(() => {
+console.log(`cart items from context : ${cartItems}`)
+  }, []);
 
   const onPostToStripe = async () => {
 
@@ -272,7 +292,7 @@ function shoppingCartPage() {
 
     }[] = [];
 
-    line_items: shoppingCart2Items.map(
+    line_items: cartItems!.map(
       (cartItem: ShoppingCartModel2) => {
 
 
@@ -315,24 +335,24 @@ function shoppingCartPage() {
       }
     )
 
-    async function fetchData() {
+    async function postToStripe() {
       try {
         const response = await fetch('api/stripe', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(lineItems),
         });
-    
+
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
-    
+
         const data = await response.json();
-    
+
         console.log("stripe response", data);
         console.log("stripe response", data["session"].url);
 
-        const stripeUrl =  data["session"].url;
+        const stripeUrl = data["session"].url;
         if (stripeUrl) {
           console.log("stripe url", data.url);
           // If you want to navigate to the URL, you can use router.push(data.url) here.
@@ -345,8 +365,17 @@ function shoppingCartPage() {
         console.error("Error:", error);
       }
     }
-    
-    fetchData();
+
+    postToStripe();
+  }
+
+  const onDeleteCartItem = async (e : React.MouseEvent<HTMLButtonElement, MouseEvent>, cartItemId: number) => {
+    console.log('entered onDeleteCartItem')
+    e.preventDefault();
+    await DeleteCartItem(cartItemId);
+
+    setCartAmount(cartAmount - 1);
+    console.log('existing onDeleteCartItem')
   }
 
 
@@ -367,7 +396,7 @@ function shoppingCartPage() {
                 <div className="flex-grow h-20">
                   <div className="md:h-1/2">Some promotional text</div>
                   <p className="text-xl font-semibold md:h-1/2">
-                    Subtotal ({`11`} items): <span className="font-bold"> ${shoppingCart2Items.reduce((acc, cur) => acc + cur.price, 0)}</span>
+                    Subtotal ({`11`} items): <span className="font-bold">  ${shoppingCart2Items.reduce((acc, cur) => acc + cur.price, 0)}</span>
                   </p >
                 </div>
               </div>
@@ -390,7 +419,7 @@ function shoppingCartPage() {
             </div>
           </section>
           <section className="order-last md:order-1 md:basis-2/3 ">
-            {shoppingCart2Items.length > 0 ? (
+            {cartAmount > 0 ? (
               shoppingCart2Items?.map((carItem, key) => {
                 return (
                   <div key={key} className="overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full 
@@ -423,6 +452,15 @@ function shoppingCartPage() {
                               {/* {carItem.qty} */}
                               {1}
                             </p>
+                          </div>
+                          <div className="mt-auto">
+                            <button
+                              type="submit"
+                              onClick={(e) => { onDeleteCartItem(e,carItem.id) }}
+                              className="bg-red-500 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded-md w-full"
+                            >
+                              Remove
+                            </button>
                           </div>
                         </div>
                       </div>

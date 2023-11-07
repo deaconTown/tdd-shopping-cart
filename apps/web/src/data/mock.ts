@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker';
+import { da, faker } from '@faker-js/faker';
 
 export const testList = [
   {
@@ -235,7 +235,7 @@ export const getTestCart2 = async () : Promise<ShoppingCartModel2[]> => {
   })
     .then((response) => response.json()) // Parse the response as JSON
     .then((data) => {
-      console.log("getTestCart", data);
+      // console.log("getTestCart", data);
 
       data.forEach(
         (element: {
@@ -250,7 +250,7 @@ export const getTestCart2 = async () : Promise<ShoppingCartModel2[]> => {
           },
           images: string[],
         }) => {
-          console.log("element", element);
+          // console.log("element", element);
 
 
           let shoppingCart: ShoppingCartModel2 = {
@@ -269,7 +269,7 @@ export const getTestCart2 = async () : Promise<ShoppingCartModel2[]> => {
           cart.push(shoppingCart);
 
           // console.log("prev", shoppingCartItems);
-          console.log("new item", shoppingCart);
+          // console.log("new item", shoppingCart);
 
           
         }
@@ -283,3 +283,21 @@ export const getTestCart2 = async () : Promise<ShoppingCartModel2[]> => {
 
   return cart;
 };
+
+
+export const DeleteCartItem = async (id: number) =>{
+  console.log('entered the DeleteCartItem method')
+  let data = await fetch(` http://localhost:4000/testShoppingCart2/${id.toString()}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if(!data.ok){
+    console.log('there was an issue deleting the cart item')
+  }
+
+  console.log('exiting the DeleteCartItem method')
+
+}
