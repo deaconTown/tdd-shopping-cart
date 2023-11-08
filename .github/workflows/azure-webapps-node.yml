@@ -50,7 +50,7 @@ jobs:
     - name: yarn build frontend
       run: |
         yarn build
-      working-directory: web
+      working-directory: apps/web
 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v3
