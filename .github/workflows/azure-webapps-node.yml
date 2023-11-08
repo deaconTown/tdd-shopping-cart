@@ -40,13 +40,17 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ env.NODE_VERSION }}
-        cache: 'npm'
+        cache: 'yarn'
 
-    - name: yarn install, build, and test
+
+    - name: yarn install
       run: |
-        npm install
-        npm run build --if-present
-        npm run test --if-present
+        yarn install
+
+    - name: yarn build frontend
+      run: |
+        yarn build
+      working-directory: web
 
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v3
