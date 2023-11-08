@@ -1,9 +1,9 @@
 import React from 'react'
 
-const checkoutPage = () => {
+const CheckoutPage : React.FC = () => {
   return (
     <div>checkoutPage</div>
   )
 }
 
-export default checkoutPage
+export default CheckoutPage

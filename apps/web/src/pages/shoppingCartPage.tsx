@@ -5,7 +5,7 @@ import { DeleteCartItem, postToTestShoppingCart } from "@/data/mock";
 import { useRouter } from "next/router";
 import { ShoppingCartContext, ShoppingCartContextType, ShoppingCartProvider, ShoppingDispatchCartContext, useShoppingCartContext } from "@/context/ShoppingCartContext";
 
-const shoppingCartPage =() => {
+const ShoppingCartPage: React.FC = () => {
   // const [cartItems, setCartItems] = useState<CartItem[]>([]);
   // const [shoppingCartItems, setShoppingCartItems] = useState<
   //   ShoppingCartModel[]
@@ -367,4 +367,4 @@ console.log(`cart items from context : ${state.cartItems}`)
   );
 }
 
-export default shoppingCartPage;
+export default ShoppingCartPage;
