@@ -5,7 +5,7 @@ import { DeleteCartItem, postToTestShoppingCart } from "@/data/mock";
 import { useRouter } from "next/router";
 import { ShoppingCartContext, ShoppingCartContextType, ShoppingCartProvider, ShoppingDispatchCartContext, useShoppingCartContext } from "@/context/ShoppingCartContext";
 
-function shoppingCartPage() {
+const shoppingCartPage =() => {
   // const [cartItems, setCartItems] = useState<CartItem[]>([]);
   // const [shoppingCartItems, setShoppingCartItems] = useState<
   //   ShoppingCartModel[]

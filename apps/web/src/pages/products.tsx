@@ -5,7 +5,7 @@ import { getTestCart2, postToTestShoppingCart } from "@/data/mock";
 import { useRouter } from "next/router";
 import { ShoppingCartContext, ShoppingDispatchCartContext, useShoppingCartContext } from "@/context/ShoppingCartContext";
 
-function productPage() {
+const productPage = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [shoppingCart2Items, setShoppingCart2Items] = useState<ShoppingCartModel2[]>([]);
 
