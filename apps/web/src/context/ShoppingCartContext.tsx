@@ -1,6 +1,11 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import { DeleteCartItem } from '@/data/mock';
+import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 
-const ShoppingCartContext = createContext<{ cartAmount: number; cartItems: ShoppingCartModel2[] }>({ cartAmount: 0, cartItems: [] });
+export interface ShoppingCartContextType {
+    actions: { getTestCart2: () => Promise<void>; }; state: { cartItems: ShoppingCartModel2[]; };
+}
+
+const ShoppingCartContext = createContext<ShoppingCartContextType | undefined>(undefined);
 const ShoppingDispatchCartContext = createContext<React.Dispatch<React.SetStateAction<number>>>(() => { });
 
 interface Props {
@@ -9,78 +14,91 @@ interface Props {
 
 const ShoppingCartProvider = ({ children }: Props) => {
     const [cartAmount, setCartAmount] = useState<number>(0);
-    const [shoppingCart2Items, setShoppingCart2Items] = useState<
+    const [cartItems, setCartItems] = useState<
         ShoppingCartModel2[]
     >([])
 
 
-    const getTestCart2 = async () => {
+    const getTestCart1 = async () => {
         console.log("entered getTestCart from index");
         // Convert the data to a JSON string
         // Use the fetch method with the POST method and the JSON data
 
         // let cart: ShoppingCartModel2[] = [];
 
-        let data = await fetch(`http://localhost:4000/testShoppingCart2`, {
+        await fetch(`http://localhost:4000/testShoppingCart2`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
             },
         })
             .then((response) => response.json()) // Parse the response as JSON
-            .then((data) => {
+            .then((data: ShoppingCartModel2[]) => {
                 console.log("getTestCart from index", data);
 
                 console.log(`shopping cart length ${data.length}`)
                 setCartAmount(data.length);
 
-                data.forEach(
-                    (element: {
-                        id: number,
-                        title: string,
-                        price: number,
-                        description: string,
-                        category: {
-                            id: number,
-                            name: string,
-                            image: string
-                        },
-                        images: string[],
-                    }) => {
-                        // console.log("element", element);
-
-
-                        let shoppingCart: ShoppingCartModel2 = {
-                            id: element.id,
-                            title: element.title,
-                            price: element.price,
-                            description: element.description,
-                            category: {
-                                id: element.category.id,
-                                name: element.category.name,
-                                image: element.category.image
-                            },
-                            images: element.images,
-                        };
-
-                        setShoppingCart2Items((prev) => [...prev, shoppingCart]);
-
-                    }
-                );
+                setCartItems(data);
             }) // Do something with the data
             .catch((error) => console.error(error)); // Handle any errors
 
         console.log("exiting getTestCart from index");
     };
 
-    useEffect(() => {
-        getTestCart2();
 
-    }, [cartAmount])
+    const getTestCart2 = useCallback(async (arg = {}) => {
+        console.log("entered getTestCart from index");
+        // Convert the data to a JSON string
+        // Use the fetch method with the POST method and the JSON data
+
+        await fetch(`http://localhost:4000/testShoppingCart2`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((response) => response.json()) // Parse the response as JSON
+            .then((data: ShoppingCartModel2[]) => {
+                console.log("getTestCart from index", data);
+
+                console.log(`shopping cart length ${data.length}`)
+                setCartAmount(data.length);
+
+                setCartItems(data);
+            }) // Do something with the data
+            .catch((error) => console.error(error)); // Handle any errors
+
+        console.log("exiting getTestCart from index");
+    }, []);
+
+    // useEffect(() => {
+    //     getTestCart2();
+
+    // }, []);
+
+    const onDeleteCartItem = useCallback(async (cartItemId: number) => {
+        try {
+            // await DeleteCartItem(cartItemId);
+            getTestCart2();
+        } catch (error) {
+
+        }
+    }, []);
+
+    let value = {
+        actions: {
+            getTestCart2,
+            onDeleteCartItem
+        },
+        state: {
+            cartItems
+        }
+    }
 
 
     return (
-        <ShoppingCartContext.Provider value={{ cartAmount: cartAmount, cartItems: shoppingCart2Items }}>
+        <ShoppingCartContext.Provider value={value}>
             <ShoppingDispatchCartContext.Provider value={setCartAmount}>
                 {children}
             </ShoppingDispatchCartContext.Provider>
@@ -94,7 +112,7 @@ export { ShoppingCartContext, ShoppingDispatchCartContext, ShoppingCartProvider 
 export function useShoppingCartContext() {
     const context = useContext(ShoppingCartContext);
     if (context === undefined) {
-        throw new Error("Context must be used within a Provider");
+        throw new Error("Shopping Cart Context must be used within the Shopping Cart Provider");
     }
     return context;
 }

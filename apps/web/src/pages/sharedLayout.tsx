@@ -7,16 +7,13 @@ export default function SharedLayout({
 }) {
   return (
     <section>
-      <ShoppingCartProvider>
-        {/* Include shared UI here e.g. a header or sidebar */}
-        <NavBar />
+      {/* Include shared UI here e.g. a header or sidebar */}
+      <NavBar />
 
-        <div className=" h-24"></div>
+      <div className=" h-24"></div>
 
-        {children}
-      </ShoppingCartProvider>
+      {children}
 
     </section>
-
   )
 }

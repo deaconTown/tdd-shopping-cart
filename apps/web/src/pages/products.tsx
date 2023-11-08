@@ -3,7 +3,7 @@ import { el, faker } from "@faker-js/faker";
 import SharedLayout from "./sharedLayout";
 import { getTestCart2, postToTestShoppingCart } from "@/data/mock";
 import { useRouter } from "next/router";
-import { ShoppingCartContext, ShoppingDispatchCartContext } from "@/context/ShoppingCartContext";
+import { ShoppingCartContext, ShoppingDispatchCartContext, useShoppingCartContext } from "@/context/ShoppingCartContext";
 
 function productPage() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -11,7 +11,7 @@ function productPage() {
 
   const router = useRouter();
 
-  const cartAmount = useContext(ShoppingCartContext);
+  const {actions} = useShoppingCartContext();
 
 
   useEffect(() => {
@@ -49,6 +49,8 @@ function productPage() {
         .then(response => response.json()) // Parse the response as JSON
         .then(data => console.log(data)) // Do something with the data
         .catch(error => console.error(error)); // Handle any errors
+
+        actions.getTestCart2();
     } catch (error) {
       console.log(`Failed to post new cart item. Error: ${error}`)
     }

@@ -3,7 +3,7 @@ import { el, faker } from "@faker-js/faker";
 import SharedLayout from "./sharedLayout";
 import { DeleteCartItem, postToTestShoppingCart } from "@/data/mock";
 import { useRouter } from "next/router";
-import { ShoppingCartContext, ShoppingDispatchCartContext } from "@/context/ShoppingCartContext";
+import { ShoppingCartContext, ShoppingCartContextType, ShoppingCartProvider, ShoppingDispatchCartContext, useShoppingCartContext } from "@/context/ShoppingCartContext";
 
 function shoppingCartPage() {
   // const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -11,12 +11,14 @@ function shoppingCartPage() {
   //   ShoppingCartModel[]
   // >([]);
 
-  const [shoppingCart2Items, setShoppingCart2Items] = useState<
-    ShoppingCartModel2[]
-  >([]);
 
   const setCartAmount = useContext(ShoppingDispatchCartContext);
-  const {cartAmount, cartItems} = useContext(ShoppingCartContext);
+  const {actions, state} = useShoppingCartContext();
+
+  
+  const [shoppingCart2Items, setShoppingCart2Items] = useState<
+    ShoppingCartModel2[]
+  >(state.cartItems);
 
   const router = useRouter();
 
@@ -102,120 +104,7 @@ function shoppingCartPage() {
   //   return product;
   // };
 
-  // const getTestCart = async () => {
-  //   console.log("entered getTestCart");
-  //   // Convert the data to a JSON string
-  //   // Use the fetch method with the POST method and the JSON data
 
-  //   let cart: ShoppingCartModel[] = [];
-
-  //   let data = await fetch(`http://localhost:4000/testShoppingCart`, {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //     .then((response) => response.json()) // Parse the response as JSON
-  //     .then((data) => {
-  //       console.log("getTestCart", data);
-
-  //       data.forEach(
-  //         (element: {
-  //           id: string;
-  //           name: string;
-  //           unitPrice: number;
-  //           availableAmount: number;
-  //           isInStock: boolean;
-  //           description: string;
-  //           qty: number;
-  //           image: string;
-  //         }) => {
-  //           console.log("element", element);
-
-  //           let shoppingCart: ShoppingCartModel = {
-  //             shoppingCartId: element.id,
-  //             productName: element.name,
-  //             productImage: element.image,
-  //             unitPrice: element.unitPrice,
-  //             qty: element.qty,
-  //           };
-
-  //           console.log("prev", shoppingCartItems);
-  //           console.log("new item", shoppingCart);
-
-  //           setShoppingCartItems((prev) => [...prev, shoppingCart]);
-  //         }
-  //       );
-  //     }) // Do something with the data
-  //     .catch((error) => console.error(error)); // Handle any errors
-
-  //   console.log("data cart", cart);
-
-  //   console.log("exiting getTestCart");
-
-  //   // return product;
-  // };
-  // const getTestCart2 = async () => {
-  //   console.log("entered getTestCart");
-  //   // Convert the data to a JSON string
-  //   // Use the fetch method with the POST method and the JSON data
-
-  //   // let cart: ShoppingCartModel2[] = [];
-
-  //   let data = await fetch(`http://localhost:4000/testShoppingCart2`, {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //     .then((response) => response.json()) // Parse the response as JSON
-  //     .then((data) => {
-  //       console.log("getTestCart", data);
-
-  //       data.forEach(
-  //         (element: {
-  //           id: number,
-  //           title: string,
-  //           price: number,
-  //           description: string,
-  //           category: {
-  //             id: number,
-  //             name: string,
-  //             image: string
-  //           },
-  //           images: string[],
-  //         }) => {
-  //           // console.log("element", element);
-
-
-  //           let shoppingCart: ShoppingCartModel2 = {
-  //             id: element.id,
-  //             title: element.title,
-  //             price: element.price,
-  //             description: element.description,
-  //             category: {
-  //               id: element.category.id,
-  //               name: element.category.name,
-  //               image: element.category.image
-  //             },
-  //             images: element.images,
-  //           };
-
-  //           // console.log("prev", shoppingCartItems);
-  //           // console.log("new item", shoppingCart);
-
-  //           setShoppingCart2Items((prev) => [...prev, shoppingCart]);
-  //         }
-  //       );
-  //     }) // Do something with the data
-  //     .catch((error) => console.error(error)); // Handle any errors
-
-  //   // console.log("data cart", shoppingCart2Items);
-
-  //   console.log("exiting getTestCart");
-
-  //   // return product;
-  // };
 
   // useEffect(() => {
   //   // // populateDb();
@@ -255,20 +144,19 @@ function shoppingCartPage() {
   // }, []);
 
   useEffect(() => {
-    setShoppingCart2Items(cartItems);
+    // setShoppingCart2Items(cartItems);
 
-    console.log(`cart items from context: ${cartItems}`)
-    console.log(`cart items count from context: ${cartItems}`)
   
-    return () => {
+    // return () => {
       
-    }
-  }, [cartItems])
+    // }
+    actions.getTestCart2();
+  }, [actions.getTestCart2, state.cartItems.length])
   
 
   useEffect(() => {
-console.log(`cart items from context : ${cartItems}`)
-  }, []);
+console.log(`cart items from context : ${state.cartItems}`)
+  }, [state.cartItems]);
 
   const onPostToStripe = async () => {
 
@@ -292,7 +180,7 @@ console.log(`cart items from context : ${cartItems}`)
 
     }[] = [];
 
-    line_items: cartItems!.map(
+    line_items: state.cartItems!.map(
       (cartItem: ShoppingCartModel2) => {
 
 
@@ -373,8 +261,9 @@ console.log(`cart items from context : ${cartItems}`)
     console.log('entered onDeleteCartItem')
     e.preventDefault();
     await DeleteCartItem(cartItemId);
+    actions.getTestCart2();
 
-    setCartAmount(cartAmount - 1);
+    setCartAmount(state.cartItems.length - 1);
     console.log('existing onDeleteCartItem')
   }
 
@@ -396,7 +285,7 @@ console.log(`cart items from context : ${cartItems}`)
                 <div className="flex-grow h-20">
                   <div className="md:h-1/2">Some promotional text</div>
                   <p className="text-xl font-semibold md:h-1/2">
-                    Subtotal ({`11`} items): <span className="font-bold">  ${shoppingCart2Items.reduce((acc, cur) => acc + cur.price, 0)}</span>
+                    Subtotal ({`${state.cartItems.length}`} items): <span className="font-bold">  ${state.cartItems.reduce((acc, cur) => acc + cur.price, 0)}</span>
                   </p >
                 </div>
               </div>
@@ -419,8 +308,8 @@ console.log(`cart items from context : ${cartItems}`)
             </div>
           </section>
           <section className="order-last md:order-1 md:basis-2/3 ">
-            {cartAmount > 0 ? (
-              shoppingCart2Items?.map((carItem, key) => {
+            {state.cartItems.length > 0 ? (
+              state.cartItems?.map((carItem, key) => {
                 return (
                   <div key={key} className="overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full 
                   

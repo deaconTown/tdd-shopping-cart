@@ -12,7 +12,7 @@ function NavBar() {
 ;
 
     // const {cartAmount, cartItems} = useContext(ShoppingCartContext);
-    const {cartAmount} = useShoppingCartContext();
+    const {state} = useShoppingCartContext();
 
     const handleNav = () => {
         setOpenNav(!openNav);
@@ -25,7 +25,6 @@ function NavBar() {
 
     
   useEffect(() => {
-    console.log(`cart items count from context: ${cartAmount}`)
   
     return () => {
       
@@ -67,7 +66,7 @@ function NavBar() {
                         <Link href="/shoppingCartPage">
                             {/* <li className='ml-10 uppercase hover:border-b text-xl'>Cart</li> */}
                             <span className="text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2">
-                                <ShoppingCartIcon className='h-6 w-6 uppercase hover:border-b text-xl' />  {cartAmount}
+                                <ShoppingCartIcon className='h-6 w-6 uppercase hover:border-b text-xl' />  {state.cartItems.length}
                             </span>
                         </Link>
                     </ul>
