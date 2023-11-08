@@ -5,7 +5,7 @@ import { getTestCart2, postToTestShoppingCart } from "@/data/mock";
 import { useRouter } from "next/router";
 import { ShoppingCartContext, ShoppingDispatchCartContext, useShoppingCartContext } from "@/context/ShoppingCartContext";
 
-const productPage = () => {
+const ProductPage: React.FC = () => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [shoppingCart2Items, setShoppingCart2Items] = useState<ShoppingCartModel2[]>([]);
 
@@ -111,4 +111,4 @@ const productPage = () => {
   );
 }
 
-export default productPage;
+export default ProductPage;
