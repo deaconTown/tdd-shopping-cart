@@ -75,7 +75,7 @@ const ProductPage: React.FC = () => {
             shoppingCart2Items?.map((carItem, key) => {
 
               return (
-                <div className="text-center shadow-lg rounded">
+                <div key={key} className="text-center shadow-lg rounded">
                   <div className="overflow-hidden flex flex-col h-full">
                     <div className="flex-1">
                       <img className="hover:scale-125 duration-1000 w-full max:h-96" src={`${carItem.images[0]}`} alt={`${carItem.title}`} />
