@@ -20,18 +20,18 @@ steps:
   displayName: 'yarn install'
 
 - script: |
+    cd apps/web
     yarn build
-  displayName: 'yarn build'
-  workingDirectory: apps/web
-  
+  displayName: 'Build Next.js App'
 
-- task: CopyFiles@2
+- task: ArchiveFiles@2
   inputs:
-    sourceFolder: '$(Build.SourcesDirectory)'
-    contents: |
-       app/web/*
-    targetFolder: '$(Build.ArtifactStagingDirectory)'
-  displayName: 'Copy project files'
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/apps/web/.next'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/next-app.zip'
+    replaceExistingArchive: true
+  displayName: 'Archive Build Artifacts'
 
 # - task: ArchiveFiles@2
 #   inputs:
