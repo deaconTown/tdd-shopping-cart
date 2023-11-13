@@ -24,14 +24,14 @@ steps:
   displayName: 'yarn build'
   workingDirectory: apps/web
 
-- task: ArchiveFiles@2
-  inputs:
-    rootFolderOrFile: '$(Build.BinariesDirectory)'
-    includeRootFolder: true
-    archiveType: 'zip'
-    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-    replaceExistingArchive: true
-    verbose: true
+# - task: ArchiveFiles@2
+#   inputs:
+#     rootFolderOrFile: '$(Build.BinariesDirectory)'
+#     includeRootFolder: true
+#     archiveType: 'zip'
+#     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+#     replaceExistingArchive: true
+#     verbose: true
 
 - task: PublishBuildArtifacts@1
   inputs:
