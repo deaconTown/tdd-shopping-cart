@@ -23,6 +23,15 @@ steps:
     yarn build
   displayName: 'yarn build'
   workingDirectory: apps/web
+  
+
+- task: CopyFiles@2
+  inputs:
+    sourceFolder: '$(Build.SourcesDirectory)'
+    contents: |
+       app/web/*
+    targetFolder: '$(Build.ArtifactStagingDirectory)'
+  displayName: 'Copy project files'
 
 # - task: ArchiveFiles@2
 #   inputs:
