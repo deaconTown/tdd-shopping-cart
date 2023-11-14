@@ -106,5 +106,55 @@
       "qty": 2,
       "image": "https://loremflickr.com/640/480/business?lock=3470339866624000"
     }
+  ],
+  "testShoppingCart2": [
+    {
+      "id": 21,
+      "title": "Luxurious Metal Salad",
+      "price": 871,
+      "description": "The Football Is Good For Training And Recreational Purposes",
+      "category": {
+        "id": 4,
+        "name": "Shoes",
+        "image": "https://i.imgur.com/gxaUWSF.jpeg"
+      },
+      "images": [
+        "https://i.imgur.com/nZnWUc0.jpeg",
+        "https://i.imgur.com/OLKMwgP.jpeg",
+        "https://i.imgur.com/00qWleT.jpeg"
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Refined Bronze Pizza",
+      "price": 522,
+      "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+      "category": {
+        "id": 4,
+        "name": "Shoes",
+        "image": "https://i.imgur.com/gxaUWSF.jpeg"
+      },
+      "images": [
+        "https://i.imgur.com/s8WRA2O.jpeg",
+        "https://i.imgur.com/Y5gHJMd.jpeg",
+        "https://i.imgur.com/gxaUWSF.jpeg"
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Recycled Soft Car",
+      "price": 443,
+      "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+      "category": {
+        "id": 2,
+        "name": "Electronics",
+        "image": "https://i.imgur.com/nZnWUc0.jpeg"
+      },
+      "images": [
+        "https://i.imgur.com/fpT4052.jpeg",
+        "https://i.imgur.com/uDpzwEk.jpeg",
+        "https://i.imgur.com/kTPCFG2.jpeg"
+      ]
+    }
   ]
 }

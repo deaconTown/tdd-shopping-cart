@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import Image from 'next/image';
 import { useState } from 'react';
 import Link from 'next/link';
 import Logo from '../../images/logo_200x200.png'
 import { Bars3Icon, ShoppingCartIcon, XMarkIcon } from '@heroicons/react/24/solid'
+import { ShoppingCartContext, ShoppingDispatchCartContext, useShoppingCartContext } from '@/context/ShoppingCartContext';
 
 function NavBar() {
     const [navBar, setNavBar] = useState(false);
-    const [openNav, setOpenNav] = useState(false)
+    const [openNav, setOpenNav] = useState(false);
+;
+
+    // const {cartAmount, cartItems} = useContext(ShoppingCartContext);
+    const {state} = useShoppingCartContext();
 
     const handleNav = () => {
         setOpenNav(!openNav);
@@ -17,6 +22,17 @@ function NavBar() {
         event.preventDefault();
         setOpenNav(false);
     }
+
+    
+  useEffect(() => {
+  
+    return () => {
+      
+    }
+  }, [])
+  
+
+
 
     return (
         <nav id='navBar' className='fixed h-24 w-full shadow-xl bg-white'>
@@ -49,7 +65,9 @@ function NavBar() {
 
                         <Link href="/shoppingCartPage">
                             {/* <li className='ml-10 uppercase hover:border-b text-xl'>Cart</li> */}
-                            <ShoppingCartIcon className='h-6 w-6 ml-10 uppercase hover:border-b text-xl' />
+                            <span className="text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2">
+                                <ShoppingCartIcon className='h-6 w-6 uppercase hover:border-b text-xl' />  {state.cartItems.length}
+                            </span>
                         </Link>
                     </ul>
                 </div>
@@ -82,7 +100,7 @@ function NavBar() {
                         />
                     </Link>
                 </div>
-                <div className='flex-col py-4'>
+                <div className='flex-col py-4' onBlur={()=> setOpenNav(false)}>
                     <ul id='menu-list-mobile' className='justify-between'>
 
                         <li className='ml-10 uppercase hover:border-b text-xl cursor-pointer py-4'>

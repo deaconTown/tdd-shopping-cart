@@ -1,10 +1,10 @@
-import NavBar from "@/components/NavBar"
+import NavBar from '@/components/NavBar'
 
-export default function SharedLayout({
-  children, // will be a page or nested layout
-}: {
-  children: React.ReactNode
-}) {
+interface Props {
+  children: React.ReactNode;
+}
+
+const SharedLayout: React.FC<Props> = ({ children }: Props) => {
   return (
     <section>
       {/* Include shared UI here e.g. a header or sidebar */}
@@ -13,6 +13,9 @@ export default function SharedLayout({
       <div className=" h-24"></div>
 
       {children}
+
     </section>
   )
 }
+
+export default SharedLayout;
