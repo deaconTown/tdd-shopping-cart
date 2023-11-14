@@ -66,7 +66,7 @@ function NavBar() {
                         <Link href="/shoppingCartPage">
                             {/* <li className='ml-10 uppercase hover:border-b text-xl'>Cart</li> */}
                             <span className="text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2">
-                                <ShoppingCartIcon className='h-6 w-6 uppercase hover:border-b text-xl' />  {state.cartItems.length}
+                                <ShoppingCartIcon className='h-6 w-6 uppercase hover:border-b text-xl' />  {state.cartItems?.length}
                             </span>
                         </Link>
                     </ul>
