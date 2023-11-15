@@ -109,8 +109,8 @@
   ],
   "testShoppingCart2": [
     {
-      "id": "ae3fee2f-0e47-d1f7-012c-608fa024b3b7",
-      "shoppingCartId": "f3ff46f5-0083-1668-b073-37a30b10bb72",
+      "id": "b5a7c2e1-3606-d708-dbe8-90e85aa1321f",
+      "shoppingCartId": "686db29a-d8d9-9c0c-5ef2-33b8063fb84c",
       "product": {
         "id": 43,
         "title": "Fantastic Wooden Table",
@@ -127,11 +127,32 @@
           "https://i.imgur.com/KDCZxnJ.jpeg"
         ]
       },
-      "qty": 2
+      "qty": 1
     },
     {
-      "id": "9af38725-ebef-a2b6-2a8e-cf61bc995b02",
-      "shoppingCartId": "f3ff46f5-0083-1668-b073-37a30b10bb72",
+      "id": "3e51910e-f097-500f-e0de-a88cdebf19cc",
+      "shoppingCartId": "686db29a-d8d9-9c0c-5ef2-33b8063fb84c",
+      "product": {
+        "id": 45,
+        "title": "electric Cycle",
+        "price": 8520,
+        "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+        "category": {
+          "id": 5,
+          "name": "Miscellaneous",
+          "image": "https://i.imgur.com/BG8J0Fj.jpg"
+        },
+        "images": [
+          "https://i.imgur.com/BG8J0Fj.jpg",
+          "https://i.imgur.com/ujHBpCX.jpg",
+          "https://i.imgur.com/WHeVL9H.jpg"
+        ]
+      },
+      "qty": 5
+    },
+    {
+      "id": "8061b73c-4ab1-3757-5991-86048d1222b3",
+      "shoppingCartId": "686db29a-d8d9-9c0c-5ef2-33b8063fb84c",
       "product": {
         "id": 47,
         "title": "Fantastic Frozen Towels",
@@ -148,11 +169,11 @@
           "https://i.imgur.com/kG05a29.jpg"
         ]
       },
-      "qty": 5
+      "qty": 2
     },
     {
-      "id": "106e5edb-d78e-7701-24f8-37c520f9cfe8",
-      "shoppingCartId": "f3ff46f5-0083-1668-b073-37a30b10bb72",
+      "id": "bace9c1c-038a-a32f-97d9-5c800e12d761",
+      "shoppingCartId": "686db29a-d8d9-9c0c-5ef2-33b8063fb84c",
       "product": {
         "id": 83,
         "title": "Wafflera luz solar",
@@ -167,28 +188,83 @@
           "https://www.comercialbenavides.net/data/images/prods/prod_0377a45baab979a23e881fd044c938d6.jpg"
         ]
       },
-      "qty": 7
+      "qty": 2
     },
     {
-      "id": "641d14a7-13e4-8597-7c8a-aa4f1843e0c5",
-      "shoppingCartId": "f3ff46f5-0083-1668-b073-37a30b10bb72",
+      "id": "8b36f6d4-12b1-a07f-a1c6-d4762cc2d93c",
+      "shoppingCartId": "686db29a-d8d9-9c0c-5ef2-33b8063fb84c",
       "product": {
-        "id": 41,
-        "title": "Handcrafted Rubber Bacon",
-        "price": 297,
-        "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+        "id": 96,
+        "title": "Gaming JoyStick",
+        "price": 45632,
+        "description": "test dataaaa",
         "category": {
-          "id": 4,
-          "name": "Shoes",
-          "image": "https://i.imgur.com/qNOjJje.jpeg"
+          "id": 2,
+          "name": "Electronics",
+          "image": "https://i.imgur.com/ZANVnHE.jpeg"
         },
         "images": [
-          "https://i.imgur.com/HqYqLnW.jpeg",
-          "https://i.imgur.com/RlDGnZw.jpeg",
-          "https://i.imgur.com/qa0O6fg.jpeg"
+          "https://img.freepik.com/premium-photo/picture-planet-with-trees-it_579873-1170.jpg?w=740"
         ]
       },
-      "qty": 2
+      "qty": 1
+    },
+    {
+      "id": "e9621954-d38a-9be4-2f89-169e392e37c1",
+      "shoppingCartId": "686db29a-d8d9-9c0c-5ef2-33b8063fb84c",
+      "product": {
+        "id": 114,
+        "title": "test",
+        "price": 1,
+        "description": "A description Test",
+        "category": {
+          "id": 1,
+          "name": "nuevo",
+          "image": "https://i.imgur.com/QkIa5tT.jpeg"
+        },
+        "images": [
+          "https://api.escuelajs.co/api/v1/files/75fa.jpg"
+        ]
+      },
+      "qty": 1
+    },
+    {
+      "id": "a4e9e19d-491c-da5c-658f-abb87b47535c",
+      "shoppingCartId": "686db29a-d8d9-9c0c-5ef2-33b8063fb84c",
+      "product": {
+        "id": 118,
+        "title": "Cartera",
+        "price": 25,
+        "description": "Siempre a la moda",
+        "category": {
+          "id": 5,
+          "name": "Miscellaneous",
+          "image": "https://i.imgur.com/BG8J0Fj.jpg"
+        },
+        "images": [
+          "https://img.ws.mms.shopee.com.co/bd59977c7abe900c26e18e795129e69f"
+        ]
+      },
+      "qty": 10
+    },
+    {
+      "id": "daaa6fbd-b400-8456-12b0-887fac8146a4",
+      "shoppingCartId": "686db29a-d8d9-9c0c-5ef2-33b8063fb84c",
+      "product": {
+        "id": 97,
+        "title": "testing55",
+        "price": 789456,
+        "description": "testing the data",
+        "category": {
+          "id": 6,
+          "name": "walter",
+          "image": "https://www.google.com/search?q=imagenes+pinguinos+con+globos&tbm=isch&ved=2ahUKEwid8KzP1beCAxWBejABHQ7CDD4Q2-cCegQIABAA&oq=imagenes+pinguinos+con+globos&gs_lcp=CgNpbWcQAzoHCAAQigUQQzoFCAAQgAQ6BggAEAcQHjoGCAAQCBAeOgQIABAeOgYIABAFEB5Q7QFYiUxgmVJoBHAAeAKAAYgJiAGxO5IBDzAuMS41LjEuMy4yLjMuMZgBAKABAaoBC2d3cy13aXotaW1nwAEB&sclient=img&ei=QjVNZZ3HE4H1wbkPjoSz8AM&bih=643&biw=1366&rlz=1C1ONGR_esSV1075SV1075#imgrc=wa7yVu7QrlxydM"
+        },
+        "images": [
+          "https://img.freepik.com/premium-photo/picture-planet-with-trees-it_579873-1170.jpg?w=740"
+        ]
+      },
+      "qty": 1
     }
   ]
 }
