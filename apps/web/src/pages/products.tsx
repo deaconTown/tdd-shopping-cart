@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { el, faker } from "@faker-js/faker";
 import SharedLayout from "./sharedLayout";
-import { getTestCart2, postToTestShoppingCart } from "@/data/mock";
+import { getTestCart2, getTestProducts, postToTestShoppingCart } from "@/data/mock";
 import { useRouter } from "next/router";
 import { ShoppingCartContext, ShoppingDispatchCartContext, useShoppingCartContext } from "@/context/ShoppingCartContext";
 import { randomUUID } from "crypto";
@@ -21,10 +21,18 @@ const ProductPage: React.FC = () => {
     let getProducts = async () => {
       await getTestCart2().then((prods) => {
 
+        // setShoppingCart2Items(prods);
+      });
+    }
+
+    let getTestProductsFromApi = async () => {
+      await getTestProducts().then((prods) => {
+
         setShoppingCart2Items(prods);
       });
     }
 
+    getTestProductsFromApi();
     getProducts();
 
     return () => { };
@@ -103,7 +111,7 @@ const ProductPage: React.FC = () => {
                 <div key={key} className="text-center shadow-lg rounded">
                   <div className="overflow-hidden flex flex-col h-full">
                     <div className="flex-1">
-                      <img className="hover:scale-125 duration-1000 w-full max:h-96" src={`${carItem.images[0]}`} alt={`${carItem.title}`} />
+                      <img className="hover:scale-125 duration-1000 w-full h-80" src={`${carItem.images[0]}`} alt={`${carItem.title}`} />
                       <h3 className="py-2 text-2xl">
                         {carItem.title}
                       </h3>

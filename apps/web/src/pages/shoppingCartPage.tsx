@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { el, faker } from "@faker-js/faker";
 import SharedLayout from "./sharedLayout";
-import { DeleteCartItem, postToTestShoppingCart } from "@/data/mock";
+import { DeleteCartItem, getTestProducts, getTestProductsByCategory, postToTestShoppingCart } from "@/data/mock";
 import { useRouter } from "next/router";
 import { ShoppingCartContext, ShoppingCartContextType, ShoppingCartProvider, ShoppingDispatchCartContext, useShoppingCartContext } from "@/context/ShoppingCartContext";
 import QuantitySelector from "@/components/QuantitySelector";
+import { guidGenerator } from "@/commonUtil/util";
 
 const ShoppingCartPage: React.FC = () => {
   // const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -27,23 +28,23 @@ const ShoppingCartPage: React.FC = () => {
   const handleQuantityChange = (itemId: string, newQuantity: number) => {
     // Find the index of the item in the cart
     // const itemIndex = cartItems.findIndex((item) => item.id === itemId);
-  
+
     // // Create a copy of the cartItems array to avoid mutating state directly
     // const updatedCart = [...cartItems];
-  
+
     // // Update the quantity of the specific item
     // updatedCart[itemIndex] = { ...updatedCart[itemIndex], quantity: newQuantity };
-  
+
     // // Set the updated cart state
     // setCartItems(updatedCart);
-  
+
     // Make the fetch request to update the server with the new quantity
     console.log('change is happenin')
     actions.updateCartItemQuantity(itemId, newQuantity);
 
     actions.getTestCart2();
   };
-  
+
   // https://fakestoreapi.com/
 
   // const getShoppingCartItems = async () => {
@@ -292,6 +293,90 @@ const ShoppingCartPage: React.FC = () => {
     console.log('existing onDeleteCartItem')
   }
 
+  const [products, setProducts] = useState<Product[]>([]);
+
+  // const router = useRouter();
+
+  // const { actions, state } = useShoppingCartContext();
+
+
+  useEffect(() => {
+
+    // let getProducts = async () => {
+    //   await getTestCart2().then((prods) => {
+
+    //     // setShoppingCart2Items(prods);
+    //   });
+    // }
+
+    let getTestProductsFromApi = async () => {
+      console.log(`state.cartItems: ${state.cartItems}`)
+      await getTestProductsByCategory(state.cartItems != undefined? state.cartItems[0].product.category.name : '').then((prods) => {
+
+        setProducts(prods);
+      });
+    }
+
+    getTestProductsFromApi();
+    // getProducts();
+
+    return () => { };
+  }, [state.cartItems]);
+
+  const postToCart = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string) => {
+    console.log('entered postToCart')
+    event.preventDefault();
+
+    // Convert the data to a JSON string
+    try {
+
+      const cartItemToAdd = products.find(x => x.id == id);
+
+      if (cartItemToAdd != undefined) {
+
+        //check if item already exists in the cart
+        const foundCartItem = state.cartItems?.find(x => x.product.id == cartItemToAdd.id);
+
+        if (foundCartItem !== undefined) {
+          actions.updateCartItemQuantity(foundCartItem.id, foundCartItem.qty + 1);
+        }
+        else {
+
+          const dataToPost: CartItem = {
+            id: guidGenerator(),
+            shoppingCartId: state.shoppingCartId ?? guidGenerator(),
+            product: cartItemToAdd,
+            qty: 1
+          }
+          let jsonData = JSON.stringify(dataToPost);
+
+          console.log('jsonData from products page', jsonData)
+
+          // Use the fetch method with the POST method and the JSON data
+          fetch("http://localhost:4000/testShoppingCart2", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: jsonData
+          })
+            .then(response => response.json()) // Parse the response as JSON
+            .then(data => console.log(data)) // Do something with the data
+            .catch(error => console.error(error)); // Handle any errors
+        }
+        actions.getTestCart2();
+
+      }
+
+    } catch (error) {
+      console.log(`Failed to post new cart item. Error: ${error}`)
+    }
+
+
+    console.log('exiting postToShoppingCart')
+  }
+
+
 
   return (
     <SharedLayout>
@@ -363,7 +448,7 @@ const ShoppingCartPage: React.FC = () => {
                           </div>
 
                           <div id='cart-item-actions' className="flex">
-                           <div key={carItem.id} className="pr-4">
+                            <div key={carItem.id} className="pr-4">
                               <QuantitySelector quantity={carItem.qty ?? 0} onQuantityChange={(newQuantity) => handleQuantityChange(carItem.id, newQuantity)} />
                             </div>
                             <div className="mt-auto">
@@ -388,6 +473,44 @@ const ShoppingCartPage: React.FC = () => {
             )}
           </section>
         </div>
+        <section>
+
+          <div className="max-w-[1320] mx-auto grid lg:grid-cols-4 md:grid-cols-2 gap-6 px-[20px]">
+            {products.length > 0 ? (
+              products?.map((carItem, key) => {
+
+                return (
+                  <div key={key} className="text-center shadow-lg rounded">
+                    <div className="overflow-hidden flex flex-col h-full">
+                      <div className="flex-1">
+                        <img className="hover:scale-125 duration-1000 w-full h-80" src={`${carItem.images[0]}`} alt={`${carItem.title}`} />
+                        <h3 className="py-2 text-2xl">
+                          {carItem.title}
+                        </h3>
+                        <p className="py-2 font-bold text-2xl">${carItem.price}</p>
+                        <p className="py-2">{carItem.description}</p>
+                      </div>
+
+
+                      <div className="mt-auto">
+                        <button
+                          type="submit"
+                          onClick={(e) => postToCart(e, carItem.id)}
+                          className="mt-auto bg-green-500 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded-md w-full"
+                        >
+                          Add
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+            ) : (
+              <div></div>
+            )}
+          </div>
+        </section>
+
       </main>
     </SharedLayout>
   );

@@ -127,7 +127,7 @@
           "https://i.imgur.com/KDCZxnJ.jpeg"
         ]
       },
-      "qty": 1
+      "qty": 9
     },
     {
       "id": "3e51910e-f097-500f-e0de-a88cdebf19cc",
@@ -148,7 +148,7 @@
           "https://i.imgur.com/WHeVL9H.jpg"
         ]
       },
-      "qty": 5
+      "qty": 3
     },
     {
       "id": "8061b73c-4ab1-3757-5991-86048d1222b3",
@@ -210,25 +210,6 @@
       "qty": 1
     },
     {
-      "id": "e9621954-d38a-9be4-2f89-169e392e37c1",
-      "shoppingCartId": "686db29a-d8d9-9c0c-5ef2-33b8063fb84c",
-      "product": {
-        "id": 114,
-        "title": "test",
-        "price": 1,
-        "description": "A description Test",
-        "category": {
-          "id": 1,
-          "name": "nuevo",
-          "image": "https://i.imgur.com/QkIa5tT.jpeg"
-        },
-        "images": [
-          "https://api.escuelajs.co/api/v1/files/75fa.jpg"
-        ]
-      },
-      "qty": 1
-    },
-    {
       "id": "a4e9e19d-491c-da5c-658f-abb87b47535c",
       "shoppingCartId": "686db29a-d8d9-9c0c-5ef2-33b8063fb84c",
       "product": {
@@ -248,21 +229,24 @@
       "qty": 10
     },
     {
-      "id": "daaa6fbd-b400-8456-12b0-887fac8146a4",
-      "shoppingCartId": "686db29a-d8d9-9c0c-5ef2-33b8063fb84c",
+      "id": "ebbbf315-aaa9-50bb-d6d5-0fa3748d70be",
+      "shoppingCartId": "4d33bb3c-9956-288a-0c1e-98b9d6a21664",
       "product": {
-        "id": 97,
-        "title": "testing55",
-        "price": 789456,
-        "description": "testing the data",
+        "id": "2",
+        "title": "Mens Casual Premium Slim Fit T-Shirts ",
+        "price": 22.3,
+        "description": "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
         "category": {
-          "id": 6,
-          "name": "walter",
-          "image": "https://www.google.com/search?q=imagenes+pinguinos+con+globos&tbm=isch&ved=2ahUKEwid8KzP1beCAxWBejABHQ7CDD4Q2-cCegQIABAA&oq=imagenes+pinguinos+con+globos&gs_lcp=CgNpbWcQAzoHCAAQigUQQzoFCAAQgAQ6BggAEAcQHjoGCAAQCBAeOgQIABAeOgYIABAFEB5Q7QFYiUxgmVJoBHAAeAKAAYgJiAGxO5IBDzAuMS41LjEuMy4yLjMuMZgBAKABAaoBC2d3cy13aXotaW1nwAEB&sclient=img&ei=QjVNZZ3HE4H1wbkPjoSz8AM&bih=643&biw=1366&rlz=1C1ONGR_esSV1075SV1075#imgrc=wa7yVu7QrlxydM"
+          "id": 0,
+          "name": "men's clothing",
+          "image": ""
         },
         "images": [
-          "https://img.freepik.com/premium-photo/picture-planet-with-trees-it_579873-1170.jpg?w=740"
-        ]
+          "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg"
+        ],
+        "amountAvailable": 10,
+        "isInStock": true,
+        "isActive": true
       },
       "qty": 1
     }
