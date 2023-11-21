@@ -1,3 +1,4 @@
+import Footer from '@/components/Footer';
 import NavBar from '@/components/NavBar'
 
 interface Props {
@@ -14,6 +15,7 @@ const SharedLayout: React.FC<Props> = ({ children }: Props) => {
 
       {children}
 
+      <Footer />
     </section>
   )
 }

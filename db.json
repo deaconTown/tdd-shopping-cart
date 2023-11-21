@@ -109,52 +109,146 @@
   ],
   "testShoppingCart2": [
     {
-      "id": 21,
-      "title": "Luxurious Metal Salad",
-      "price": 871,
-      "description": "The Football Is Good For Training And Recreational Purposes",
-      "category": {
-        "id": 4,
-        "name": "Shoes",
-        "image": "https://i.imgur.com/gxaUWSF.jpeg"
+      "id": "b5a7c2e1-3606-d708-dbe8-90e85aa1321f",
+      "shoppingCartId": "686db29a-d8d9-9c0c-5ef2-33b8063fb84c",
+      "product": {
+        "id": 43,
+        "title": "Fantastic Wooden Table",
+        "price": 163,
+        "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+        "category": {
+          "id": 4,
+          "name": "Shoes",
+          "image": "https://i.imgur.com/qNOjJje.jpeg"
+        },
+        "images": [
+          "https://i.imgur.com/Au8J9sX.jpeg",
+          "https://i.imgur.com/gdr8BW2.jpeg",
+          "https://i.imgur.com/KDCZxnJ.jpeg"
+        ]
       },
-      "images": [
-        "https://i.imgur.com/nZnWUc0.jpeg",
-        "https://i.imgur.com/OLKMwgP.jpeg",
-        "https://i.imgur.com/00qWleT.jpeg"
-      ]
+      "qty": 9
     },
     {
-      "id": 13,
-      "title": "Refined Bronze Pizza",
-      "price": 522,
-      "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
-      "category": {
-        "id": 4,
-        "name": "Shoes",
-        "image": "https://i.imgur.com/gxaUWSF.jpeg"
+      "id": "3e51910e-f097-500f-e0de-a88cdebf19cc",
+      "shoppingCartId": "686db29a-d8d9-9c0c-5ef2-33b8063fb84c",
+      "product": {
+        "id": 45,
+        "title": "electric Cycle",
+        "price": 8520,
+        "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+        "category": {
+          "id": 5,
+          "name": "Miscellaneous",
+          "image": "https://i.imgur.com/BG8J0Fj.jpg"
+        },
+        "images": [
+          "https://i.imgur.com/BG8J0Fj.jpg",
+          "https://i.imgur.com/ujHBpCX.jpg",
+          "https://i.imgur.com/WHeVL9H.jpg"
+        ]
       },
-      "images": [
-        "https://i.imgur.com/s8WRA2O.jpeg",
-        "https://i.imgur.com/Y5gHJMd.jpeg",
-        "https://i.imgur.com/gxaUWSF.jpeg"
-      ]
+      "qty": 3
     },
     {
-      "id": 29,
-      "title": "Recycled Soft Car",
-      "price": 443,
-      "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-      "category": {
-        "id": 2,
-        "name": "Electronics",
-        "image": "https://i.imgur.com/nZnWUc0.jpeg"
+      "id": "8061b73c-4ab1-3757-5991-86048d1222b3",
+      "shoppingCartId": "686db29a-d8d9-9c0c-5ef2-33b8063fb84c",
+      "product": {
+        "id": 47,
+        "title": "Fantastic Frozen Towels",
+        "price": 761,
+        "description": "The Football Is Good For Training And Recreational Purposes",
+        "category": {
+          "id": 5,
+          "name": "Miscellaneous",
+          "image": "https://i.imgur.com/BG8J0Fj.jpg"
+        },
+        "images": [
+          "https://i.imgur.com/xPDwUb3.jpg",
+          "https://i.imgur.com/3rfp691.jpg",
+          "https://i.imgur.com/kG05a29.jpg"
+        ]
       },
-      "images": [
-        "https://i.imgur.com/fpT4052.jpeg",
-        "https://i.imgur.com/uDpzwEk.jpeg",
-        "https://i.imgur.com/kTPCFG2.jpeg"
-      ]
+      "qty": 2
+    },
+    {
+      "id": "bace9c1c-038a-a32f-97d9-5c800e12d761",
+      "shoppingCartId": "686db29a-d8d9-9c0c-5ef2-33b8063fb84c",
+      "product": {
+        "id": 83,
+        "title": "Wafflera luz solar",
+        "price": 115,
+        "description": "Wafflera solar",
+        "category": {
+          "id": 2,
+          "name": "Electronics",
+          "image": "https://i.imgur.com/ZANVnHE.jpeg"
+        },
+        "images": [
+          "https://www.comercialbenavides.net/data/images/prods/prod_0377a45baab979a23e881fd044c938d6.jpg"
+        ]
+      },
+      "qty": 2
+    },
+    {
+      "id": "8b36f6d4-12b1-a07f-a1c6-d4762cc2d93c",
+      "shoppingCartId": "686db29a-d8d9-9c0c-5ef2-33b8063fb84c",
+      "product": {
+        "id": 96,
+        "title": "Gaming JoyStick",
+        "price": 45632,
+        "description": "test dataaaa",
+        "category": {
+          "id": 2,
+          "name": "Electronics",
+          "image": "https://i.imgur.com/ZANVnHE.jpeg"
+        },
+        "images": [
+          "https://img.freepik.com/premium-photo/picture-planet-with-trees-it_579873-1170.jpg?w=740"
+        ]
+      },
+      "qty": 1
+    },
+    {
+      "id": "a4e9e19d-491c-da5c-658f-abb87b47535c",
+      "shoppingCartId": "686db29a-d8d9-9c0c-5ef2-33b8063fb84c",
+      "product": {
+        "id": 118,
+        "title": "Cartera",
+        "price": 25,
+        "description": "Siempre a la moda",
+        "category": {
+          "id": 5,
+          "name": "Miscellaneous",
+          "image": "https://i.imgur.com/BG8J0Fj.jpg"
+        },
+        "images": [
+          "https://img.ws.mms.shopee.com.co/bd59977c7abe900c26e18e795129e69f"
+        ]
+      },
+      "qty": 10
+    },
+    {
+      "id": "ebbbf315-aaa9-50bb-d6d5-0fa3748d70be",
+      "shoppingCartId": "4d33bb3c-9956-288a-0c1e-98b9d6a21664",
+      "product": {
+        "id": "2",
+        "title": "Mens Casual Premium Slim Fit T-Shirts ",
+        "price": 22.3,
+        "description": "Slim-fitting style, contrast raglan long sleeve, three-button henley placket, light weight & soft fabric for breathable and comfortable wearing. And Solid stitched shirts with round neck made for durability and a great fit for casual fashion wear and diehard baseball fans. The Henley style round neckline includes a three-button placket.",
+        "category": {
+          "id": 0,
+          "name": "men's clothing",
+          "image": ""
+        },
+        "images": [
+          "https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg"
+        ],
+        "amountAvailable": 10,
+        "isInStock": true,
+        "isActive": true
+      },
+      "qty": 1
     }
   ]
 }

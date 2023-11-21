@@ -183,12 +183,19 @@ const populateDb = () => {
   while (counter > 0) {
     const product: Product = {
       id: faker.string.uuid(),
-      name: faker.commerce.product(),
+      title: faker.commerce.product(),
       isActive: true,
-      unitPrice: parseFloat(faker.commerce.price({ min: 100, max: 200 })), // 154.00,
+      price: parseFloat(faker.commerce.price({ min: 100, max: 200 })), // 154.00,
       amountAvailable: faker.number.int({ max: 50 }), // 42,
       isInStock: true,
       description: faker.commerce.productDescription(),
+      category: {
+        id: 0,
+        name: '',
+        image: ''
+      },
+      images: []
+
     }
 
     const customer: Customer = {
@@ -206,7 +213,21 @@ const populateDb = () => {
 
     const cartItem: CartItem = {
       id: faker.string.uuid(),
-      productId: product.id,
+      product: {
+        id: '',
+        title: '',
+        price: 0,
+        description: '',
+        category: {
+          id: 0,
+          name: '',
+          image: '',
+        },
+        images: [],
+        amountAvailable: 0,
+        isInStock: false,
+        isActive: false,
+      },
       shoppingCartId: shoppingCart.id,
       qty: 1
     }
@@ -220,12 +241,12 @@ const populateDb = () => {
   console.log('exiting populateDb');
 }
 
-export const getTestCart2 = async () : Promise<ShoppingCartModel2[]> => {
+export const getTestCart2 = async (): Promise<Product[]> => {
   console.log("entered getTestCart2");
   // Convert the data to a JSON string
   // Use the fetch method with the POST method and the JSON data
 
-  let cart: ShoppingCartModel2[] = [];
+  let cart: Product[] = [];
 
   let data = await fetch(`https://api.escuelajs.co/api/v1/products/`, {
     method: "GET",
@@ -238,22 +259,11 @@ export const getTestCart2 = async () : Promise<ShoppingCartModel2[]> => {
       // console.log("getTestCart", data);
 
       data.forEach(
-        (element: {
-          id: number,
-          title: string,
-          price: number,
-          description: string,
-          category: {
-            id: number,
-            name: string,
-            image: string
-          },
-          images: string[],
-        }) => {
+        (element: Product) => {
           // console.log("element", element);
 
 
-          let shoppingCart: ShoppingCartModel2 = {
+          let shoppingCart: Product = {
             id: element.id,
             title: element.title,
             price: element.price,
@@ -264,6 +274,9 @@ export const getTestCart2 = async () : Promise<ShoppingCartModel2[]> => {
               image: element.category.image
             },
             images: element.images,
+            amountAvailable: element.amountAvailable,
+            isInStock: element.isInStock,
+            isActive: element.isActive
           };
 
           cart.push(shoppingCart);
@@ -271,7 +284,7 @@ export const getTestCart2 = async () : Promise<ShoppingCartModel2[]> => {
           // console.log("prev", shoppingCartItems);
           // console.log("new item", shoppingCart);
 
-          
+
         }
       );
     }) // Do something with the data
@@ -284,17 +297,126 @@ export const getTestCart2 = async () : Promise<ShoppingCartModel2[]> => {
   return cart;
 };
 
+export const getTestProducts = async (): Promise<Product[]> => {
+  console.log("entered getTestProducts");
+  // Convert the data to a JSON string
+  // Use the fetch method with the POST method and the JSON data
 
-export const DeleteCartItem = async (id: number) =>{
+  let cart: Product[] = [];
+
+  let data = await fetch(`https://fakestoreapi.com/products`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json()) // Parse the response as JSON
+    .then((data) => {
+      // console.log("getTestCart", data);
+
+      data.forEach(
+        (element: ProductApi) => {
+          console.log("element", element);
+
+          let shoppingCart: Product = {
+            id: element.id.toString(),
+            title: element.title,
+            price: parseFloat(element.price ?? 0),
+            description: element.description,
+            category: {
+              id: 0,
+              name: element.category,
+              image: ''
+            },
+            images: [element.image],
+            amountAvailable: 10,
+            isInStock: true,
+            isActive: true
+          };
+
+          cart.push(shoppingCart);
+        }
+      );
+    }) // Do something with the data
+    .catch((error) => console.error(error)); // Handle any errors
+
+  console.log(" getTestProducts data cart", cart);
+
+  console.log("exiting getTestProducts");
+
+  return cart;
+};
+
+
+export const getTestProductsByCategory = async (category: string): Promise<Product[]> => {
+  console.log("entered getTestProductsByCategory");
+  // Convert the data to a JSON string
+  // Use the fetch method with the POST method and the JSON data
+
+  let cart: Product[] = [];
+
+  // let data = await fetch(`https://fakestoreapi.com/products/category/${category.toLowerCase()}`, {
+    console.log(`https://fakestoreapi.com/products/category/${category.toLowerCase()}`)
+    console.log(`https://fakestoreapi.com/products/category/${category}`)
+  let data = await fetch(`https://fakestoreapi.com/products/category/jewelery`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json()) // Parse the response as JSON
+    .then((data) => {
+      // console.log("getTestCart", data);
+
+      data.forEach(
+        (element: ProductApi) => {
+          console.log("element", element);
+
+          let shoppingCart: Product = {
+            id: element.id.toString(),
+            title: element.title,
+            price: parseFloat(element.price ?? 0),
+            description: element.description,
+            category: {
+              id: 0,
+              name: element.category,
+              image: ''
+            },
+            images: [element.image],
+            amountAvailable: 10,
+            isInStock: true,
+            isActive: true
+          };
+
+          cart.push(shoppingCart);
+
+          // console.log("prev", shoppingCartItems);
+          // console.log("new item", shoppingCart);
+
+
+        }
+      );
+    }) // Do something with the data
+    .catch((error) => console.error(error)); // Handle any errors
+
+  console.log(" getTestProductsByCategory data cart", cart);
+
+  console.log("exiting getTestProductsByCategory");
+
+  return cart;
+};
+
+
+export const DeleteCartItem = async (id: string) => {
   console.log('entered the DeleteCartItem method')
-  let data = await fetch(` http://localhost:4000/testShoppingCart2/${id.toString()}`, {
+  let data = await fetch(` http://localhost:4000/testShoppingCart2/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
     },
   });
 
-  if(!data.ok){
+  if (!data.ok) {
     console.log('there was an issue deleting the cart item')
   }
 

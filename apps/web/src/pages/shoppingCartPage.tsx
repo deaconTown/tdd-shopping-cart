@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { el, faker } from "@faker-js/faker";
 import SharedLayout from "./sharedLayout";
-import { DeleteCartItem, postToTestShoppingCart } from "@/data/mock";
+import { DeleteCartItem, getTestProducts, getTestProductsByCategory, postToTestShoppingCart } from "@/data/mock";
 import { useRouter } from "next/router";
 import { ShoppingCartContext, ShoppingCartContextType, ShoppingCartProvider, ShoppingDispatchCartContext, useShoppingCartContext } from "@/context/ShoppingCartContext";
+import QuantitySelector from "@/components/QuantitySelector";
+import { guidGenerator } from "@/commonUtil/util";
 
 const ShoppingCartPage: React.FC = () => {
   // const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -13,14 +15,35 @@ const ShoppingCartPage: React.FC = () => {
 
 
   const setCartAmount = useContext(ShoppingDispatchCartContext);
-  const {actions, state} = useShoppingCartContext();
+  const { actions, state } = useShoppingCartContext();
 
-  
+
   const [shoppingCart2Items, setShoppingCart2Items] = useState<
-    ShoppingCartModel2[]
+    CartItem[] | undefined
   >(state.cartItems);
+  const [quantity, setQuantity] = useState(state.cartItems?.length);
 
   const router = useRouter();
+
+  const handleQuantityChange = (itemId: string, newQuantity: number) => {
+    // Find the index of the item in the cart
+    // const itemIndex = cartItems.findIndex((item) => item.id === itemId);
+
+    // // Create a copy of the cartItems array to avoid mutating state directly
+    // const updatedCart = [...cartItems];
+
+    // // Update the quantity of the specific item
+    // updatedCart[itemIndex] = { ...updatedCart[itemIndex], quantity: newQuantity };
+
+    // // Set the updated cart state
+    // setCartItems(updatedCart);
+
+    // Make the fetch request to update the server with the new quantity
+    console.log('change is happenin')
+    actions.updateCartItemQuantity(itemId, newQuantity);
+
+    actions.getTestCart2();
+  };
 
   // https://fakestoreapi.com/
 
@@ -146,16 +169,16 @@ const ShoppingCartPage: React.FC = () => {
   useEffect(() => {
     // setShoppingCart2Items(cartItems);
 
-  
+
     // return () => {
-      
+
     // }
     actions.getTestCart2();
-  }, [actions.getTestCart2, state.cartItems.length])
-  
+  }, [actions.getTestCart2, state.cartItems?.length])
+
 
   useEffect(() => {
-console.log(`cart items from context : ${state.cartItems}`)
+    console.log(`cart items from context : ${state.cartItems}`)
   }, [state.cartItems]);
 
   const onPostToStripe = async () => {
@@ -181,7 +204,8 @@ console.log(`cart items from context : ${state.cartItems}`)
     }[] = [];
 
     line_items: state.cartItems!.map(
-      (cartItem: ShoppingCartModel2) => {
+      (cartItem: CartItem) => {
+
 
 
         let lineItem: {
@@ -206,15 +230,15 @@ console.log(`cart items from context : ${state.cartItems}`)
           price_data: {
             currency: 'usd',
             product_data: {
-              name: cartItem.title,
-              description: cartItem.description,
-              images: cartItem.images
+              name: cartItem.product.title,
+              description: cartItem.product.description,
+              images: cartItem.product.images
             },
-            unit_amount: cartItem.price * 100,
+            unit_amount: cartItem.product.price * 100,
             tax_behavior: 'exclusive'
 
           },
-          quantity: 1
+          quantity: cartItem.qty
 
         }
         lineItems.push(lineItem);
@@ -257,15 +281,101 @@ console.log(`cart items from context : ${state.cartItems}`)
     postToStripe();
   }
 
-  const onDeleteCartItem = async (e : React.MouseEvent<HTMLButtonElement, MouseEvent>, cartItemId: number) => {
+  const onDeleteCartItem = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, cartItemId: string) => {
     console.log('entered onDeleteCartItem')
     e.preventDefault();
     await DeleteCartItem(cartItemId);
     actions.getTestCart2();
 
-    setCartAmount(state.cartItems.length - 1);
+    if (state.cartItems) {
+      setCartAmount(state.cartItems?.length - 1);
+    }
     console.log('existing onDeleteCartItem')
   }
+
+  const [products, setProducts] = useState<Product[]>([]);
+
+  // const router = useRouter();
+
+  // const { actions, state } = useShoppingCartContext();
+
+
+  useEffect(() => {
+
+    // let getProducts = async () => {
+    //   await getTestCart2().then((prods) => {
+
+    //     // setShoppingCart2Items(prods);
+    //   });
+    // }
+
+    let getTestProductsFromApi = async () => {
+      console.log(`state.cartItems: ${state.cartItems}`)
+      await getTestProductsByCategory(state.cartItems != undefined? state.cartItems[0].product.category.name : '').then((prods) => {
+
+        setProducts(prods);
+      });
+    }
+
+    getTestProductsFromApi();
+    // getProducts();
+
+    return () => { };
+  }, [state.cartItems]);
+
+  const postToCart = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string) => {
+    console.log('entered postToCart')
+    event.preventDefault();
+
+    // Convert the data to a JSON string
+    try {
+
+      const cartItemToAdd = products.find(x => x.id == id);
+
+      if (cartItemToAdd != undefined) {
+
+        //check if item already exists in the cart
+        const foundCartItem = state.cartItems?.find(x => x.product.id == cartItemToAdd.id);
+
+        if (foundCartItem !== undefined) {
+          actions.updateCartItemQuantity(foundCartItem.id, foundCartItem.qty + 1);
+        }
+        else {
+
+          const dataToPost: CartItem = {
+            id: guidGenerator(),
+            shoppingCartId: state.shoppingCartId ?? guidGenerator(),
+            product: cartItemToAdd,
+            qty: 1
+          }
+          let jsonData = JSON.stringify(dataToPost);
+
+          console.log('jsonData from products page', jsonData)
+
+          // Use the fetch method with the POST method and the JSON data
+          fetch("http://localhost:4000/testShoppingCart2", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: jsonData
+          })
+            .then(response => response.json()) // Parse the response as JSON
+            .then(data => console.log(data)) // Do something with the data
+            .catch(error => console.error(error)); // Handle any errors
+        }
+        actions.getTestCart2();
+
+      }
+
+    } catch (error) {
+      console.log(`Failed to post new cart item. Error: ${error}`)
+    }
+
+
+    console.log('exiting postToShoppingCart')
+  }
+
 
 
   return (
@@ -285,7 +395,7 @@ console.log(`cart items from context : ${state.cartItems}`)
                 <div className="flex-grow h-20">
                   <div className="md:h-1/2">Some promotional text</div>
                   <p className="text-xl font-semibold md:h-1/2">
-                    Subtotal ({`${state.cartItems.length}`} items): <span className="font-bold">  ${state.cartItems.reduce((acc, cur) => acc + cur.price, 0)}</span>
+                    Subtotal ({`${state.cartItems?.length}`} items): <span className="font-bold">  ${state.cartItems?.reduce((acc, cur) => acc + cur.product.price * cur.qty, 0)}</span>
                   </p >
                 </div>
               </div>
@@ -308,8 +418,8 @@ console.log(`cart items from context : ${state.cartItems}`)
             </div>
           </section>
           <section className="order-last md:order-1 md:basis-2/3 ">
-            {state.cartItems.length > 0 ? (
-              state.cartItems?.map((carItem, key) => {
+            {state.cartItems !== undefined && state.cartItems.length > 0 ? (
+              state.cartItems.map((carItem, key) => {
                 return (
                   <div key={key} className="overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full 
                   
@@ -319,8 +429,8 @@ console.log(`cart items from context : ${state.cartItems}`)
                         <div className="mx-auto flex flex-shrink-0 items-center justify-center lg:h-44 lg:w-44  sm:mx-0 sm:h-10 sm:w-10">
                           <img
                             className="h-44 w-44 object-cover object-center"
-                            src={`${carItem.images[0]}`}
-                            alt={`${carItem.title}`}
+                            src={`${carItem.product.images[0]}`}
+                            alt={`${carItem.product.title}`}
                           />
                         </div>
                         <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
@@ -328,29 +438,30 @@ console.log(`cart items from context : ${state.cartItems}`)
                             className="text-base font-semibold leading-6 text-gray-900"
                             id="modal-title"
                           >
-                            {carItem.title}
+                            {carItem.product.title}
                           </h3>
                           <div className="mt-2">
                             <p className="text-sm text-black-500 font-bold">
                               {/* ${carItem.price * carItem.qty} */}
-                              ${carItem.price * 1}
+                              ${carItem.product.price * carItem.qty}
                             </p>
                           </div>
-                          <div className="mt-2">
-                            <p className="text-sm text-gray-500">
-                              {/* {carItem.qty} */}
-                              {1}
-                            </p>
+
+                          <div id='cart-item-actions' className="flex">
+                            <div key={carItem.id} className="pr-4">
+                              <QuantitySelector quantity={carItem.qty ?? 0} onQuantityChange={(newQuantity) => handleQuantityChange(carItem.id, newQuantity)} />
+                            </div>
+                            <div className="mt-auto">
+                              <button
+                                type="submit"
+                                onClick={(e) => { onDeleteCartItem(e, carItem.id) }}
+                                className="bg-red-500 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded-md w-full"
+                              >
+                                Remove
+                              </button>
+                            </div>
                           </div>
-                          <div className="mt-auto">
-                            <button
-                              type="submit"
-                              onClick={(e) => { onDeleteCartItem(e,carItem.id) }}
-                              className="bg-red-500 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded-md w-full"
-                            >
-                              Remove
-                            </button>
-                          </div>
+
                         </div>
                       </div>
                     </div>
@@ -362,6 +473,44 @@ console.log(`cart items from context : ${state.cartItems}`)
             )}
           </section>
         </div>
+        <section>
+
+          <div className="max-w-[1320] mx-auto grid lg:grid-cols-4 md:grid-cols-2 gap-6 px-[20px]">
+            {products.length > 0 ? (
+              products?.map((carItem, key) => {
+
+                return (
+                  <div key={key} className="text-center shadow-lg rounded">
+                    <div className="overflow-hidden flex flex-col h-full">
+                      <div className="flex-1">
+                        <img className="hover:scale-125 duration-1000 w-full h-80" src={`${carItem.images[0]}`} alt={`${carItem.title}`} />
+                        <h3 className="py-2 text-2xl">
+                          {carItem.title}
+                        </h3>
+                        <p className="py-2 font-bold text-2xl">${carItem.price}</p>
+                        <p className="py-2">{carItem.description}</p>
+                      </div>
+
+
+                      <div className="mt-auto">
+                        <button
+                          type="submit"
+                          onClick={(e) => postToCart(e, carItem.id)}
+                          className="mt-auto bg-green-500 hover:bg-gray-400 text-white font-bold py-2 px-4 rounded-md w-full"
+                        >
+                          Add
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })
+            ) : (
+              <div></div>
+            )}
+          </div>
+        </section>
+
       </main>
     </SharedLayout>
   );

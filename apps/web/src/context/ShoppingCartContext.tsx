@@ -1,8 +1,23 @@
+import { guidGenerator } from '@/commonUtil/util';
 import { DeleteCartItem } from '@/data/mock';
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 
+
+interface actionTypes {
+    getTestCart2: (arg?: {}) => Promise<void>,
+    onDeleteCartItem: (cartItemId: number) => Promise<void>,
+    updateCartItemQuantity: (cartItemId: string, newQuantity: number) => void
+}
+
+interface stateTypes {
+    cartItems: CartItem[] | undefined
+    shoppingCartId: string | undefined
+}
+
+
 export interface ShoppingCartContextType {
-    actions: { getTestCart2: () => Promise<void>; }; state: { cartItems: ShoppingCartModel2[]; };
+    actions: actionTypes;
+    state: stateTypes;
 }
 
 const ShoppingCartContext = createContext<ShoppingCartContextType | undefined>(undefined);
@@ -15,8 +30,18 @@ interface Props {
 const ShoppingCartProvider = ({ children }: Props) => {
     const [cartAmount, setCartAmount] = useState<number>(0);
     const [cartItems, setCartItems] = useState<
-        ShoppingCartModel2[]
-    >([])
+        CartItem[] | undefined
+    >(undefined);
+
+    const [shoppingCartId, setShoppingCartId] = useState('');
+
+    useEffect(() => {
+        setShoppingCartId(guidGenerator());
+
+        return () => {
+
+        }
+    }, [])
 
 
     const getTestCart1 = async () => {
@@ -33,7 +58,7 @@ const ShoppingCartProvider = ({ children }: Props) => {
             },
         })
             .then((response) => response.json()) // Parse the response as JSON
-            .then((data: ShoppingCartModel2[]) => {
+            .then((data: CartItem[]) => {
                 console.log("getTestCart from index", data);
 
                 console.log(`shopping cart length ${data.length}`)
@@ -59,10 +84,10 @@ const ShoppingCartProvider = ({ children }: Props) => {
             },
         })
             .then((response) => response.json()) // Parse the response as JSON
-            .then((data: ShoppingCartModel2[]) => {
-                console.log("getTestCart from index", data);
+            .then((data: CartItem[]) => {
+                console.log("getTestCart from context", data);
 
-                console.log(`shopping cart length ${data.length}`)
+                console.log(`context shopping cart length ${data.length}`)
                 setCartAmount(data.length);
 
                 setCartItems(data);
@@ -77,6 +102,47 @@ const ShoppingCartProvider = ({ children }: Props) => {
 
     // }, []);
 
+    const updateCartItemQuantity = (cartItemId: string, newQuantity: number) => {
+        // Replace the URL with your actual API endpoint
+        // const apiUrl = `http://localhost:4000/testShoppingCart2/${cartItemId}`;
+        const apiUrl = `http://localhost:4000/testShoppingCart2/${cartItemId}`;
+
+
+
+        // Make a fetch request to update the quantity
+        let foundCartItem = cartItems?.find(x => x.id == cartItemId);
+        if (foundCartItem !== undefined) {
+            const cartItemToUpdate: CartItem = { ...foundCartItem, qty: newQuantity };
+
+            fetch(apiUrl, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(cartItemToUpdate),
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error('Failed to update quantity');
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log('Quantity updated successfully:', data);
+                    // Handle success, if needed
+                })
+                .catch((error) => {
+                    console.error('Error updating quantity:', error);
+                    // Handle error, if needed
+                });
+        }
+        else {
+            console.error('Error updating quantity: no cart item with that id found');
+        }
+
+
+    };
+
     const onDeleteCartItem = useCallback(async (cartItemId: number) => {
         try {
             // await DeleteCartItem(cartItemId);
@@ -89,10 +155,12 @@ const ShoppingCartProvider = ({ children }: Props) => {
     let value = {
         actions: {
             getTestCart2,
-            onDeleteCartItem
+            onDeleteCartItem,
+            updateCartItemQuantity
         },
         state: {
-            cartItems
+            cartItems,
+            shoppingCartId: shoppingCartId
         }
     }
 
