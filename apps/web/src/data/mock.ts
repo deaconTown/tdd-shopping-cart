@@ -28,7 +28,7 @@ const postToCustomer = (customer: Customer) => {
   let customerJsonData = JSON.stringify(customer);
 
   // Use the fetch method with the POST method and the JSON data
-  fetch("http://localhost:4000/customer", {
+  fetch("{process.env.NEXT_PUBLIC_CARTBASEURL}/customer", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -48,7 +48,7 @@ export const postToProduct = (product: Product) => {
   let productJsonData = JSON.stringify(product);
 
   // Use the fetch method with the POST method and the JSON data
-  fetch("http://localhost:4000/product", {
+  fetch("{process.env.NEXT_PUBLIC_CARTBASEURL}/product", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -69,7 +69,7 @@ const postToCartItem = (cartItem: CartItem) => {
   let jsonData = JSON.stringify(cartItem);
 
   // Use the fetch method with the POST method and the JSON data
-  fetch("http://localhost:4000/cartItem", {
+  fetch("{process.env.NEXT_PUBLIC_CARTBASEURL}/cartItem", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -89,7 +89,7 @@ export const postToShoppingCart = (shoppingCart: ShoppingCart) => {
   let jsonData = JSON.stringify(shoppingCart);
 
   // Use the fetch method with the POST method and the JSON data
-  fetch("http://localhost:4000/shoppingCart", {
+  fetch("{process.env.NEXT_PUBLIC_CARTBASEURL}/shoppingCart", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -122,7 +122,7 @@ export const postToTestShoppingCart = () => {
   let jsonData = JSON.stringify(testCart);
 
   // Use the fetch method with the POST method and the JSON data
-  fetch("http://localhost:4000/testShoppingCart", {
+  fetch("{process.env.NEXT_PUBLIC_CARTBASEURL}/testShoppingCart", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -158,7 +158,7 @@ export const postToTestShoppingCart2 = (product: ShoppingCartModel2) => {
     let jsonData = JSON.stringify(shoppingCart);
 
     // Use the fetch method with the POST method and the JSON data
-    fetch("http://localhost:4000/testShoppingCart2", {
+    fetch("{process.env.NEXT_PUBLIC_CARTBASEURL}/testShoppingCart2", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -409,7 +409,7 @@ export const getTestProductsByCategory = async (category: string): Promise<Produ
 
 export const DeleteCartItem = async (id: string) => {
   console.log('entered the DeleteCartItem method')
-  let data = await fetch(` http://localhost:4000/testShoppingCart2/${id}`, {
+  let data = await fetch(`{process.env.NEXT_PUBLIC_CARTBASEURL}/testShoppingCart2/${id}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
