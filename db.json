@@ -130,80 +130,20 @@
       "qty": 1
     },
     {
-      "id": "bace9c1c-038a-a32f-97d9-5c800e12d761",
-      "shoppingCartId": "686db29a-d8d9-9c0c-5ef2-33b8063fb84c",
+      "id": "2f197c3a-9410-51fa-3d9f-7dc75195a52d",
+      "shoppingCartId": "804ee324-fd1c-1142-66a8-3435d35207ce",
       "product": {
-        "id": 83,
-        "title": "Wafflera luz solar",
-        "price": 115,
-        "description": "Wafflera solar",
-        "category": {
-          "id": 2,
-          "name": "Electronics",
-          "image": "https://i.imgur.com/ZANVnHE.jpeg"
-        },
-        "images": [
-          "https://www.comercialbenavides.net/data/images/prods/prod_0377a45baab979a23e881fd044c938d6.jpg"
-        ]
-      },
-      "qty": 2
-    },
-    {
-      "id": "a4e9e19d-491c-da5c-658f-abb87b47535c",
-      "shoppingCartId": "686db29a-d8d9-9c0c-5ef2-33b8063fb84c",
-      "product": {
-        "id": 118,
-        "title": "Cartera",
-        "price": 25,
-        "description": "Siempre a la moda",
-        "category": {
-          "id": 5,
-          "name": "Miscellaneous",
-          "image": "https://i.imgur.com/BG8J0Fj.jpg"
-        },
-        "images": [
-          "https://img.ws.mms.shopee.com.co/bd59977c7abe900c26e18e795129e69f"
-        ]
-      },
-      "qty": 1
-    },
-    {
-      "id": "cf557e95-6dcd-3c4c-ad69-fad3a2e2fb5a",
-      "shoppingCartId": "316a48f0-397d-4320-c33c-517bd375321b",
-      "product": {
-        "id": "1",
-        "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-        "price": 109.95,
-        "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
+        "id": "3",
+        "title": "Mens Cotton Jacket",
+        "price": 55.99,
+        "description": "great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.",
         "category": {
           "id": 0,
           "name": "men's clothing",
           "image": ""
         },
         "images": [
-          "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
-        ],
-        "amountAvailable": 10,
-        "isInStock": true,
-        "isActive": true
-      },
-      "qty": 1
-    },
-    {
-      "id": "e4130f35-b649-fe70-4a30-94a9da1ea19c",
-      "shoppingCartId": "316a48f0-397d-4320-c33c-517bd375321b",
-      "product": {
-        "id": "4",
-        "title": "Mens Casual Slim Fit",
-        "price": 15.99,
-        "description": "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
-        "category": {
-          "id": 0,
-          "name": "men's clothing",
-          "image": ""
-        },
-        "images": [
-          "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg"
+          "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg"
         ],
         "amountAvailable": 10,
         "isInStock": true,

@@ -8,7 +8,8 @@ const stripe = require('stripe')('sk_test_51Nzfu3Ik0Fd7YGJ9QAwrjQC6yefPOOkLEySAR
 // const app = express();
 // app.use(express.static('public'));
 
-const YOUR_DOMAIN = 'http://localhost:3000';
+// const YOUR_DOMAIN = 'http://localhost:3000';
+const YOUR_DOMAIN = `${process.env.NEXT_PUBLIC_DOMAINBASEURL}`;
 // const router = useRouter();
 
 
