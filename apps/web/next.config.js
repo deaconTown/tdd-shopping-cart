@@ -2,7 +2,6 @@
 const nextConfig = {
   reactStrictMode: true,
   output: "standalone",
-  distDir: "build"
 //   async headers() {
 //     return [
 //         {
