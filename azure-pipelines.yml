@@ -6,6 +6,17 @@
 trigger:
 - develop
 
+resources:
+- repo: self
+
+variables:
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: 'd4bd1e91-d4f9-4db0-86b2-2ae3ccafa7a4'
+  imageRepository: 'tddcartdevcon'
+  containerRegistry: 'devdockerreg01.azurecr.io'
+  dockerfilePath: '**/Dockerfile'
+  tag: '$(Build.BuildId)'
+
 pool:
   vmImage: ubuntu-latest
 
@@ -47,3 +58,13 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+
+- task: Docker@2
+  displayName: Build and push an image to container registry
+  inputs:
+    command: buildAndPush
+    repository: $(imageRepository)
+    dockerfile: $(dockerfilePath)
+    containerRegistry: $(dockerRegistryServiceConnection)
+    tags: |
+      $(tag)
