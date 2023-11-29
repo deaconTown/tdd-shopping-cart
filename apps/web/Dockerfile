@@ -1,38 +1,20 @@
 # Use the official Node.js image as the base image
-FROM node:16-alpine AS base
+FROM node:16-alpine
 
 # 1. Install dependencies only when needed
-FROM base AS deps
-
 WORKDIR /app
-
-# Install dependencies based on the preferred package manager
-# COPY package.json yarn.lock* package-lock.json* ./
-COPY package.json ./
-RUN npm install
-
-# 2. Rebuild the source code only when needed
-FROM base AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules 
-COPY --from=deps /app/package.json ./
-COPY . .
-RUN yarn build
-
-# 3. Production image, copy all the files and run next
-FROM base AS runner
-WORKDIR /app
-
-ENV NODE_ENV=production
-
-COPY --from=builder /app/public ./public
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-
-USER nextjs
-
 EXPOSE 3000
 
 ENV PORT 3000
+ENV NODE_ENV=production
+# Install dependencies based using the package manager
+COPY package.json ./
+RUN npm install express
+RUN npm install
 
-CMD ["node", "server.js"]
+# 2. Copy over all the other files
+COPY . .
+
+RUN npm run build
+
+CMD ["npm", "start"]
