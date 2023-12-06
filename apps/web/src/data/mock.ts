@@ -356,8 +356,8 @@ export const getTestProductsByCategory = async (category: string): Promise<Produ
   let cart: Product[] = [];
 
   // let data = await fetch(`https://fakestoreapi.com/products/category/${category.toLowerCase()}`, {
-    console.log(`https://fakestoreapi.com/products/category/${category.toLowerCase()}`)
-    console.log(`https://fakestoreapi.com/products/category/${category}`)
+  console.log(`https://fakestoreapi.com/products/category/${category.toLowerCase()}`)
+  console.log(`https://fakestoreapi.com/products/category/${category}`)
   let data = await fetch(`https://fakestoreapi.com/products/category/jewelery`, {
     method: "GET",
     headers: {
@@ -423,3 +423,37 @@ export const DeleteCartItem = async (id: string) => {
   console.log('exiting the DeleteCartItem method')
 
 }
+
+export const getTestCategories = async (): Promise<string[]> => {
+  console.log("entered getTestCategories");
+  // Convert the data to a JSON string
+  // Use the fetch method with the POST method and the JSON data
+
+  let categories: string[] = [];
+
+  let data = await fetch(`https://fakestoreapi.com/products/categories`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json()) // Parse the response as JSON
+    .then((data) => {
+      // console.log("getTestCart", data);
+
+      data.forEach(
+        (element: string) => {
+          console.log("element", element);
+
+          categories.push(element);
+        }
+      );
+    }) // Do something with the data
+    .catch((error) => console.error(error)); // Handle any errors
+
+  console.log(" getTestCategories data cart", categories);
+
+  console.log("exiting getTestCategories");
+
+  return categories;
+};
