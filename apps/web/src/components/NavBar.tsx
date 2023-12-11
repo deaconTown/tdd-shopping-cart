@@ -67,7 +67,7 @@ function NavBar() {
                                 </Link>
 
                                 <Link href="">
-                                    <li className='ml-10 uppercase hover:border-b text-xl'>What's New</li>
+                                    <li className='ml-10 uppercase hover:border-b text-xl'>{`${"What's New"}`}</li>
                                 </Link>
 
                                 <Link href="">

@@ -174,7 +174,8 @@ const ShoppingCartPage: React.FC = () => {
 
     // }
     actions.getTestCart2();
-  }, [actions.getTestCart2, state.cartItems?.length])
+  // }, [actions.getTestCart2, state.cartItems?.length])
+  }, [ state.cartItems?.length])
 
 
   useEffect(() => {
@@ -481,7 +482,7 @@ const ShoppingCartPage: React.FC = () => {
 
               return (
                 // <div className="border-solid border-2 border-gray-500 rounded-[25px]">
-                <div className="border-solid border-2 border-gray-200 rounded-[25px]">
+                <div key={key} className="border-solid border-2 border-gray-200 rounded-[25px]">
                   <div key={key} className="text-center">
                     <div className="overflow-hidden flex flex-col h-full">
                       <div className="flex-1 flex flex-col">

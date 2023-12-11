@@ -122,19 +122,21 @@ const ProductPage: React.FC = () => {
 
   return (
     <SharedLayout>
+      <div className="mt-10">
 
+      </div>
       <ProductBanner productItems={shoppingCart2Items} />
 
-      <div  className="m-10 md:m-6">
+      <div className="m-10 md:m-6">
         <h1 className="text-4xl text-left py-5 font-extrabold ml-6">
           Shop Our Top Categories
         </h1>
         <div className="rounded-lg max-w-[1320] mx-auto grid lg:grid-cols-4 md:grid-cols-2 gap-6 px-[20px]">
           {productCategories?.map((prod, index) => {
 
-            return <div className="flex-1 flex flex-col mb-6 ml-8">
+            return <div key={index} className="flex-1 flex flex-col mb-6 ml-8">
               <div className="flex justify-center">
-              <img key={prod} className="w-full h-96" src={getCategoryImage(prod)} alt={prod} />
+                <img key={prod} className="w-full h-96" src={getCategoryImage(prod)} alt={prod} />
               </div>
             </div>
           })}
@@ -155,8 +157,8 @@ const ProductPage: React.FC = () => {
 
               return (
                 // <div className="border-solid border-2 border-gray-500 rounded-[25px]">
-                <div className="border-solid border-2 border-gray-200 rounded-[25px]">
-                  <div key={key} className="text-center">
+                <div key={key} className="border-solid border-2 border-gray-200 rounded-[25px]">
+                  <div className="text-center">
                     <div className="overflow-hidden flex flex-col h-full">
                       <div className="flex-1 flex flex-col">
                         <div className="flex justify-center">
