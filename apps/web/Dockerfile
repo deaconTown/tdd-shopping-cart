@@ -9,8 +9,8 @@ ENV PORT 3000
 ENV NODE_ENV=production
 # Install dependencies based using the package manager
 COPY package.json ./
-RUN npm install
 # RUN npm install
+RUN npm install
 
 
 # 3. Build the application
@@ -31,15 +31,17 @@ EXPOSE 3000
 ENV PORT 3000
 ENV NODE_ENV=production
 
-COPY --from=build /app/package.json ./
-COPY --from=build /app/next.config.js ./
-COPY --from=build /app/public  ./public
-COPY --from=build /app/.next  ./.next
-COPY --from=build /app/node_modules ./node_modules
-# COPY  --from=build /app/.next/standalone  ./next/standalone/public
-# COPY  --from=build /app/.next/static  ./next/standalone/static
-# COPY  --from=build /app/.next/static  ./.next/static
+# COPY --from=build /app/package.json ./
+# COPY --from=build /app/next.config.js ./
+# COPY --from=build /app/.next  ./.next
+# COPY --from=build /app/public  ./next/standalone/public
+# COPY --from=build /app/node_modules ./node_modules
+COPY  --from=build /app/public  ./.next/standalone/public
+COPY  --from=build /app/.next/static  ./.next/standalone/static
+COPY  --from=build /app/.next/standalone  ./.next/standalone
 
-
+# .\.next\standalone\apps\web\
+# WORKDIR /.next/standalone/apps/web
 # 4. Start the application 
-CMD ["npm", "run", "start"]
+CMD ["node", "./.next/standalone/server.js"]
+# CMD ["npm", "start"]
