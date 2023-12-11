@@ -239,6 +239,72 @@
         "isActive": true
       },
       "qty": 1
+    },
+    {
+      "id": "27d15022-fe9a-6bb5-c8cc-a5a7c1141f9c",
+      "shoppingCartId": "ac1ca8e7-ca22-03f1-541e-34a5e2721bec",
+      "product": {
+        "id": "4",
+        "title": "Mens Casual Slim Fit",
+        "price": 15.99,
+        "description": "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
+        "category": {
+          "id": 0,
+          "name": "men's clothing",
+          "image": ""
+        },
+        "images": [
+          "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg"
+        ],
+        "amountAvailable": 10,
+        "isInStock": true,
+        "isActive": true
+      },
+      "qty": 1
+    },
+    {
+      "id": "2c108435-1697-144f-99b9-3eff9ea76a87",
+      "shoppingCartId": "ba1a890d-e064-ef30-841c-48e7c5f5ef36",
+      "product": {
+        "id": "6",
+        "title": "Solid Gold Petite Micropave ",
+        "price": 168,
+        "description": "Satisfaction Guaranteed. Return or exchange any order within 30 days.Designed and sold by Hafeez Center in the United States. Satisfaction Guaranteed. Return or exchange any order within 30 days.",
+        "category": {
+          "id": 0,
+          "name": "jewelery",
+          "image": ""
+        },
+        "images": [
+          "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg"
+        ],
+        "amountAvailable": 10,
+        "isInStock": true,
+        "isActive": true
+      },
+      "qty": 1
+    },
+    {
+      "id": "28a16aea-e8da-598a-6f54-3305839c2d74",
+      "shoppingCartId": "ba1a890d-e064-ef30-841c-48e7c5f5ef36",
+      "product": {
+        "id": "5",
+        "title": "John Hardy Women's Legends Naga Gold & Silver Dragon Station Chain Bracelet",
+        "price": 695,
+        "description": "From our Legends Collection, the Naga was inspired by the mythical water dragon that protects the ocean's pearl. Wear facing inward to be bestowed with love and abundance, or outward for protection.",
+        "category": {
+          "id": 0,
+          "name": "jewelery",
+          "image": ""
+        },
+        "images": [
+          "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg"
+        ],
+        "amountAvailable": 10,
+        "isInStock": true,
+        "isActive": true
+      },
+      "qty": 1
     }
   ]
 }
