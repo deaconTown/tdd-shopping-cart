@@ -9,10 +9,10 @@ import { ShoppingCartContext, ShoppingDispatchCartContext, useShoppingCartContex
 function NavBar() {
     const [navBar, setNavBar] = useState(false);
     const [openNav, setOpenNav] = useState(false);
-;
+    ;
 
     // const {cartAmount, cartItems} = useContext(ShoppingCartContext);
-    const {state} = useShoppingCartContext();
+    const { state } = useShoppingCartContext();
 
     const handleNav = () => {
         setOpenNav(!openNav);
@@ -23,58 +23,90 @@ function NavBar() {
         setOpenNav(false);
     }
 
-    
-  useEffect(() => {
-  
-    return () => {
-      
-    }
-  }, [])
-  
+
+    useEffect(() => {
+
+        return () => {
+
+        }
+    }, [])
+
 
 
 
     return (
-        <nav id='navBar' className='fixed h-24 w-full shadow-xl bg-white'>
-            <div
-                id='left-side'
-                className='flex justify-between items-center h-full w-full  px-4 2xl:px16 '>
-                <Link href='/'>
-                    <Image
-                        src={Logo}
-                        alt='Logo'
-                        width={75}
-                        height={75}
-                        className=' border-orange-300 border border-opacity-50 rounded-3xl cursor-pointer'
-                        priority
-                    />
-                </Link>
-                <div id='right-side' className='hidden sm:flex'>
-                    <ul id='menu-list' className='hidden sm:flex'>
-                        <Link href="/">
-                            <li className='ml-10 uppercase hover:border-b text-xl'>Home</li>
-                        </Link>
 
-                        <Link href="">
-                            <li className='ml-10 uppercase hover:border-b text-xl'>Contact Us</li>
-                        </Link>
+        <nav id='navBar' className='fixed w-full shadow-xl bg-white text-black'>
+            <div className='bg-[#003d29] py-3 flex flex-row text-white justify-between px-8'>
+                <div>+18761234567</div>
+                <div>Ge 50% Off on Selected Items | <button onClick={() => { }}>Shop Now</button> </div>
+                <div>Eng  Location</div>
 
-                        <Link href="">
-                            <li className='ml-10 uppercase hover:border-b text-xl'>About</li>
-                        </Link>
-
-                        <Link href="/shoppingCartPage">
-                            {/* <li className='ml-10 uppercase hover:border-b text-xl'>Cart</li> */}
-                            <span className="text-blue-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2">
-                                <ShoppingCartIcon className='h-6 w-6 uppercase hover:border-b text-xl' />  {state.cartItems?.length}
-                            </span>
-                        </Link>
-                    </ul>
-                </div>
-                <div id='hamburger' onClick={handleNav} className='sm:hidden cursor-pointer pl-24'>
-                    <Bars3Icon className='h-6 w-6' />
-                </div>
             </div>
+            {/* desktop nav */}
+            <div className='flex flex-row justify-between px-10'>
+                {/* others */}
+                <div>
+                    <div
+                        id='left-side'
+                        className='flex justify-between items-center h-full px-4 2xl:px16 py-2'>
+                        <Link href='/'>
+                            <Image
+                                src={Logo}
+                                alt='Logo'
+                                width={75}
+                                height={75}
+                                className=' border-orange-300 border border-opacity-50 rounded-3xl cursor-pointer'
+                                priority
+                            />
+                        </Link>
+                        <div id='right-side' className='hidden sm:flex'>
+                            <ul id='menu-list' className='hidden sm:flex'>
+                                <Link href="/">
+                                    <li className='ml-10 uppercase hover:border-b text-xl'>Deals</li>
+                                </Link>
+
+                                <Link href="">
+                                    <li className='ml-10 uppercase hover:border-b text-xl'>{`${"What's New"}`}</li>
+                                </Link>
+
+                                <Link href="">
+                                    <li className='ml-10 uppercase hover:border-b text-xl'>Delivery</li>
+                                </Link>
+                            </ul>
+                        </div>
+                        <div id='hamburger' onClick={handleNav} className='sm:hidden cursor-pointer pl-24'>
+                            <Bars3Icon className='h-6 w-6' />
+                        </div>
+                    </div>
+
+                </div>
+                {/* account | cart */}
+                <div
+                    id='left-side'
+                    className='flex justify-between items-center px-4 2xl:px16 py-2'>
+                    <div id='right-side' className='hidden sm:flex '>
+                        <ul id='menu-list' className='hidden sm:flex'>
+
+                            <Link href="" className='px-8'>
+                                <li className='ml-10 uppercase hover:border-b text-xl'>Account</li>
+                            </Link>
+
+                            <Link href="/shoppingCartPage">
+                                {/* <li className='ml-10 uppercase hover:border-b text-xl'>Cart</li> */}
+                                <span className="text-white-800 text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded mr-2">
+                                    <ShoppingCartIcon className='h-6 w-6 uppercase hover:border-b text-xl' />  {state.cartItems?.length}
+                                </span>
+                            </Link>
+                        </ul>
+                    </div>
+                    {/* <div id='hamburger' onClick={handleNav} className='sm:hidden cursor-pointer pl-24'>
+                        <Bars3Icon className='h-6 w-6' />
+                    </div> */}
+                </div>
+
+            </div>
+            {/* mobile nav */}
             <div id='mobile-menu'
                 className=
                 {
@@ -100,7 +132,7 @@ function NavBar() {
                         />
                     </Link>
                 </div>
-                <div className='flex-col py-4' onBlur={()=> setOpenNav(false)}>
+                <div className='flex-col py-4' onBlur={() => setOpenNav(false)}>
                     <ul id='menu-list-mobile' className='justify-between'>
 
                         <li className='ml-10 uppercase hover:border-b text-xl cursor-pointer py-4'>
@@ -142,6 +174,7 @@ function NavBar() {
                 </div>
             </div>
         </nav>
+
     )
 }
 
