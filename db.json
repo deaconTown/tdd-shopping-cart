@@ -109,128 +109,52 @@
   ],
   "testShoppingCart2": [
     {
-      "id": "b5a7c2e1-3606-d708-dbe8-90e85aa1321f",
-      "shoppingCartId": "686db29a-d8d9-9c0c-5ef2-33b8063fb84c",
+      "id": "4c705378-8087-1d26-acff-d22f0d09d346",
+      "shoppingCartId": "517d49bb-6d22-be76-5c8a-8f48502730b2",
       "product": {
-        "id": 43,
-        "title": "Fantastic Wooden Table",
-        "price": 163,
-        "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+        "id": "1",
+        "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+        "price": 109.95,
+        "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
         "category": {
-          "id": 4,
-          "name": "Shoes",
-          "image": "https://i.imgur.com/qNOjJje.jpeg"
+          "id": 0,
+          "name": "men's clothing",
+          "image": ""
         },
         "images": [
-          "https://i.imgur.com/Au8J9sX.jpeg",
-          "https://i.imgur.com/gdr8BW2.jpeg",
-          "https://i.imgur.com/KDCZxnJ.jpeg"
-        ]
+          "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg"
+        ],
+        "amountAvailable": 10,
+        "isInStock": true,
+        "isActive": true
       },
-      "qty": 9
+      "qty": 6
     },
     {
-      "id": "3e51910e-f097-500f-e0de-a88cdebf19cc",
-      "shoppingCartId": "686db29a-d8d9-9c0c-5ef2-33b8063fb84c",
+      "id": "d4cc17b8-1860-d893-212a-e557ab28a2cd",
+      "shoppingCartId": "306544b6-44e3-2f2a-620b-c503301c2617",
       "product": {
-        "id": 45,
-        "title": "electric Cycle",
-        "price": 8520,
-        "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+        "id": "3",
+        "title": "Mens Cotton Jacket",
+        "price": 55.99,
+        "description": "great outerwear jackets for Spring/Autumn/Winter, suitable for many occasions, such as working, hiking, camping, mountain/rock climbing, cycling, traveling or other outdoors. Good gift choice for you or your family member. A warm hearted love to Father, husband or son in this thanksgiving or Christmas Day.",
         "category": {
-          "id": 5,
-          "name": "Miscellaneous",
-          "image": "https://i.imgur.com/BG8J0Fj.jpg"
+          "id": 0,
+          "name": "men's clothing",
+          "image": ""
         },
         "images": [
-          "https://i.imgur.com/BG8J0Fj.jpg",
-          "https://i.imgur.com/ujHBpCX.jpg",
-          "https://i.imgur.com/WHeVL9H.jpg"
-        ]
-      },
-      "qty": 3
-    },
-    {
-      "id": "8061b73c-4ab1-3757-5991-86048d1222b3",
-      "shoppingCartId": "686db29a-d8d9-9c0c-5ef2-33b8063fb84c",
-      "product": {
-        "id": 47,
-        "title": "Fantastic Frozen Towels",
-        "price": 761,
-        "description": "The Football Is Good For Training And Recreational Purposes",
-        "category": {
-          "id": 5,
-          "name": "Miscellaneous",
-          "image": "https://i.imgur.com/BG8J0Fj.jpg"
-        },
-        "images": [
-          "https://i.imgur.com/xPDwUb3.jpg",
-          "https://i.imgur.com/3rfp691.jpg",
-          "https://i.imgur.com/kG05a29.jpg"
-        ]
+          "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg"
+        ],
+        "amountAvailable": 10,
+        "isInStock": true,
+        "isActive": true
       },
       "qty": 2
     },
     {
-      "id": "bace9c1c-038a-a32f-97d9-5c800e12d761",
-      "shoppingCartId": "686db29a-d8d9-9c0c-5ef2-33b8063fb84c",
-      "product": {
-        "id": 83,
-        "title": "Wafflera luz solar",
-        "price": 115,
-        "description": "Wafflera solar",
-        "category": {
-          "id": 2,
-          "name": "Electronics",
-          "image": "https://i.imgur.com/ZANVnHE.jpeg"
-        },
-        "images": [
-          "https://www.comercialbenavides.net/data/images/prods/prod_0377a45baab979a23e881fd044c938d6.jpg"
-        ]
-      },
-      "qty": 2
-    },
-    {
-      "id": "8b36f6d4-12b1-a07f-a1c6-d4762cc2d93c",
-      "shoppingCartId": "686db29a-d8d9-9c0c-5ef2-33b8063fb84c",
-      "product": {
-        "id": 96,
-        "title": "Gaming JoyStick",
-        "price": 45632,
-        "description": "test dataaaa",
-        "category": {
-          "id": 2,
-          "name": "Electronics",
-          "image": "https://i.imgur.com/ZANVnHE.jpeg"
-        },
-        "images": [
-          "https://img.freepik.com/premium-photo/picture-planet-with-trees-it_579873-1170.jpg?w=740"
-        ]
-      },
-      "qty": 1
-    },
-    {
-      "id": "a4e9e19d-491c-da5c-658f-abb87b47535c",
-      "shoppingCartId": "686db29a-d8d9-9c0c-5ef2-33b8063fb84c",
-      "product": {
-        "id": 118,
-        "title": "Cartera",
-        "price": 25,
-        "description": "Siempre a la moda",
-        "category": {
-          "id": 5,
-          "name": "Miscellaneous",
-          "image": "https://i.imgur.com/BG8J0Fj.jpg"
-        },
-        "images": [
-          "https://img.ws.mms.shopee.com.co/bd59977c7abe900c26e18e795129e69f"
-        ]
-      },
-      "qty": 10
-    },
-    {
-      "id": "ebbbf315-aaa9-50bb-d6d5-0fa3748d70be",
-      "shoppingCartId": "4d33bb3c-9956-288a-0c1e-98b9d6a21664",
+      "id": "57ce356a-5235-6edb-c9fc-99465d1a1c33",
+      "shoppingCartId": "306544b6-44e3-2f2a-620b-c503301c2617",
       "product": {
         "id": "2",
         "title": "Mens Casual Premium Slim Fit T-Shirts ",
@@ -248,7 +172,29 @@
         "isInStock": true,
         "isActive": true
       },
-      "qty": 1
+      "qty": 2
+    },
+    {
+      "id": "0ed532a4-6f29-1e8e-f92e-bbb35ef3efd6",
+      "shoppingCartId": "cbeffa47-07cf-56b6-fa4f-506b74c7f678",
+      "product": {
+        "id": "4",
+        "title": "Mens Casual Slim Fit",
+        "price": 15.99,
+        "description": "The color could be slightly different between on the screen and in practice. / Please note that body builds vary by person, therefore, detailed size information should be reviewed below on the product description.",
+        "category": {
+          "id": 0,
+          "name": "men's clothing",
+          "image": ""
+        },
+        "images": [
+          "https://fakestoreapi.com/img/71YXzeOuslL._AC_UY879_.jpg"
+        ],
+        "amountAvailable": 10,
+        "isInStock": true,
+        "isActive": true
+      },
+      "qty": 4
     }
   ]
 }

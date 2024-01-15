@@ -353,7 +353,7 @@ const ShoppingCartPage: React.FC = () => {
           console.log('jsonData from products page', jsonData)
 
           // Use the fetch method with the POST method and the JSON data
-          fetch("http://localhost:4000/testShoppingCart2", {
+          fetch(`${process.env.NEXT_PUBLIC_CARTBASEURL}/testShoppingCart2`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
