@@ -1,7 +1,8 @@
+import { authLoginDTO } from "src/DTO/authLoginDTO";
 import { Customer } from "src/Entities/Customer";
 
 interface IAuthenticationService {
-    ValidateLogin(username:string, password: string);
+    ValidateLogin(login: authLoginDTO);
 }
 
 export default IAuthenticationService;

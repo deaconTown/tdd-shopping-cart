@@ -11,11 +11,6 @@ describe('Users', () => {
         user = new User();
         userService = new UserService();
 
-        // const module: TestingModule = await Test.createTestingModule({
-        //     providers: [ShoppingCartService]
-        // }).compile();
-
-        // module.get<IShoppingCartService, ShoppingCartService>
     });
 
     it('should get all users', () => {
@@ -24,12 +19,14 @@ describe('Users', () => {
                 id: 1,
                 username: 'Jane',
                 isActive: false,
+                email: 'Jane@email.com',
                 passwordHash: ''
             },
             {
                 id: 2,
                 username: 'Henry',
                 isActive: false,
+                email: 'Henry@email.com',
                 passwordHash: ''
             }
         ]
@@ -47,14 +44,11 @@ describe('Users', () => {
     it('should add a new user', () => {
         //arrange
 
-        // let customerCart : ShoppingCart = {
-
-        // }
-
         let newUsers: User =
         {
             id: 1,
             username: 'Jane',
+            email: 'Jane@email.com',
             isActive: false,
             passwordHash: ''
         };
@@ -71,14 +65,11 @@ describe('Users', () => {
     it('should get user by id', () => {
         //arrange
 
-        // let customerCart : ShoppingCart = {
-
-        // }
-
         let newUsers: User =
         {
             id: 1,
             username: 'Jane',
+            email: 'Jane@email.com',
             isActive: false,
             passwordHash: ''
         };
@@ -98,6 +89,7 @@ describe('Users', () => {
         {
             id: 1,
             username: 'Jane',
+            email: 'Jane@email.com',
             isActive: false,
             passwordHash: ''
         };
@@ -118,6 +110,7 @@ describe('Users', () => {
         {
             id: 1,
             username: 'Jane',
+            email: 'Jane@email.com',
             isActive: false,
             passwordHash: ''
         };

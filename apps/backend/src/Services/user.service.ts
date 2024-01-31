@@ -3,13 +3,13 @@ import IUserService from "src/Interfaces/IUserService.interface";
 
 class UserService implements IUserService {
     private users: User[] = [];
-    
-    GetUsers() : User[] {
+
+    GetUsers(): User[] {
         return this.users;
     }
 
     GetUserById(userId: number): User {
-        
+
         return this.users.find(x => x.id == userId);
     }
 
@@ -42,7 +42,14 @@ class UserService implements IUserService {
         //update the user based on the index found
         this.users[foundIndex] = user;
     }
-    
+
+    GetUserByUsername(username: string): User {
+        throw new Error("Method not implemented.");
+    }
+    GetUserByEmail(email: string): User {
+        return this.users.find(x => x.email.toLowerCase() == email.toLowerCase());
+    }
+
 }
 
 export default UserService;
