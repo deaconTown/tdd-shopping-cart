@@ -35,7 +35,7 @@ describe('Authentication', () => {
             username: 'Jane',
             email: 'Jane@email.com',
             isActive: true,
-            passwordHash: 'testPasswordHash'
+            password: 'testPasswordHash'
         };
 
         jest.spyOn(userService, 'AddUser')
@@ -65,7 +65,7 @@ describe('Authentication', () => {
             username: 'Jane',
             email: 'Jane@email.com',
             isActive: false,
-            passwordHash: 'testPasswordHash'
+            password: 'testPasswordHash'
         };
 
         jest.spyOn(userService, 'AddUser')
@@ -95,7 +95,7 @@ describe('Authentication', () => {
             username: 'Jane',
             email: 'joker@email.com',
             isActive: true,
-            passwordHash: 'testPasswordHash'
+            password: 'testPasswordHash'
         };
 
         jest.spyOn(userService, 'AddUser')

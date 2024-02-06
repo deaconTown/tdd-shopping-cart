@@ -1,6 +1,8 @@
+import { Injectable } from "@nestjs/common";
 import { User } from "src/Entities/User";
 import IUserService from "src/Interfaces/IUserService.interface";
 
+@Injectable()
 class UserService implements IUserService {
     private users: User[] = [];
 
@@ -46,6 +48,7 @@ class UserService implements IUserService {
     GetUserByUsername(username: string): User {
         throw new Error("Method not implemented.");
     }
+    
     GetUserByEmail(email: string): User {
         return this.users.find(x => x.email.toLowerCase() == email.toLowerCase());
     }

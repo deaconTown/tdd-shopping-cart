@@ -20,14 +20,14 @@ describe('Users', () => {
                 username: 'Jane',
                 isActive: false,
                 email: 'Jane@email.com',
-                passwordHash: ''
+                password: ''
             },
             {
                 id: 2,
                 username: 'Henry',
                 isActive: false,
                 email: 'Henry@email.com',
-                passwordHash: ''
+                password: ''
             }
         ]
 
@@ -50,7 +50,7 @@ describe('Users', () => {
             username: 'Jane',
             email: 'Jane@email.com',
             isActive: false,
-            passwordHash: ''
+            password: ''
         };
 
         //act
@@ -71,7 +71,7 @@ describe('Users', () => {
             username: 'Jane',
             email: 'Jane@email.com',
             isActive: false,
-            passwordHash: ''
+            password: ''
         };
 
         //act
@@ -91,7 +91,7 @@ describe('Users', () => {
             username: 'Jane',
             email: 'Jane@email.com',
             isActive: false,
-            passwordHash: ''
+            password: ''
         };
 
         //act
@@ -112,7 +112,7 @@ describe('Users', () => {
             username: 'Jane',
             email: 'Jane@email.com',
             isActive: false,
-            passwordHash: ''
+            password: ''
         };
 
         //act
@@ -124,5 +124,14 @@ describe('Users', () => {
         //assert
         expect(result.isActive).toEqual(true);
     });
+
+    it('should get all addresses for a specific user', () => {
+        expect.assertions(1);
+    });
+
+    it('should get all payment methods for a specific user', () => {
+        expect.assertions(1);
+    });
+
 
 })

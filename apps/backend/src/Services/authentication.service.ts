@@ -1,5 +1,5 @@
 import { authLoginDTO } from "../DTO/authLoginDTO";
-import { User } from "../Entities/User";
+import { User } from "src/Entities/User";
 import IAuthenticationService from "../Interfaces/IAuthenticationService.interface";
 import IUserService from "../Interfaces/IUserService.interface";
 
@@ -23,8 +23,7 @@ class AuthenticationService implements IAuthenticationService {
             throw new Error('No user found')
         }
 
-        if(user.isActive === false)
-        {
+        if (user.isActive === false) {
             console.log(`user is inactive`);
             console.log(`exiting ValidateLogin method`);
             throw new Error('User inactive')
@@ -38,7 +37,7 @@ class AuthenticationService implements IAuthenticationService {
 
         // TODO: CREATE A METHOD TO HASH AND AND UNHASH WHEN NEEDED
 
-        if (user.passwordHash && user.passwordHash.trim().toLowerCase() !== login.password.trim().toLowerCase()) {
+        if (user.password && user.password.trim().toLowerCase() !== login.password.trim().toLowerCase()) {
             console.log(`exiting ValidateLogin method`);
             throw new Error(`user password did not match`)
         }
