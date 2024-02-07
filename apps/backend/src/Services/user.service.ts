@@ -1,10 +1,10 @@
 import { Injectable } from "@nestjs/common";
-import { User } from "src/Entities/User";
-import IUserService from "src/Interfaces/IUserService.interface";
+import { User } from "../Entities/User";
+import IUserService from "../Interfaces/IUserService.interface";
 
 @Injectable()
 class UserService implements IUserService {
-    private users: User[] = [];
+    private users: User[] = [{id: 1, username: "user1", email: "email@email.com", isActive: true, password:"password123"}];
 
     GetUsers(): User[] {
         return this.users;
@@ -50,7 +50,9 @@ class UserService implements IUserService {
     }
     
     GetUserByEmail(email: string): User {
+        console.log('entered the GetUserByEmail method')
         return this.users.find(x => x.email.toLowerCase() == email.toLowerCase());
+        console.log('exiting the GetUserByEmail method')
     }
 
 }

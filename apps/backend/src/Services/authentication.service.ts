@@ -1,12 +1,16 @@
-import { authLoginDTO } from "../DTO/authLoginDTO";
-import { User } from "src/Entities/User";
+import { authLoginDTO } from "../DTO/authLogin.dto";
+import { User } from "../Entities/User";
 import IAuthenticationService from "../Interfaces/IAuthenticationService.interface";
 import IUserService from "../Interfaces/IUserService.interface";
+import { Injectable } from "@nestjs/common";
+import UserService from "./user.service";
 
+@Injectable()
 class AuthenticationService implements IAuthenticationService {
 
-    constructor(private userService: IUserService) {
-
+    constructor(
+        public userService: UserService
+        ) {
     }
 
     ValidateLogin(login: authLoginDTO) {
@@ -17,11 +21,12 @@ class AuthenticationService implements IAuthenticationService {
 
         const user: User = this.userService.GetUserByEmail(login.email);
 
-        if (user === null) {
+        if (user === null || user === undefined) {
             console.log(`No user found`);
             console.log(`exiting ValidateLogin method`);
             throw new Error('No user found')
         }
+
 
         if (user.isActive === false) {
             console.log(`user is inactive`);

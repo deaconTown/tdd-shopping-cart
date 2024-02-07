@@ -1,4 +1,4 @@
-import { authLoginDTO } from "src/DTO/authLoginDTO";
+import { authLoginDTO } from "src/DTO/authLogin.dto";
 import { Customer } from "src/Entities/Customer";
 
 interface IAuthenticationService {

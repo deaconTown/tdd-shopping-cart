@@ -1,6 +1,6 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import IAuthenticationService from "../Interfaces/IAuthenticationService.interface";
-import { authLoginDTO } from "../DTO/authLoginDTO";
+import { authLoginDTO } from "../DTO/authLogin.dto";
 import AuthenticationService from "../Services/authentication.service";
 import { User } from "../Entities/User";
 import UserService from "../Services/user.service";
