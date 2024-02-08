@@ -12,22 +12,25 @@ export class AuthenticationController {
     // private authService: IUserService;
     constructor(
         private readonly authService: AuthenticationService
-        , private readonly userService: UserService
+        // , private readonly userService: UserService
     ) {
         // this.userService = new UserService();
-        authService = new AuthenticationService(this.userService);
+        // authService = new AuthenticationService();
     }
 
     @Post('login')
-    login(@Res() res: Response,@Body() authLogin: authLoginDTO) {
+    login(@Res() res: Response, @Body() authLogin: authLoginDTO) {
+        console.log('AuthenticationController || entered the login endpoint')
         try {
             this.authService.ValidateLogin(authLogin);
 
-            res.status(HttpStatus.OK).json({success: true});
+            console.log('AuthenticationController || exiting the login endpoint')
+            res.status(HttpStatus.OK).json({ success: true });
 
             // return  { success: true }
         } catch (error) {
 
+            console.log('AuthenticationController || exiting the login endpoint')
             throw new HttpException(error.message, HttpStatus.UNAUTHORIZED);
 
         }

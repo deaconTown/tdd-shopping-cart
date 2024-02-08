@@ -8,10 +8,7 @@ import UserService from "./user.service";
 @Injectable()
 class AuthenticationService implements IAuthenticationService {
 
-    constructor(
-        public userService: UserService
-        ) {
-    }
+    constructor(public userService: UserService) { }
 
     ValidateLogin(login: authLoginDTO) {
 
