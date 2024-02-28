@@ -58,7 +58,7 @@ describe('Users', () => {
 
         let newUsers: User =
         {
-            id: 1,
+            id: 45,
             username: 'Jane',
             email: 'Jane@email.com',
             isActive: false,
@@ -79,7 +79,7 @@ describe('Users', () => {
 
         let newUsers: User =
         {
-            id: 1,
+            id: 45,
             username: 'Jane',
             email: 'Jane@email.com',
             isActive: false,

@@ -2,50 +2,51 @@ import { authLoginDTO } from "../DTO/authLogin.dto";
 import { User } from "../Entities/User";
 import IAuthenticationService from "../Interfaces/IAuthenticationService.interface";
 import IUserService from "../Interfaces/IUserService.interface";
-import { Injectable } from "@nestjs/common";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 import UserService from "./user.service";
 
 @Injectable()
 class AuthenticationService implements IAuthenticationService {
 
-    constructor(public userService: UserService) { }
+    constructor(private userService: UserService) { }
 
     ValidateLogin(login: authLoginDTO) {
 
         console.log(`entered ValidateLogin method`);
 
-        let loginValid = false;
+        let loginValid = true;
 
-        const user: User = this.userService.GetUserByEmail(login.email);
+        const user: User = this.userService.GetUserByEmail(login.username);
 
         if (user === null || user === undefined) {
             console.log(`No user found`);
             console.log(`exiting ValidateLogin method`);
-            throw new Error('No user found')
+            throw new UnauthorizedException('account not found');
         }
 
 
         if (user.isActive === false) {
             console.log(`user is inactive`);
             console.log(`exiting ValidateLogin method`);
-            throw new Error('User inactive')
+            throw new UnauthorizedException('User inactive')
         }
 
-        if (user.email && user.email.trim().toLowerCase() !== login.email.trim().toLowerCase()) {
-            console.log(`no user found with email ${login.email}`);
+        if (user.email && user.email.trim().toLowerCase() !== login.username.trim().toLowerCase()) {
+            console.log(`no account found with email ${login.username}`);
             console.log(`exiting ValidateLogin method`);
-            throw new Error(`no user found with email ${login.email}`)
+            throw new UnauthorizedException(`no user found with email ${login.username}`)
         }
 
         // TODO: CREATE A METHOD TO HASH AND AND UNHASH WHEN NEEDED
 
         if (user.password && user.password.trim().toLowerCase() !== login.password.trim().toLowerCase()) {
             console.log(`exiting ValidateLogin method`);
-            throw new Error(`user password did not match`)
+            console.log(`username or password invalid`);
+            throw new UnauthorizedException(`username or password invalid`)
         }
 
         console.log(`exiting ValidateLogin method`);
-        return loginValid; //SEEMS LIKE DEAD CODE
+        return user; //SEEMS LIKE DEAD CODE
     }
 
 }

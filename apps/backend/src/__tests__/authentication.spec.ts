@@ -44,7 +44,7 @@ describe('Authentication', () => {
         jest.spyOn(userService, 'GetUserByEmail')
             .mockImplementationOnce(() => newUsers)
 
-        auth.email = 'Jane@email.com';
+        auth.username = 'Jane@email.com';
         auth.password = 'testPasswordHash';
 
         // act
@@ -74,7 +74,7 @@ describe('Authentication', () => {
         jest.spyOn(userService, 'GetUserByEmail')
             .mockImplementationOnce(() => newUsers)
 
-        auth.email = 'Jane@email.com';
+        auth.username = 'Jane@email.com';
         auth.password = 'testPasswordHash';
 
         // act
@@ -104,14 +104,14 @@ describe('Authentication', () => {
         jest.spyOn(userService, 'GetUserByEmail')
             .mockImplementationOnce(() => newUsers)
 
-        auth.email = 'Jane@email.com';
+        auth.username = 'Jane@email.com';
         auth.password = 'testPasswordHash';
 
         // act
         // var sut = authService.ValidateLogin(auth);
 
         // assert
-        var result = expect(() => authService.ValidateLogin(auth)).toThrowError(`no user found with email ${auth.email}`);
+        var result = expect(() => authService.ValidateLogin(auth)).toThrowError(`no user found with email ${auth.username}`);
     });
 
 
