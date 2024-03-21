@@ -306,5 +306,47 @@
       },
       "qty": 1
     }
+  ],
+  "emails" : [
+    {
+      "id": 1,
+      "state": 1,
+      "emailString": "test email string 1"
+    },
+    {
+      "id": 2,
+      "state": 1,
+      "emailString": "test email string 2"
+    },
+    {
+      "id": 3,
+      "state": 1,
+      "emailString": "test email string 3"
+    },
+    {
+      "id": 4,
+      "state": 1,
+      "emailString": "test email string 4"
+    },
+    {
+      "id": 5,
+      "state": 1,
+      "emailString": "test email string 5"
+    },
+    {
+      "id": 6,
+      "state": 1,
+      "emailString": "test email string 6"
+    },
+    {
+      "id": 7,
+      "state": 1,
+      "emailString": "test email string 7"
+    },
+    {
+      "id": 8,
+      "state": 1,
+      "emailString": "test email string 8"
+    }
   ]
 }
